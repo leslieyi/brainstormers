@@ -12,6 +12,8 @@ import Homepage from "./Homepage"
   // rails db:migrate
   // deploying!
   //brew tap heroku/brew && brew install heroku
+  //heroku git:remote -a your_app_name
+
 
 function App() {
   const [user, setUser] = useState(null);
