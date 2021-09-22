@@ -13,6 +13,8 @@ import Homepage from "./Homepage"
   // deploying!
   //brew tap heroku/brew && brew install heroku
   //heroku git:remote -a yi-brainstormers
+  //heroku run rails db:migrate db:seed
+
 
 
 function App() {
