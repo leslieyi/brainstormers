@@ -6,12 +6,12 @@ function Auth({user, onLogin}){
     return(
 
 
-        <div>
-            <>
+        <div style={{textAlign:"center"}}>
+            <h3>
             <Link to="/login">Login</Link>
             <br/>
             <Link to="/signup">Signup</Link>
-            </>
+            </h3>
             
         <Switch>
           <Route exact path="/login">
