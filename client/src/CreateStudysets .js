@@ -1,8 +1,7 @@
-import { Form, Button, Divider } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+
 // import CreateFlashcards from "./CreateFlashcards";
 
 function CreateStudysets() {
@@ -13,32 +12,19 @@ function CreateStudysets() {
     title: "",
     description: "",
   });
-  const [flashcardValue, setFlashcardValue] = useState({
-    word: "",
-    definition: "",
-  });
+
 
   const studysetOnChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
     setStudysetValue({
-      ...studysetValue, //spreading the user's input
-      [name]: value, //inserting the key/value pair of the user just typed in
+      ...studysetValue, 
+      [name]: value, 
     });
-    // console.log(`${name} ${value}`);
+
   };
 
-  const flashcardOnChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setFlashcardValue({
-      ...flashcardValue, //spreading the user's input
-      [name]: value, //inserting the key/value pair of the user just typed in
-    });
-    // console.log(`${name} ${value}`);
-  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -91,27 +77,9 @@ function CreateStudysets() {
           autoComplete="off"
         />
 
-        {/* <Divider />
-
-        <h1>Term</h1>
-        <Form.Input
-          placeholder="Enter Term"
-          name="word"
-          onChange={flashcardOnChange}
-        />
-
-        <h1>Definition</h1>
-        <ReactQuill
-          theme="snow"
-          name="definition"
-          onChange={flashcardOnChange}
-          placeholder="type"
-        />
-        <br /> */}
         <Button type="submit">Submit</Button>
       </Form>
 
-      {/* <CreateFlashcards /> */}
     </div>
   );
 }

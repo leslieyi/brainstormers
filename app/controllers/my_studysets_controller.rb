@@ -8,9 +8,8 @@ class MyStudysetsController < ApplicationController
 
   def show #show only ONE my studysets
     my_studyset = find_studyset
-    render json: my_studyset, status: :ok
-  end
-
+    render json: my_studyset, include: :flashcards, status: :ok , serializer: MyStudysetsSerializer
+  end 
   private
 
   def find_studyset
