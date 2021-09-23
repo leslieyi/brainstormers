@@ -13,7 +13,6 @@ function Login({onLogin}) {
   function loginOnChange(e) {
     const name = e.target.name;
     const value = e.target.value;
-    // console.log(`${e.target.name}:${e.target.value}`);
     setUser({
       ...user, //spreading the userInput
       [name]: value,
@@ -21,7 +20,6 @@ function Login({onLogin}) {
   }
   const loginSubmit = (e) => {
     e.preventDefault();
-    // console.log("login click")
 
     fetch("/login", {
       method: "POST",

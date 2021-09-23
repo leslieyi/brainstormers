@@ -1,4 +1,3 @@
-import { textAlign } from "@mui/system";
 import Navbar from "./Navbar";
 function TitleHeader({user, setUser}) {
   return (

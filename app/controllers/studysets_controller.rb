@@ -1,21 +1,25 @@
 class StudysetsController < ApplicationController
-
   skip_before_action :authorize, only: :index
 
   def index
     studysets = Studyset.all
     render json: studysets, status: :ok
   end
-  
+
   def show
     studyset = Studyset.find(params[:id])
     render json: studyset, status: :ok
   end
 
-  def my_studysets #show only my studysets
-    my_studysets = @current_user.studysets
-    render json: my_studysets, status: :ok
+  def all_my_studysets #show only my studysets
+    all_my_studysets = @current_user.studysets
+    render json: all_my_studysets, status: :ok
   end
+
+  # def show_all_my_studysets #show only my studysets
+  #   all_my_studysets = @current_user.studysets
+  #   render json: all_my_studysets, status: :ok
+  # end
 
   def create
     studyset = @current_user.studysets.create!(studyset_params)

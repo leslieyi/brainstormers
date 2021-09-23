@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :flashcards
   resources :studysets
-  get "/my-studysets", to: "studysets#my_studysets"
+  get "/all-my-studysets", to: "studysets#all_my_studysets"
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

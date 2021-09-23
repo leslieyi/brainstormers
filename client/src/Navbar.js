@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar({ user, setUser }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -37,6 +37,7 @@ function Navbar({ user, setUser }) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        style={{ color: "grey" }}
       >
         Menu
       </Button>
@@ -54,9 +55,40 @@ function Navbar({ user, setUser }) {
         }}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <Link to="/my-studysets"><MenuItem>My Studysets</MenuItem></Link>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem>
+          <NavLink
+            exact
+            to="/"
+            style={{ color: "grey" }}
+            activeStyle={{ color: "black" }}
+          >
+            Home
+          </NavLink>
+        </MenuItem>
+
+        <MenuItem>
+          <NavLink
+            to="/my-studysets"
+            style={{ color: "grey" }}
+            activeStyle={{ color: "black" }}
+          >
+            My Studysets
+          </NavLink>
+        </MenuItem>
+
+        <MenuItem>
+          <NavLink
+            to="/create-studysets"
+            style={{ color: "grey" }}
+            activeStyle={{ color: "black" }}
+          >
+            Create Studysets
+          </NavLink>
+        </MenuItem>
+
+        <MenuItem onClick={handleLogout} style={{ color: "grey" }}>
+          Logout
+        </MenuItem>
       </Menu>
     </div>
   );
