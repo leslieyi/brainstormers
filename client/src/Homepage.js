@@ -7,6 +7,7 @@ import ViewSingleStudyset from "./ViewSingleStudyset";
 
 function Homepage({ user, setUser }) {
 
+
   if (!user) return <Auth user={user} onLogin={setUser} />;
 
   return (
