@@ -81,12 +81,14 @@ function CreateStudysets() {
           placeholder="Enter term"
           name="title"
           onChange={studysetOnChange}
+          autoComplete="off"
         />
         <h1>Description</h1>
         <Form.Input
           placeholder="Enter Description"
           name="description"
           onChange={studysetOnChange}
+          autoComplete="off"
         />
 
         {/* <Divider />

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import TitleHeader from "./TitleHeader"
 import Homepage from "./Homepage"
 
-// import './App.css';
-
   // COMMANDS THAT WE NEED TO RUN
   // npm install --prefix client
   // npm install semantic-ui-react semantic-ui-css

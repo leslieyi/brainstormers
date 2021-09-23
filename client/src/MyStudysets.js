@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-function MyStudysets({studysetsData, setStudysetsData}) {
+function MyStudysets() {
+  const match = useRouteMatch();
+  const [studysetsData, setStudysetsData] = useState([]);
+
+  useEffect(() => {
+    fetch("/my_studysets").then((r) => {
+      if (r.ok) {
+        r.json().then((data) => setStudysetsData(data));
+      }
+    });
+  }, []);
 
   return (
     <div
@@ -13,15 +24,24 @@ function MyStudysets({studysetsData, setStudysetsData}) {
         border: "4px solid black",
       }}
     >
-      <h1>View My Studysets</h1> <Link to="/create-studysets">Make a Studyset</Link>
-
+      
+      <h1>View My Studysets</h1>{" "}
+      <Link to="/create-studysets">Make a Studyset</Link>
       {studysetsData.map((studyset) => (
-        <div>
-          <Link to={`/my-studysets/${studyset.id}`}><h1>{studyset.title}</h1></Link>
+        <div
+          key={studyset.id}
+          style={{
+            border: "1px solid black",
+            width: "50%",
+            display: "flexbox",
+          }}
+        >
+          <Link to={`/my-studysets/${studyset.id}`}>
+            <div>{studyset.title}</div>
+          </Link>
         </div>
       ))}
-
-     
+    
     </div>
   );
 }

@@ -10,16 +10,7 @@ class StudysetsController < ApplicationController
     studyset = Studyset.find(params[:id])
     render json: studyset, status: :ok
   end
-
-  def all_my_studysets #show only my studysets
-    all_my_studysets = @current_user.studysets
-    render json: all_my_studysets, status: :ok
-  end
-
-  # def show_all_my_studysets #show only my studysets
-  #   all_my_studysets = @current_user.studysets
-  #   render json: all_my_studysets, status: :ok
-  # end
+  
 
   def create
     studyset = @current_user.studysets.create!(studyset_params)

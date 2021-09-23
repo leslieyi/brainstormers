@@ -55,36 +55,30 @@ function Navbar({ user, setUser }) {
         }}
         TransitionComponent={Fade}
       >
-        <MenuItem>
-          <NavLink
-            exact
-            to="/"
-            style={{ color: "grey" }}
-            activeStyle={{ color: "black" }}
-          >
-            Home
-          </NavLink>
-        </MenuItem>
+        <NavLink
+          exact
+          to="/"
+          style={{ color: "grey" }}
+          activeStyle={{ color: "black" }}
+        >
+          <MenuItem>Home</MenuItem>
+        </NavLink>
 
-        <MenuItem>
-          <NavLink
-            to="/my-studysets"
-            style={{ color: "grey" }}
-            activeStyle={{ color: "black" }}
-          >
-            My Studysets
-          </NavLink>
-        </MenuItem>
+        <NavLink
+          to="/my-studysets"
+          style={{ color: "grey" }}
+          activeStyle={{ color: "black" }}
+        >
+          <MenuItem>My Studysets</MenuItem>
+        </NavLink>
 
-        <MenuItem>
-          <NavLink
-            to="/create-studysets"
-            style={{ color: "grey" }}
-            activeStyle={{ color: "black" }}
-          >
-            Create Studysets
-          </NavLink>
-        </MenuItem>
+        <NavLink
+          to="/create-studysets"
+          style={{ color: "grey" }}
+          activeStyle={{ color: "black" }}
+        >
+          <MenuItem>Create Studysets</MenuItem>
+        </NavLink>
 
         <MenuItem onClick={handleLogout} style={{ color: "grey" }}>
           Logout

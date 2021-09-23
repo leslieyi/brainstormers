@@ -2,21 +2,10 @@ import Auth from "./Auth";
 import Main from "./Main";
 import MyStudysets from "./MyStudysets";
 import CreateStudysets from "./CreateStudysets ";
-import ViewSingleStudyset from "./ViewSingleStudyset"
 import { Route, Switch } from "react-router-dom";
-import { useState, useEffect } from "react";
-
+import ViewSingleStudyset from "./ViewSingleStudyset";
 
 function Homepage({ user, setUser }) {
-  const [studysetsData, setStudysetsData] = useState([]);
-
-  useEffect(() => {
-    fetch("/all-my-studysets").then((r) => {
-      if (r.ok) {
-        r.json().then((data) => setStudysetsData(data));
-      }
-    });
-  }, []);
 
   if (!user) return <Auth user={user} onLogin={setUser} />;
 
@@ -27,18 +16,17 @@ function Homepage({ user, setUser }) {
           <Main />
         </Route>
 
-        <Route  exact path="/my-studysets">
-            <MyStudysets studysetsData={studysetsData}/>
+        <Route exact path="/my-studysets">
+          <MyStudysets />
         </Route>
 
-        <Route  exact path= {`/my-studysets/${studysetsData.id}`} >
-            <ViewSingleStudyset/>
+        <Route path="/my-studysets/:id">
+          <ViewSingleStudyset />
         </Route>
 
-        <Route exact path="/create-studysets" >
+        <Route path="/create-studysets">
           <CreateStudysets />
         </Route>
-
       </Switch>
     </div>
   );

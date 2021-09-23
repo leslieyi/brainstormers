@@ -1,13 +1,23 @@
-function ViewSingleStudyset() {
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
+function ViewSingleStudyset() {
+  const { id } = useParams();
+
+    const [studyset, setStudyset] = useState();
+    useEffect(() => {
+        fetch(`/my_studysets/${id}`)
+        .then(r => r.json())
+        .then(data => setStudyset(data))
+    }, [id])
+
+    if (!studyset) return null;
 
   return (
     <div>
-      <h1>View Single Studyset</h1>
-      
-      {/* {studysetsData.map((studyset) => (
-        <h1>{studyset.title}</h1>
-      ))} */}
+          <h1>Now showing {studyset.title} studyset </h1>
+          <h2>Description: {studyset.description}</h2>
     </div>
   );
 }
