@@ -1,8 +1,7 @@
-import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function MyStudysets() {
-  const match = useRouteMatch();
   const [studysetsData, setStudysetsData] = useState([]);
 
   useEffect(() => {

@@ -3,15 +3,20 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function CreateFlashcards() {
+function CreateFlashcards({studyset_id}) {
+  const [errors, setErrors] = useState([]);
   const [flashcardValue, setFlashcardValue] = useState({
     word: "",
     definition: "",
+    studyset_id: `${studyset_id}`,
   });
+
+
 
   const flashcardOnChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    console.log(`${e.target.name}: ${e.target.value}`)
 
     setFlashcardValue({
       ...flashcardValue, //spreading the user's input
@@ -19,12 +24,37 @@ function CreateFlashcards() {
     });
   };
 
-  const handleSubmit = (e) => {
-    console.log("Iwas clicked");
-  };
+
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    fetch(`/flashcards`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(flashcardValue),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.errors) {
+          setErrors(data.errors);
+        } else {
+          setFlashcardValue(data);
+        }
+      });
+
+      e.target.reset();
+
+  }
+
 
   return (
     <div>
+         {errors.map((error) => (
+        <h4>{error}</h4>
+      ))}
       <Form onSubmit={handleSubmit}>
         <h1>Term</h1>
         <Form.Input
@@ -38,10 +68,11 @@ function CreateFlashcards() {
           theme="snow"
           name="definition"
           onChange={flashcardOnChange}
-          placeholder="type"
+          placeholder="Enter Defnition"
         />
+        <br/>
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Create Flashcard</Button>
       </Form>
     </div>
   );

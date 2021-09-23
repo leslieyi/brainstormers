@@ -19,11 +19,9 @@ function Navbar({ user, setUser }) {
   const history = useHistory();
 
   const handleLogout = () => {
-    console.log("hi");
     fetch("/logout", {
       method: "DELETE",
     }).then((r) => {
-      // console.log(r);
       setUser(null);
       history.push("/");
     });

@@ -11,12 +11,13 @@ function ViewSingleStudyset() {
     fetch(`/my_studysets/${id}`)
       .then((r) => r.json())
       .then((data) => setStudyset(data));
-  }, [id]);
+  }, [studyset, id]);
 
   if (!studyset) return null;
 
   return (
     <div
+    key={studyset.id}
       style={{
         margin: "100px",
         paddingRight: "250px",
@@ -29,8 +30,14 @@ function ViewSingleStudyset() {
       <h1>Now showing {studyset.title} studyset </h1>
       <h2>Description: {studyset.description}</h2>
       <h2>Total Flashcards: {studyset.total_flashcards}</h2>
-      
-      <CreateFlashcards/>
+      {studyset.flashcards.map((flashcard) =>(
+        <div key={flashcard.id} style={{ border: "4px solid black"}}>
+        <p>Word: {flashcard.word}</p>
+        <p>Flashcard: {flashcard.definition}</p>
+        </div>
+      ))}
+
+      <CreateFlashcards studyset_id={studyset.id} key={studyset.id}/>
     </div>
   );
 }

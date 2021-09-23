@@ -25,7 +25,6 @@ function Signup({ onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    //  console.log("I was clicked")
     fetch(`/signup`, {
       method: "POST",
       headers: {
