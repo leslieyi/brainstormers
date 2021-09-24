@@ -27,7 +27,6 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
     setOpen(false);
   };
 
-
   return (
     <Box
       component="span"
@@ -53,7 +52,7 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
             aria-label="edit"
             size="medium"
             color="primary"
-            onClick={handleEditButton}
+            onClick={() => handleEditButton(studyset)}
           >
             <EditIcon fontSize="inherit" />
           </IconButton>

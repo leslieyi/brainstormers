@@ -5,11 +5,16 @@ import MySingleStudyset from "./MySingleStudyset";
 
 function MyStudysets() {
   const [errors, setErrors] = useState([]);
-
-  const [studysetsData, setStudysetsData] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false);
+  const [studysetsData, setStudysetsData] = useState([]);
 
 
+  //Editing the studyset
+  const [studysetValue, setStudysetValue] = useState({
+    title: "",
+    description: "",
+    id: "",
+  });
 
   useEffect(() => {
     fetch(`/my_studysets/`).then((r) => {
@@ -28,30 +33,47 @@ function MyStudysets() {
     });
   };
 
-  const handleEditButton = () => {
-    setToggleEdit(!toggleEdit);
-    console.log("I'm clicked")
-  };
-
-  const [studysetValue, setStudysetValue] = useState({
-    title: "" ,
-    description: "",
-  });
-
   const studysetOnChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-
+    // console.log(value)
     setStudysetValue({
-      ...studysetValue, 
-      [name]: value, 
+      ...studysetValue,
+      [name]: value,
     });
+  };
 
+  const handleEditButton = (studyset) => {
+    setToggleEdit((studysetValue.id === "" || studyset.id === studysetValue.id) ? !toggleEdit : toggleEdit);
+    setStudysetValue(studyset);
   };
 
   const handleUpdate = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+
+    fetch(`/my_studysets/${studysetValue.id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(studysetValue),
+    })
+      .then((r) => r.json())
+      .then((editedData) => {
+        if (editedData.errors) {
+          setErrors(editedData.errors);
+        } else {
+          const updatedData = studysetsData.map(studyset => {
+            if (studyset.id != studysetValue.id) {
+              return studyset;
+            }
+            return studysetValue;
+          });
+          setStudysetsData(updatedData);
+        }
+      });
+  };
 
   return (
     <div
@@ -74,35 +96,41 @@ function MyStudysets() {
 
       {studysetsData.map((studyset) => (
         <MySingleStudyset
+          key={studyset.id}
           studyset={studyset}
           setStudysetsData={setStudysetsData}
-          key={studyset.id}
           handleDelete={handleDelete}
           handleEditButton={handleEditButton}
         />
       ))}
 
       {toggleEdit ? (
-        <Form onSubmit={handleUpdate} >
-          <h1>Title</h1>
-          <Form.Input
-            placeholder="Enter term"
-            name="title"
-            onChange={studysetOnChange}
-            autoComplete="off"
-            value={studysetsData.title}
-          />
-          <h1>Description</h1>
-          <Form.Input
-            placeholder="Enter Description"
-            name="description"
-            onChange={studysetOnChange}
-            autoComplete="off"
-            value={studysetsData.description}
-          />
+        <>
+          {errors.map((error) => (
+            <h4>{error}</h4>
+          ))}
 
-          <Button type="submit">Update</Button>
-        </Form>
+          <Form onSubmit={handleUpdate}>
+            <h1>Title</h1>
+            <Form.Input
+              placeholder="Edit term"
+              name="title"
+              onChange={studysetOnChange}
+              autoComplete="off"
+              value={studysetValue.title}
+            />
+            <h1>Description</h1>
+            <Form.Input
+              placeholder="Edit Description"
+              name="description"
+              onChange={studysetOnChange}
+              autoComplete="off"
+              value={studysetValue.description}
+            />
+
+            <Button type="submit">Update</Button>
+          </Form>
+        </>
       ) : null}
     </div>
   );
