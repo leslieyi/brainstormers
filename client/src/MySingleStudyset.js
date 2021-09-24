@@ -1,25 +1,32 @@
-import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 
-import { Link } from "react-router-dom";
-import { useState } from "react";
+function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
+  const [open, setOpen] = useState(false);
 
-function MySingleStudyset({ studyset }) {
-  const handleDelete = () => {
-    console.log("I was clicked");
+  const handleClickOpen = () => {
+    setOpen(!open);
   };
 
-  const handleToggle = () => {
-    setIsClicked(!isClicked);
+  const handleClose = () => {
+    setOpen(false);
   };
-  const [isClicked, setIsClicked] = useState(false);
+
 
   return (
     <Box
@@ -43,20 +50,63 @@ function MySingleStudyset({ studyset }) {
           </Link>
 
           <IconButton
+            aria-label="edit"
+            size="medium"
+            color="primary"
+            onClick={handleEditButton}
+          >
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+
+          <IconButton
             aria-label="delete"
             size="medium"
             color="primary"
-            onClick={handleToggle}
+            onClick={handleClickOpen}
           >
             <DeleteIcon fontSize="inherit" />
           </IconButton>
+
+          <br />
+          <Typography>{studyset.description}</Typography>
         </CardContent>
       </Card>
-      {isClicked ? (
-        <Alert severity="warning">
-          <AlertTitle>Warning</AlertTitle>
-          This is a warning alert — <strong>check it out!</strong>
-        </Alert>
+      {open ? (
+        <div>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">Are You Sure?</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Do you really want to delete {studyset.title} studyset? This
+                process cannot be undone.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setOpen(false)}
+                size="small"
+                variant="outlined"
+                color="primary"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => handleDelete(studyset.id)}
+                size="small"
+                variant="outlined"
+                color="error"
+                autoFocus
+              >
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
       ) : null}
     </Box>
   );
