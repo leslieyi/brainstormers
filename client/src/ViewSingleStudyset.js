@@ -28,11 +28,14 @@ function ViewSingleStudyset() {
     <div
       key={studyset.id}
       style={{
-        margin: "100px",
+        marginRight: "100px",
+        marginLeft: "100px",
+        marginBottom: "200px",
+        marginTop:"100px",
         paddingRight: "250px",
         paddingLeft: "250px",
         paddingTop: "50px",
-        paddingBottom: "50px",
+        paddingBottom: "100px",
         border: "4px solid black",
       }}
     >

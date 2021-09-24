@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+
 function TitleHeader({ user, setUser }) {
   return (
     <div>

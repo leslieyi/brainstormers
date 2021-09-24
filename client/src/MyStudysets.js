@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import MySingleStudyset from "./MySingleStudyset";
 
 function MyStudysets() {
   const [studysetsData, setStudysetsData] = useState([]);
@@ -12,35 +13,30 @@ function MyStudysets() {
     });
   }, []);
 
+
+
   return (
     <div
       style={{
-        margin: "100px",
+        marginRight: "100px",
+        marginLeft: "100px",
+        marginBottom: "200px",
+        marginTop: "100px",
         paddingRight: "250px",
         paddingLeft: "250px",
         paddingTop: "50px",
-        paddingBottom: "50px",
+        paddingBottom: "100px",
         border: "4px solid black",
       }}
     >
-      
-      <h1>View My Studysets</h1>{" "}
-      <Link to="/create-studysets">Make a Studyset</Link>
+      <div>
+        <h1 style={{ display: "inline" }}>View My Studysets</h1>{" "}
+        <Link to="/create-studysets">Make a Studyset</Link>
+      </div>
+
       {studysetsData.map((studyset) => (
-        <div
-          key={studyset.id}
-          style={{
-            border: "1px solid black",
-            width: "50%",
-            display: "flexbox",
-          }}
-        >
-          <Link to={`/my-studysets/${studyset.id}`}>
-            <div>{studyset.title}</div>
-          </Link>
-        </div>
+        <MySingleStudyset studyset={studyset}/>
       ))}
-    
     </div>
   );
 }
