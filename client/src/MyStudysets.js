@@ -5,9 +5,8 @@ import MySingleStudyset from "./MySingleStudyset";
 
 function MyStudysets() {
   const [errors, setErrors] = useState([]);
-  const [toggleEdit, setToggleEdit] = useState(false);
-  const [studysetsData, setStudysetsData] = useState([]);
-
+  const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
+  const [studysetsData, setStudysetsData] = useState([]); //My Studyset data
 
   //Editing the studyset
   const [studysetValue, setStudysetValue] = useState({
@@ -28,7 +27,7 @@ function MyStudysets() {
     fetch(`/my_studysets/${id}`, {
       method: "DELETE",
     }).then((r) => {
-      const newData = studysetsData.filter((studyset) => studyset.id !== id);
+      const newData = studysetsData.filter((studyset) => studyset.id !== id); //
       setStudysetsData(newData);
     });
   };
@@ -36,7 +35,6 @@ function MyStudysets() {
   const studysetOnChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    // console.log(value)
     setStudysetValue({
       ...studysetValue,
       [name]: value,
@@ -44,7 +42,11 @@ function MyStudysets() {
   };
 
   const handleEditButton = (studyset) => {
-    setToggleEdit((studysetValue.id === "" || studyset.id === studysetValue.id) ? !toggleEdit : toggleEdit);
+    setToggleEdit(
+      studysetValue.id === "" || studyset.id === studysetValue.id
+        ? !toggleEdit
+        : toggleEdit
+    );
     setStudysetValue(studyset);
   };
 
@@ -64,13 +66,13 @@ function MyStudysets() {
         if (editedData.errors) {
           setErrors(editedData.errors);
         } else {
-          const updatedData = studysetsData.map(studyset => {
-            if (studyset.id != studysetValue.id) {
+          const updatedData = studysetsData.map((studyset) => {
+            if (studyset.id !== studysetValue.id) {
               return studyset;
             }
             return studysetValue;
           });
-          setStudysetsData(updatedData);
+          setStudysetsData(updatedData); //if My studyset id is not equal to edited value, then return the og my studyset, if not return the og studysetvalue? 
         }
       });
   };

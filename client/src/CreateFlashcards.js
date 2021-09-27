@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function CreateFlashcards({ studyset_id, onNewFlashcard }) {
+function CreateFlashcards({ studyset_id, onNewFlashcard, toggleEdit }) {
   const [errors, setErrors] = useState([]);
   const blankFlashcard = {
     word: "",
@@ -25,7 +25,7 @@ function CreateFlashcards({ studyset_id, onNewFlashcard }) {
     });
   };
 
-  const quillOnChange = (content, delta, source, editor) => {
+  const quillOnChange = (content, editor) => {
     console.log(editor);
     flashcardOnChange({ target: { name: "definition", value: content } });
     //making my own e.target.value and e.target.name bc I don't know how else to attach the event
@@ -54,31 +54,58 @@ function CreateFlashcards({ studyset_id, onNewFlashcard }) {
     e.target.reset();
   }
 
+  function handleEditSubmit(e) {
+    e.preventDefault();
+    console.log("Hello from Edit Submit");
+  }
+
   return (
-    <div>
+    <div style={{ marginRight: "250px", marginLeft: "250px" }}>
       {errors.map((error) => (
         <h4>{error}</h4>
       ))}
-      <Form onSubmit={handleSubmit}>
-        <h1>Term</h1>
-        <Form.Input
-          placeholder="Enter Term"
-          value={flashcardValue.word}
-          name="word"
-          onChange={flashcardOnChange}
-        />
 
-        <h1>Definition</h1>
-        <ReactQuill
-          theme="snow"
-          value={flashcardValue.definition}
-          onChange={quillOnChange}
-          placeholder="Enter Defnition"
-        />
-        <br />
+      {toggleEdit ? (
+        <Form onSubmit={handleEditSubmit}>
+          <h1>Term</h1>
+          <Form.Input
+            value={flashcardValue.word}
+            name="word"
+            onChange={flashcardOnChange}
+          />
 
-        <Button type="submit">Create Flashcard</Button>
-      </Form>
+          <h1>Definition</h1>
+          <ReactQuill
+            theme="snow"
+            value={flashcardValue.definition}
+            onChange={quillOnChange}
+          />
+          <br />
+
+          <Button type="submit">Update Flashcard</Button>
+        </Form>
+      ) : (
+        <Form onSubmit={handleSubmit}>
+          <h1>Term</h1>
+          <Form.Input
+            placeholder="Enter Term"
+            value={flashcardValue.word}
+            name="word"
+            onChange={flashcardOnChange}
+          />
+
+          <h1>Definition</h1>
+          <ReactQuill
+            theme="snow"
+            value={flashcardValue.definition}
+            onChange={quillOnChange}
+            placeholder="Enter Defnition"
+          />
+          <br />
+
+          <Button type="submit">Create Flashcard</Button>
+        </Form>
+      )}
     </div>
   );
 }

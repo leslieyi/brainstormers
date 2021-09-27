@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -33,11 +33,11 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
       sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
       key={studyset.id}
     >
-      <Card sx={{ minWidth: 200 }}>
+      <Card sx={{ minWidth: 200, minHeight: 100 }}>
         <CardContent>
           <Typography
             variant="h5"
-            style={{ display: "inline", marginRight: "30px" }}
+            style={{ display: "inline"}}
           >
             {studyset.title}
           </Typography>

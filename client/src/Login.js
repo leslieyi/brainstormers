@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, Input, Button, Header } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
-function Login({onLogin}) {
+function Login({ onLogin }) {
   const history = useHistory();
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState({
@@ -38,32 +38,40 @@ function Login({onLogin}) {
   };
 
   return (
-    <div style={{paddingRight:"300px", paddingLeft:"300px", paddingTop:"100px", paddingBottom:"100px"}}>
+    <div
+      style={{
+        paddingRight: "300px",
+        paddingLeft: "300px",
+        paddingTop: "100px",
+        paddingBottom: "100px",
+      }}
+    >
       <Form onSubmit={loginSubmit} float="right">
-      <Header as="h2">Login</Header>
-     
-          <Form.Field 
-            id="form-input-control-username"
-            control={Input}
-            label="Username"
-            placeholder="Username"
-            name="username"
-            autoComplete="off"
-            onChange={loginOnChange}
-          />
-     
+        <Header as="h2">Login</Header>
 
-          <Form.Field
-            id="form-input-control-password"
-            control={Input}
-            type="password"
-            label="Password"
-            placeholder="Password"
-            name="password"
-            onChange={loginOnChange}
-          />
+        <Form.Field
+          id="form-input-control-username"
+          control={Input}
+          label="Username"
+          placeholder="Username"
+          name="username"
+          autoComplete="off"
+          onChange={loginOnChange}
+        />
 
-        {errors.map(error => <div>{error}</div>)}
+        <Form.Field
+          id="form-input-control-password"
+          control={Input}
+          type="password"
+          label="Password"
+          placeholder="Password"
+          name="password"
+          onChange={loginOnChange}
+        />
+
+        {errors.map((error) => (
+          <div>{error}</div>
+        ))}
         <Button>Login</Button>
       </Form>
     </div>

@@ -3,7 +3,7 @@ import Main from "./Main";
 import MyStudysets from "./MyStudysets";
 import CreateStudysets from "./CreateStudysets ";
 import { Route, Switch } from "react-router-dom";
-import ViewSingleStudyset from "./ViewSingleStudyset";
+import ViewOneStudyset from "./ViewOneStudyset";
 
 function Homepage({ user, setUser }) {
 
@@ -22,7 +22,7 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route path="/my-studysets/:id">
-          <ViewSingleStudyset />
+          <ViewOneStudyset />
         </Route>
 
         <Route path="/create-studysets">
