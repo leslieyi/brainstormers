@@ -1,16 +1,26 @@
 import { Form, Button } from "semantic-ui-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function CreateFlashcards({ studyset_id, onNewFlashcard, toggleEdit }) {
+function CreateFlashcards({
+  onNewFlashcard,
+  editFlashcard,
+  setEditFlashcard,
+  onEditFlashcard,
+  studysetId,
+}) {
   const [errors, setErrors] = useState([]);
   const blankFlashcard = {
     word: "",
     definition: "<p><br></p>",
-    studyset_id: `${studyset_id}`,
+    studyset_id: studysetId,
   };
   const [flashcardValue, setFlashcardValue] = useState({ ...blankFlashcard });
+
+  useEffect(() => {
+    setFlashcardValue(editFlashcard || {...blankFlashcard});
+  }, [editFlashcard]);
 
   const flashcardOnChange = (e) => {
     const name = e.target.name;
@@ -35,8 +45,10 @@ function CreateFlashcards({ studyset_id, onNewFlashcard, toggleEdit }) {
     e.preventDefault();
 
     console.log(flashcardValue);
-    fetch(`/flashcards`, {
-      method: "POST",
+    const url = editFlashcard ? `/flashcards/${flashcardValue.id}` : "/flashcards";
+    const method = editFlashcard ? "PATCH" : "POST";
+    fetch(url, {
+      method,
       headers: {
         "Content-Type": "application/json",
       },
@@ -46,17 +58,15 @@ function CreateFlashcards({ studyset_id, onNewFlashcard, toggleEdit }) {
       .then((data) => {
         if (data.errors) {
           setErrors(data.errors);
-        } else {
+        } else if (editFlashcard) {
+          setEditFlashcard(null);
+          onEditFlashcard(data);
+        } else {          
           onNewFlashcard(data);
           setFlashcardValue({ ...blankFlashcard });
         }
       });
     e.target.reset();
-  }
-
-  function handleEditSubmit(e) {
-    e.preventDefault();
-    console.log("Hello from Edit Submit");
   }
 
   return (
@@ -65,47 +75,27 @@ function CreateFlashcards({ studyset_id, onNewFlashcard, toggleEdit }) {
         <h4>{error}</h4>
       ))}
 
-      {toggleEdit ? (
-        <Form onSubmit={handleEditSubmit}>
-          <h1>Term</h1>
-          <Form.Input
-            value={flashcardValue.word}
-            name="word"
-            onChange={flashcardOnChange}
-          />
+      <Form onSubmit={handleSubmit}>
+        <h1>Term</h1>
+        <Form.Input
+          placeholder="Enter Term"
+          value={flashcardValue.word}
+          name="word"
+          onChange={flashcardOnChange}
+        />
 
-          <h1>Definition</h1>
-          <ReactQuill
-            theme="snow"
-            value={flashcardValue.definition}
-            onChange={quillOnChange}
-          />
-          <br />
+        <h1>Definition</h1>
+        <ReactQuill
+          theme="snow"
+          value={flashcardValue.definition}
+          onChange={quillOnChange}
+          placeholder="Enter Defnition"
+        />
+        <br />
 
-          <Button type="submit">Update Flashcard</Button>
-        </Form>
-      ) : (
-        <Form onSubmit={handleSubmit}>
-          <h1>Term</h1>
-          <Form.Input
-            placeholder="Enter Term"
-            value={flashcardValue.word}
-            name="word"
-            onChange={flashcardOnChange}
-          />
-
-          <h1>Definition</h1>
-          <ReactQuill
-            theme="snow"
-            value={flashcardValue.definition}
-            onChange={quillOnChange}
-            placeholder="Enter Defnition"
-          />
-          <br />
-
-          <Button type="submit">Create Flashcard</Button>
-        </Form>
-      )}
+        <Button type="submit">{editFlashcard ? "Update" : "Create"}</Button>
+        {editFlashcard ? <Button onClick={() => setEditFlashcard(null)}>Cancel</Button> : null}
+      </Form>
     </div>
   );
 }

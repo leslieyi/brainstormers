@@ -13,7 +13,7 @@ function MyStudysets() {
     title: "",
     description: "",
     id: "",
-  });
+  }); 
 
   useEffect(() => {
     fetch(`/my_studysets/`).then((r) => {

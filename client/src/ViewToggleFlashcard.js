@@ -6,6 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import parse from "html-react-parser";
 
+import { Icon } from "semantic-ui-react";
+import { Popup } from "semantic-ui-react";
+
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 
@@ -16,9 +19,25 @@ function ViewToggleFlashcard({
   handleEdit,
 }) {
   const [flip, setFlip] = useState(false);
+  const [starred, setStarred] = useState(false);
+
 
   const handleFlip = () => {
     setFlip(!flip);
+  };
+
+  const handleStar = () => {
+    setStarred(!starred);
+
+    // fetch("/reviewcards", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(reviewcard),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setReviewcard(data);
+    //   });
   };
 
   return (
@@ -42,28 +61,53 @@ function ViewToggleFlashcard({
           {flip ? (
             <div>Definition: {parse(definition)}</div>
           ) : (
-            <div>Word: {word}</div>
+            <div>
+              Word: {word}{" "}
+              <Popup
+                content="Add to Flashcard to Review Later"
+                trigger={
+                  <Icon
+                    name={starred ? "star" : "star outline"}
+                    size="small"
+                    onClick={handleStar}
+                  />
+                }
+              />
+            </div>
           )}
         </Typography>
         <div style={{ marginBottom: "20px" }}>
-          <Switch onClick={handleFlip} size="small" />
-          <IconButton
-            aria-label="edit"
-            size="small"
-            color="primary"
-            onClick={() => handleEdit(flashcard)}
-          >
-            <EditIcon fontSize="inherit" />
-          </IconButton>
+          <Popup
+            content="Flip"
+            trigger={<Switch onClick={handleFlip} size="small" />}
+          />
+          <Popup
+            content="Edit"
+            trigger={
+              <IconButton
+                aria-label="edit"
+                size="small"
+                color="primary"
+                onClick={() => handleEdit(flashcard)}
+              >
+                <EditIcon />
+              </IconButton>
+            }
+          />
 
-          <IconButton
-            aria-label="delete"
-            size="small"
-            color="primary"
-            onClick={() => handleDelete(id)}
-          >
-            <DeleteIcon fontSize="inherit" />
-          </IconButton>
+          <Popup
+            content="Delete"
+            trigger={
+              <IconButton
+                aria-label="delete"
+                size="small"
+                color="primary"
+                onClick={() => handleDelete(id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            }
+          />
         </div>
       </CardContent>
     </Card>

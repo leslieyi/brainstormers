@@ -78,6 +78,14 @@ function Navbar({ user, setUser }) {
           <MenuItem>Create Studysets</MenuItem>
         </NavLink>
 
+        <NavLink
+          to="/review-later-studysets"
+          style={{ color: "grey" }}
+          activeStyle={{ color: "black" }}
+        >
+          <MenuItem>Review Later</MenuItem>
+        </NavLink>
+
         <MenuItem onClick={handleLogout} style={{ color: "grey" }}>
           Logout
         </MenuItem>

@@ -4,10 +4,9 @@ import MyStudysets from "./MyStudysets";
 import CreateStudysets from "./CreateStudysets ";
 import { Route, Switch } from "react-router-dom";
 import ViewOneStudyset from "./ViewOneStudyset";
+import ReviewLater from "./ReviewLater";
 
 function Homepage({ user, setUser }) {
-
-
   if (!user) return <Auth user={user} onLogin={setUser} />;
 
   return (
@@ -27,6 +26,10 @@ function Homepage({ user, setUser }) {
 
         <Route path="/create-studysets">
           <CreateStudysets />
+        </Route>
+
+        <Route exact path="/review-later-studysets">
+          <ReviewLater />
         </Route>
       </Switch>
     </div>
