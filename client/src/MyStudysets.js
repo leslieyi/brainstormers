@@ -1,28 +1,45 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Form, Button } from "semantic-ui-react";
 import MySingleStudyset from "./MySingleStudyset";
 
-function MyStudysets({onlyMine, user}) {
+import { Popup } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
+import Switch from "@mui/material/Switch";
+
+function MyStudysets({ onlyMine, user }) {
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
   const [studysetsData, setStudysetsData] = useState([]); //My Studyset data
-
-  //Editing the studyset
   const [studysetValue, setStudysetValue] = useState({
     title: "",
     description: "",
     id: "",
-  }); 
+  });
+  const [sortedStudyset, setSortedStudyset] = useState(false);
+
+  const handleSort = () => {
+    setSortedStudyset(!sortedStudyset);
+  };
 
   useEffect(() => {
-    const url = onlyMine ? "/my_studysets" : "/studysets";
+    // const url = onlyMine ? "/my_studysets" : "/studysets";
+  
+    let url;
+    if (onlyMine) {
+      url = sortedStudyset ? "/my-ordered-studysets" : "/my_studysets";
+    } else {
+      url = sortedStudyset ? "/ordered-studysets" : "/studysets";
+    } 
+
     fetch(url).then((r) => {
       if (r.ok) {
         r.json().then((data) => setStudysetsData(data));
       }
     });
-  }, []);
+    console.log(`${url} Inside SortState: ${sortedStudyset}`)
+  }, [sortedStudyset]); //missing something here
+
+  console.log(`Outside of fetch: ${sortedStudyset}`)//state works here
 
   const handleDelete = (id) => {
     fetch(`/my_studysets/${id}`, {
@@ -73,7 +90,7 @@ function MyStudysets({onlyMine, user}) {
             }
             return studysetValue;
           });
-          setStudysetsData(updatedData); //if My studyset id is not equal to edited value, then return the og my studyset, if not return the og studysetvalue? 
+          setStudysetsData(updatedData); //if My studyset id is not equal to edited value, then return the og my studyset, if not return the og studysetvalue?
         }
       });
   };
@@ -93,8 +110,17 @@ function MyStudysets({onlyMine, user}) {
       }}
     >
       <div style={{ marginBottom: "50px" }}>
-        <h1 style={{ display: "inline" }}>{onlyMine ? "View My" : "All"} Studysets</h1>{" "}
+        <h1 style={{ display: "inline" }}>
+          {onlyMine ? "View My" : "All"} Studysets
+        </h1>{" "}
         <Link to="/create-studysets">Make a Studyset</Link>
+        <p>
+          Sort in Alphabetical Order
+          <Popup
+            content="Sort Alphabetically"
+            trigger={<Switch onClick={handleSort} size="small" />}
+          />
+        </p>
       </div>
 
       {studysetsData.map((studyset) => (
@@ -103,7 +129,9 @@ function MyStudysets({onlyMine, user}) {
           studyset={studyset}
           setStudysetsData={setStudysetsData}
           handleDelete={studyset.user.id === user.id ? handleDelete : null}
-          handleEditButton={studyset.user.id === user.id ? handleEditButton : null}
+          handleEditButton={
+            studyset.user.id === user.id ? handleEditButton : null
+          }
         />
       ))}
 

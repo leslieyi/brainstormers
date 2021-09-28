@@ -1,5 +1,4 @@
 import Auth from "./Auth";
-import Main from "./Main";
 import MyStudysets from "./MyStudysets";
 import CreateStudysets from "./CreateStudysets ";
 import { Route, Switch } from "react-router-dom";

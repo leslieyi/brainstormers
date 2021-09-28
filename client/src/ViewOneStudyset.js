@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import CreateFlashcards from "./CreateFlashcards";
-import Box from "@mui/material/Box";
 import ViewToggleFlashcard from "./ViewToggleFlashcard";
+
+import Box from "@mui/material/Box";
+
+
 
 function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
   const { id } = useParams();
@@ -10,8 +13,11 @@ function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
   const [studyset, setStudyset] = useState();
   const [editFlashcard, setEditFlashcard] = useState(null);
 
+
+
   useEffect(() => {
     const url = mine ? "/my_studysets" : "/studysets";
+
     fetch(`${url}/${id}`)
       .then((r) => r.json())
       .then((data) => setStudyset(data));
@@ -44,9 +50,10 @@ function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
 
   //more complicated one...
   const handleEdit = (flashcard) => {
-    console.log(flashcard);
     setEditFlashcard(flashcard);
   };
+
+
 
   if (!studyset) return null;
 
@@ -65,16 +72,19 @@ function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
         <h4>Description: {studyset.description}</h4>
         <h4>Total Flashcards: {studyset.flashcards.length}</h4>
         <Link to="/review-later-studysets">Starred Words</Link>
+  
       </div>
 
-      {mine ? <CreateFlashcards
-        editFlashcard={editFlashcard}
-        setEditFlashcard={setEditFlashcard}
-        onEditFlashcard={onEditFlashcard}
-        onNewFlashcard={onNewFlashcard}
-        studysetId={studyset.id}
-        key={studyset.id}
-      /> : null}
+      {mine ? (
+        <CreateFlashcards
+          editFlashcard={editFlashcard}
+          setEditFlashcard={setEditFlashcard}
+          onEditFlashcard={onEditFlashcard}
+          onNewFlashcard={onNewFlashcard}
+          studysetId={studyset.id}
+          key={studyset.id}
+        />
+      ) : null}
 
       {studyset ? (
         <Box component="span" sx={{ textAlign: "center" }}>
