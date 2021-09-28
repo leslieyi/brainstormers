@@ -10,6 +10,8 @@ function CreateFlashcards({
   onEditFlashcard,
   studysetId,
 }) {
+
+
   const [errors, setErrors] = useState([]);
   const blankFlashcard = {
     word: "",

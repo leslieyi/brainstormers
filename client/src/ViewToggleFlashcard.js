@@ -1,6 +1,6 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import  Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -44,6 +44,7 @@ function ViewToggleFlashcard({
     >
       <CardContent style={{}}>
         <Typography
+        component={'span'}
           key={id}
           style={{
             fontSize: "20px",
@@ -52,9 +53,9 @@ function ViewToggleFlashcard({
           }}
         >
           {flip ? (
-            <div>Definition: {parse(definition)}</div>
+            <>Definition: {parse(definition)}</>
           ) : (
-            <div>
+            <>
               Word: {word}{" "}
               <Popup
                 content="Add to Flashcard to Review Later"
@@ -66,7 +67,7 @@ function ViewToggleFlashcard({
                   />
                 }
               />
-            </div>
+            </>
           )}
         </Typography>
         <div style={{ marginBottom: "20px" }}>

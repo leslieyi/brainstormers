@@ -1,5 +1,5 @@
 import Auth from "./Auth";
-import MyStudysets from "./MyStudysets";
+import AllStudysets from "./AllStudysets";
 import CreateStudysets from "./CreateStudysets ";
 import { Route, Switch } from "react-router-dom";
 import ViewOneStudyset from "./ViewOneStudyset";
@@ -45,11 +45,11 @@ function Homepage({ user, setUser }) {
     <div>
       <Switch>
         <Route exact path="/">
-          <MyStudysets onlyMine={false} user={user} key="all" />
+          <AllStudysets onlyMine={false} user={user} key="all" />
         </Route>
 
         <Route exact path="/my-studysets">
-          <MyStudysets onlyMine={true} user={user} key="mine" />
+          <AllStudysets onlyMine={true} user={user} key="mine" />
         </Route>
 
         <Route path="/my-studysets/:id">

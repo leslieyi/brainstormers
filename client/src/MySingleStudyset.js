@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+import { Popup } from "semantic-ui-react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -35,39 +36,50 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
     >
       <Card sx={{ minWidth: 200, minHeight: 100 }}>
         <CardContent>
-          <Typography
-            variant="h5"
-            style={{ display: "inline"}}
-          >
+          <Typography  component={'span'} variant="h5" style={{ display: "inline" }}>
             {studyset.title}
           </Typography>
 
-          <Link to={(handleEditButton ? "/my-studysets" : "/studysets") + `/${studyset.id}`}>
-            <IconButton aria-label="add" size="medium" color="primary">
-              <AddIcon fontSize="inherit" />
-            </IconButton>
+          <Link
+            to={
+              (handleEditButton ? "/my-studysets" : "/studysets") +
+              `/${studyset.id}`
+            }
+          >
+            <Popup
+              content="Go to Studysets"
+              trigger={
+                <IconButton aria-label="add" size="medium" color="primary">
+                  <AddIcon fontSize="inherit" />
+                </IconButton>
+              }
+            />
           </Link>
 
-          {handleEditButton ? <IconButton
-            aria-label="edit"
-            size="medium"
-            color="primary"
-            onClick={() => handleEditButton(studyset)}
-          >
-            <EditIcon fontSize="inherit" />
-          </IconButton> : null}
+          {handleEditButton ? (
+            <IconButton
+              aria-label="edit"
+              size="medium"
+              color="primary"
+              onClick={() => handleEditButton(studyset)}
+            >
+              <EditIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
 
-          {handleDelete ? <IconButton
-            aria-label="delete"
-            size="medium"
-            color="primary"
-            onClick={handleClickOpen}
-          >
-            <DeleteIcon fontSize="inherit" />
-          </IconButton> : null}
+          {handleDelete ? (
+            <IconButton
+              aria-label="delete"
+              size="medium"
+              color="primary"
+              onClick={handleClickOpen}
+            >
+              <DeleteIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
 
           <br />
-          <Typography>{studyset.description}</Typography>
+          <Typography component={'span'} >{studyset.description}</Typography>
         </CardContent>
       </Card>
       {open ? (

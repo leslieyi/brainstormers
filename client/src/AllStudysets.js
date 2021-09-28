@@ -2,11 +2,10 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import MySingleStudyset from "./MySingleStudyset";
 
-import { Popup } from "semantic-ui-react";
-import { Form, Button } from "semantic-ui-react";
+import { Popup, Form, Button, Input } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
 
-function MyStudysets({ onlyMine, user }) {
+function AllStudysets({ onlyMine, user }) {
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
   const [studysetsData, setStudysetsData] = useState([]); //My Studyset data
@@ -16,30 +15,28 @@ function MyStudysets({ onlyMine, user }) {
     id: "",
   });
   const [sortedStudyset, setSortedStudyset] = useState(false);
+  const [search, setSearch] = useState("");
+
+
 
   const handleSort = () => {
     setSortedStudyset(!sortedStudyset);
   };
 
   useEffect(() => {
-    // const url = onlyMine ? "/my_studysets" : "/studysets";
-  
     let url;
     if (onlyMine) {
       url = sortedStudyset ? "/my-ordered-studysets" : "/my_studysets";
     } else {
       url = sortedStudyset ? "/ordered-studysets" : "/studysets";
-    } 
+    }
 
     fetch(url).then((r) => {
       if (r.ok) {
         r.json().then((data) => setStudysetsData(data));
       }
     });
-    console.log(`${url} Inside SortState: ${sortedStudyset}`)
-  }, [sortedStudyset]); //missing something here
-
-  console.log(`Outside of fetch: ${sortedStudyset}`)//state works here
+  }, [sortedStudyset]);
 
   const handleDelete = (id) => {
     fetch(`/my_studysets/${id}`, {
@@ -95,6 +92,22 @@ function MyStudysets({ onlyMine, user }) {
       });
   };
 
+ 
+
+  function handleSearch(e) {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  }
+
+  let searchedData = studysetsData.filter(
+    (item) =>
+      item.title.toLowerCase().includes(search.toLowerCase()) ||
+      item.description.toLowerCase().includes(search.toLowerCase()) ||
+      item.user.username.toLowerCase().includes(search.toLowerCase())
+  );
+
+  console.log(`Searched Data${searchedData}`);
+
   return (
     <div
       style={{
@@ -110,20 +123,21 @@ function MyStudysets({ onlyMine, user }) {
       }}
     >
       <div style={{ marginBottom: "50px" }}>
-        <h1 style={{ display: "inline" }}>
+        <h1 style={{ display: "inline-block" }}>
           {onlyMine ? "View My" : "All"} Studysets
         </h1>{" "}
         <Link to="/create-studysets">Make a Studyset</Link>
-        <p>
+        <>
           Sort in Alphabetical Order
           <Popup
             content="Sort Alphabetically"
             trigger={<Switch onClick={handleSort} size="small" />}
           />
-        </p>
+          <Input onChange={handleSearch} placeholder="Start Typing to Search" />
+        </>
       </div>
 
-      {studysetsData.map((studyset) => (
+      {searchedData.map((studyset) => (
         <MySingleStudyset
           key={studyset.id}
           studyset={studyset}
@@ -167,4 +181,4 @@ function MyStudysets({ onlyMine, user }) {
   );
 }
 
-export default MyStudysets;
+export default AllStudysets;

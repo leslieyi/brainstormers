@@ -13,6 +13,9 @@ import Homepage from "./Homepage"
   //heroku git:remote -a yi-brainstormers
   //heroku run rails db:migrate db:seed
 
+  // console.log = console.warn = console.error = () => {};
+
+
 
 
 function App() {
