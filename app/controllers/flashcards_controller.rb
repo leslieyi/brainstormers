@@ -9,7 +9,6 @@ class FlashcardsController < ApplicationController
     render json: flashcards, status: :ok
   end
 
-
   def show
     flashcard = find_flashcard
     render json: flashcard, status: :ok
@@ -36,7 +35,6 @@ class FlashcardsController < ApplicationController
 
   def find_flashcard
     Flashcard.find(params[:id])
-  
   end
 
   def flashcard_params

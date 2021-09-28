@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :flashcards
   resources :studysets
 
-  resources :my_studysets, only: [:index, :show]
+  resources :my_studysets
+
+
+
+
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
