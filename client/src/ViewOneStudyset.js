@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import CreateFlashcards from "./CreateFlashcards";
-import ViewSingleFlashcard from "./ViewSingleFlashcard";
-import ReviewLater from "./ReviewLater";
-import { Route, Switch } from "react-router-dom";
+import Box from "@mui/material/Box";
+import ViewToggleFlashcard from "./ViewToggleFlashcard";
 
-function ViewOneStudyset() {
+function ViewOneStudyset({ reviewcards, toggleStar }) {
   const { id } = useParams();
 
   const [studyset, setStudyset] = useState();
-  const [reviewcard, setReviewcard] = useState();
   const [editFlashcard, setEditFlashcard] = useState(null);
 
   useEffect(() => {
@@ -18,8 +16,6 @@ function ViewOneStudyset() {
       .then((data) => setStudyset(data));
   }, [id]);
 
-
-
   const onNewFlashcard = (flashcard) => {
     setStudyset({
       ...studyset,
@@ -27,9 +23,11 @@ function ViewOneStudyset() {
     });
   };
   const onEditFlashcard = (flashcard) => {
-    const flashcards = studyset.flashcards.map((item) => (item.id === flashcard.id) ? flashcard : item);
-    setStudyset({...studyset, flashcards});
-  }
+    const flashcards = studyset.flashcards.map((item) =>
+      item.id === flashcard.id ? flashcard : item
+    );
+    setStudyset({ ...studyset, flashcards });
+  };
 
   const handleDelete = (id) => {
     console.log(id);
@@ -78,11 +76,18 @@ function ViewOneStudyset() {
       />
 
       {studyset ? (
-        <ViewSingleFlashcard
-          studyset={studyset}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-        />
+        <Box component="span" sx={{ textAlign: "center" }}>
+          {studyset.flashcards.map((flashcard) => (
+            <ViewToggleFlashcard
+              flashcard={flashcard}
+              reviewcards={reviewcards}
+              toggleStar={toggleStar}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+              key={Math.random()}
+            />
+          ))}
+        </Box>
       ) : null}
     </div>
   );

@@ -1,16 +1,19 @@
-function ReviewLater(){
+import ViewToggleFlashcard from "./ViewToggleFlashcard";
 
-
-    
-//   useEffect(() => {
-//     fetch(`reviewcards`)
-//       .then((r) => r.json())
-//       .then((data) => setReviewcard(data));
-//   }, [id]);
-
-    return (
-        <h1>Render Starred flashcards</h1>
-    )
+function ReviewLater({ reviewcards, toggleStar }) {
+  return (
+    <div>
+      <h1>Review Cards</h1>
+      {reviewcards.map((reviewcard) => (
+        <ViewToggleFlashcard
+          flashcard={reviewcard.flashcard}
+          reviewcards={reviewcards}
+          toggleStar={toggleStar}
+          key={reviewcard.id}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default ReviewLater;

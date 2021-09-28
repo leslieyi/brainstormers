@@ -11,16 +11,18 @@ import { Popup } from "semantic-ui-react";
 
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function ViewToggleFlashcard({
   flashcard: { id, word, definition },
   flashcard,
   handleDelete,
   handleEdit,
+  reviewcards,
+  toggleStar,
 }) {
   const [flip, setFlip] = useState(false);
-  const [starred, setStarred] = useState(false);
-
+  const [starred, setStarred] = useState(!!reviewcards.find(item => item.flashcard.id == flashcard.id));
 
   const handleFlip = () => {
     setFlip(!flip);
@@ -28,16 +30,7 @@ function ViewToggleFlashcard({
 
   const handleStar = () => {
     setStarred(!starred);
-
-    // fetch("/reviewcards", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(reviewcard),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setReviewcard(data);
-    //   });
+    toggleStar(flashcard.id);
   };
 
   return (
@@ -81,6 +74,7 @@ function ViewToggleFlashcard({
             content="Flip"
             trigger={<Switch onClick={handleFlip} size="small" />}
           />
+          {handleEdit ? 
           <Popup
             content="Edit"
             trigger={
@@ -93,8 +87,9 @@ function ViewToggleFlashcard({
                 <EditIcon />
               </IconButton>
             }
-          />
+          /> : null}
 
+          {handleDelete ? 
           <Popup
             content="Delete"
             trigger={
@@ -107,7 +102,7 @@ function ViewToggleFlashcard({
                 <DeleteIcon />
               </IconButton>
             }
-          />
+          /> : null}
         </div>
       </CardContent>
     </Card>
