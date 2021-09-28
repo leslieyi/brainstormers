@@ -1,15 +1,14 @@
 class ReviewsetsController < ApplicationController
- # skip_before_action :authorize, only: :index
+  # skip_before_action :authorize, only: :index
 
   def index
     reviewsets = @current_user.reviewsets
     render json: reviewsets, status: :ok, include: ["studyset.user"]
   end
 
-
   def create
     reviewset = Reviewset.create(reviewset_params)
-    render json: reviewset, status: :created
+    render json: reviewset, status: :created, include: ["studyset.user"]
   end
 
   def destroy

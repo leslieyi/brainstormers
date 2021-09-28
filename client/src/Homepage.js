@@ -17,7 +17,7 @@ function Homepage({ user, setUser }) {
       .then((r) => r.json())
       .then((data) => setReviewsets(data));
   }, [user]);
-  
+
   useEffect(() => {
     if (!user) setReviewcards([]);
     fetch("/reviewcards")
@@ -26,9 +26,7 @@ function Homepage({ user, setUser }) {
   }, [user]);
 
   const toggleSave = (studysetId) => {
-    const deleting = reviewsets.find(
-      (card) => card.studyset.id === studysetId
-    );
+    const deleting = reviewsets.find((card) => card.studyset.id === studysetId);
     if (deleting) {
       fetch(`/reviewsets/${deleting.id}`, {
         method: "DELETE",
@@ -77,19 +75,45 @@ function Homepage({ user, setUser }) {
     <div>
       <Switch>
         <Route exact path="/">
-          <AllStudysets onlyMine={false} user={user} key="all" />
+          <AllStudysets
+            onlyMine={false}
+            user={user}
+            reviewsets={reviewsets}
+            setReviewsets={setReviewsets}
+            key="all"
+          />
         </Route>
 
         <Route exact path="/my-studysets">
-          <AllStudysets onlyMine={true} user={user} key="mine" />
+          <AllStudysets
+            onlyMine={true}
+            user={user}
+            reviewsets={reviewsets}
+            setReviewsets={setReviewsets}
+            key="mine"
+          />
         </Route>
 
         <Route path="/my-studysets/:id">
-          <ViewOneStudyset mine={true} reviewcards={reviewcards} toggleStar={toggleStar} />
+          <ViewOneStudyset
+            mine={true}
+            reviewcards={reviewcards}
+            setReviewcards={setReviewcards}
+            toggleStar={toggleStar}
+            toggleSave={toggleSave}
+            reviewsets={reviewsets}
+          />
         </Route>
 
         <Route path="/studysets/:id">
-          <ViewOneStudyset mine={false} reviewcards={reviewcards} toggleStar={toggleStar} />
+          <ViewOneStudyset
+            mine={false}
+            reviewcards={reviewcards}
+            setReviewcards={setReviewcards}
+            toggleStar={toggleStar}
+            toggleSave={toggleSave}
+            reviewsets={reviewsets}
+          />
         </Route>
 
         <Route path="/create-studysets">
@@ -97,18 +121,11 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route exact path="/saved-flashcards">
-          <SavedFlashcards
-            reviewcards={reviewcards}
-            toggleStar={toggleStar}
-          />
+          <SavedFlashcards reviewcards={reviewcards} toggleStar={toggleStar} />
         </Route>
 
         <Route exact path="/saved-studysets">
-          <SavedStudysets
-            user={user}
-            reviewsets={reviewsets}
-            toggleSave={toggleSave}
-          />
+          <SavedStudysets user={user} reviewsets={reviewsets} />
         </Route>
       </Switch>
     </div>

@@ -7,7 +7,7 @@ import Switch from "@mui/material/Switch";
 
 
 
-function AllStudysets({ onlyMine, user }) {
+function AllStudysets({ onlyMine, user, reviewsets, setReviewsets }) {
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
   const [studysetsData, setStudysetsData] = useState([]); //My Studyset data
@@ -46,6 +46,9 @@ function AllStudysets({ onlyMine, user }) {
     }).then((r) => {
       const newData = studysetsData.filter((studyset) => studyset.id !== id); //
       setStudysetsData(newData);
+
+      const newReviewsets = reviewsets.filter(reviewset => reviewset.studyset.id !== id);
+      setReviewsets(newReviewsets);
     });
   };
 
@@ -83,13 +86,17 @@ function AllStudysets({ onlyMine, user }) {
         if (editedData.errors) {
           setErrors(editedData.errors);
         } else {
-          const updatedData = studysetsData.map((studyset) => {
-            if (studyset.id !== studysetValue.id) {
-              return studyset;
+          const updatedData = studysetsData.map((studyset) => studyset.id !== studysetValue.id ? studyset : studysetValue);
+          setStudysetsData(updatedData);
+
+          const updatedReviewsets = reviewsets.map(reviewset => {
+            if (reviewset.studyset.id !== studysetValue.id) {
+              return reviewset;
             }
-            return studysetValue;
+            reviewset.studyset = studysetValue;
+            return reviewset;
           });
-          setStudysetsData(updatedData); //if My studyset id is not equal to edited value, then return the og my studyset, if not return the og studysetvalue?
+          setReviewsets(updatedReviewsets);
         }
       });
   };
@@ -140,7 +147,7 @@ function AllStudysets({ onlyMine, user }) {
 
       {searchedData.map((studyset) => (
         <MySingleStudyset
-          // key={studyset.id}
+          key={Math.random()}
           studyset={studyset}
           setStudysetsData={setStudysetsData}
           handleDelete={studyset.user.id === user.id ? handleDelete : null}

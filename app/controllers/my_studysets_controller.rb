@@ -1,6 +1,4 @@
 class MyStudysetsController < ApplicationController
-  #skip_before_action :authorize, only: :index
-
   def index #show only my studysets
     all_my_studysets = @current_user.studysets
     render json: all_my_studysets, status: :ok
@@ -37,5 +35,4 @@ class MyStudysetsController < ApplicationController
   def studyset_params
     params.permit(:title, :description)
   end
-  
 end

@@ -5,7 +5,6 @@ class User < ApplicationRecord
   has_many :flashcards, through: :reviewcards
 
   has_many :reviewsets
-  has_many :studysets, through: :reviewsets
 
   has_secure_password
 

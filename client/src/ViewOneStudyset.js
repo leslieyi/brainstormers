@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import CreateFlashcards from "./CreateFlashcards";
 import ViewToggleFlashcard from "./ViewToggleFlashcard";
-import { Icon } from "semantic-ui-react";
-import { Popup } from "semantic-ui-react";
+import { Icon, Popup } from "semantic-ui-react";
 
 import Box from "@mui/material/Box";
 
-function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
+function ViewOneStudyset({ reviewcards, setReviewcards, toggleStar, mine, toggleSave, reviewsets }) {
   const { id } = useParams();
 
   const [studyset, setStudyset] = useState();
@@ -21,6 +20,13 @@ function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
       .then((data) => setStudyset(data));
   }, [id]);
 
+  useEffect(() => {
+    if (!reviewsets || !studyset) {
+      return;
+    }
+    setSaved(!!reviewsets.find(item => item.studyset.id === studyset.id));
+  }, [reviewsets, studyset]);
+
   const onNewFlashcard = (flashcard) => {
     setStudyset({
       ...studyset,
@@ -32,10 +38,16 @@ function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
       item.id === flashcard.id ? flashcard : item
     );
     setStudyset({ ...studyset, flashcards });
+
+    const newReviewcards = reviewcards.map(reviewcard => {
+      const card = reviewcard.flashcard;
+      reviewcard.flashcard = card.id === flashcard.id ? flashcard : card;
+      return reviewcard;
+    });
+    setReviewcards(newReviewcards);
   };
 
   const handleDelete = (id) => {
-    console.log(id);
     fetch(`/flashcards/${id}`, {
       method: "DELETE",
     }).then((r) => {
@@ -43,6 +55,9 @@ function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
         ...studyset,
         flashcards: [...studyset.flashcards.filter((item) => item.id !== id)],
       });
+
+      const newReviewcards = reviewcards.filter(reviewcard => reviewcard.flashcard.id !== id);
+      setReviewcards(newReviewcards);
     });
   };
 
@@ -51,13 +66,11 @@ function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
     setEditFlashcard(flashcard);
   };
 
-  const [saved, setSaved] = useState(
-    false
-
-    // !!reviewsets.find(item => item.studyset.id === studyset.id)
-  );
+  console.log("Reviewsets", reviewsets);
+  console.log("Studyset", studyset);
+  const [saved, setSaved] = useState(false);
   const handleSave = () => {
-    setSaved(!saved);
+    toggleSave(studyset.id);
   };
 
   if (!studyset) return null;

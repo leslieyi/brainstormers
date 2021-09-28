@@ -1,7 +1,6 @@
 import SingleSavedStudysets from "./SingleSavedStudysets";
 
 function SavedStudysets({ reviewsets, toggleSave, user }) {
-  console.log(reviewsets);
   return (
     <div   style={{
         marginRight: "100px",
