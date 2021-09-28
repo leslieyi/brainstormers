@@ -5,6 +5,8 @@ import MySingleStudyset from "./MySingleStudyset";
 import { Popup, Form, Button, Input } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
 
+
+
 function AllStudysets({ onlyMine, user }) {
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
@@ -125,16 +127,16 @@ function AllStudysets({ onlyMine, user }) {
       <div style={{ marginBottom: "50px" }}>
         <h1 style={{ display: "inline-block" }}>
           {onlyMine ? "View My" : "All"} Studysets
-        </h1>{" "}
+        </h1>
         <Link to="/create-studysets">Make a Studyset</Link>
-        <>
+        <div>
           Sort in Alphabetical Order
           <Popup
             content="Sort Alphabetically"
             trigger={<Switch onClick={handleSort} size="small" />}
           />
           <Input onChange={handleSearch} placeholder="Start Typing to Search" />
-        </>
+        </div>
       </div>
 
       {searchedData.map((studyset) => (

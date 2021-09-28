@@ -31,12 +31,16 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
   return (
     <Box
       component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.9)" }}
       key={studyset.id}
     >
       <Card sx={{ minWidth: 200, minHeight: 100 }}>
         <CardContent>
-          <Typography  component={'span'} variant="h5" style={{ display: "inline" }}>
+          <Typography
+            component={"span"}
+            variant="h5"
+            style={{ display: "inline", color: handleDelete? "#0353a4" : "#000000" }}
+          >
             {studyset.title}
           </Typography>
 
@@ -79,7 +83,19 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
           ) : null}
 
           <br />
-          <Typography component={'span'} >{studyset.description}</Typography>
+
+          <div >
+            <Typography style={{ display: "block", }} component={"span"}>
+              <b>Description:</b>
+              {studyset.description}
+            </Typography>
+            <Typography style={{ display: "block",  }} component={"span"}>
+              <b>Total Flashcards:</b> {studyset.total_flashcards}
+            </Typography>
+            <Typography style={{ display: "block",  }} component={"span"}>
+              <b>Creator:</b> {studyset.user.username}
+            </Typography>
+          </div>
         </CardContent>
       </Card>
       {open ? (
@@ -120,6 +136,7 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
         </div>
       ) : null}
     </Box>
+
   );
 }
 
