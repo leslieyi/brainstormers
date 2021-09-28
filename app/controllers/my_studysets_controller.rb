@@ -11,6 +11,11 @@ class MyStudysetsController < ApplicationController
     render json: my_studyset, include: :flashcards, status: :ok, serializer: MyStudysetsSerializer
   end
 
+  def my_ordered_studysets
+    all_my_studysets = @current_user.studysets.reorder(:title)
+    render json: all_my_studysets, status: :ok
+  end
+
   def update
     my_studyset = find_studyset
     my_studyset.update!(studyset_params)

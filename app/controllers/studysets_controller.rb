@@ -10,7 +10,11 @@ class StudysetsController < ApplicationController
     studyset = Studyset.find(params[:id])
     render json: studyset, status: :ok
   end
-  
+
+  def ordered_studysets
+    studysets = Studyset.reorder(:title)
+    render json: studysets, status: :ok
+  end
 
   def create
     studyset = @current_user.studysets.create!(studyset_params)
@@ -28,8 +32,6 @@ class StudysetsController < ApplicationController
     studyset.destroy
     head :no_content
   end
-
-
 
   private
 

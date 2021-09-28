@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :studysets
 
   resources :my_studysets
+  get "/my-ordered-studysets", to: "my_studysets#my_ordered_studysets"
+  get "/ordered-studysets", to: "studysets#ordered_studysets"
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
