@@ -20,7 +20,7 @@ function TitleHeader({ user, setUser }) {
         dragTransition={{
           min: 0,
           max: 0,
-          bounceStiffness: 200
+          bounceStiffness: 150
         }}
         // initial={{ scale: 0 }}
         // animate={{ rotate: 360, scale: 1 }}

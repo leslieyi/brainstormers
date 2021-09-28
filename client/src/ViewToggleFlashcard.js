@@ -4,12 +4,13 @@ import  Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+
 import parse from "html-react-parser";
 
 import { Icon } from "semantic-ui-react";
 import { Popup } from "semantic-ui-react";
 
-import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 
 
@@ -34,6 +35,7 @@ function ViewToggleFlashcard({
   };
 
   return (
+    
     <Card
       sx={{
         minWidth: 250,

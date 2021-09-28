@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :reviewcards
   has_many :flashcards, through: :reviewcards
 
+  has_many :reviewsets
+  has_many :studysets, through: :reviewsets
+
   has_secure_password
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

@@ -5,6 +5,6 @@ class StudysetSerializer < ActiveModel::Serializer
   has_many :flashcards
 
   def total_flashcards
-    "#{self.object.flashcards.count}"
+    self.object.flashcards.count
   end
 end

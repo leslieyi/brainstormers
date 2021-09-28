@@ -1,6 +1,6 @@
 import ViewToggleFlashcard from "./ViewToggleFlashcard";
 
-function ReviewLater({ reviewcards, toggleStar }) {
+function SavedFlashcards({ reviewcards, toggleStar }) {
   return (
     <div>
       <h1>Review Cards</h1>
@@ -16,4 +16,4 @@ function ReviewLater({ reviewcards, toggleStar }) {
   );
 }
 
-export default ReviewLater;
+export default SavedFlashcards;

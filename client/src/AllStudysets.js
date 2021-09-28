@@ -98,7 +98,6 @@ function AllStudysets({ onlyMine, user }) {
 
   function handleSearch(e) {
     setSearch(e.target.value);
-    console.log(e.target.value);
   }
 
   let searchedData = studysetsData.filter(
@@ -108,7 +107,6 @@ function AllStudysets({ onlyMine, user }) {
       item.user.username.toLowerCase().includes(search.toLowerCase())
   );
 
-  console.log(`Searched Data${searchedData}`);
 
   return (
     <div
@@ -122,6 +120,7 @@ function AllStudysets({ onlyMine, user }) {
         paddingTop: "50px",
         paddingBottom: "100px",
         border: "4px solid black",
+        // backgroundColor: "hsla(209, 49%, 50%, 0.59)"
       }}
     >
       <div style={{ marginBottom: "50px" }}>

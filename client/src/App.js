@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div >
       <TitleHeader user={user} setUser={setUser}/>
       <Homepage user={user} setUser={setUser}/>
     </div>

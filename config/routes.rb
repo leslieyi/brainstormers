@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviewsets
   resources :reviewcards
 
   resources :flashcards

@@ -17,7 +17,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { motion } from "framer-motion"
 
 function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
   const [open, setOpen] = useState(false);
@@ -41,7 +40,7 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
           <Typography
             component={"span"}
             variant="h5"
-            style={{ display: "inline", color: handleDelete? "#0353a4" : "#000000" }}
+            style={{ display: "inline", /*color: handleDelete? "#0353a4" : "#000000"*/ }}
           >
             {studyset.title}
           </Typography>

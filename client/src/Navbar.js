@@ -5,8 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { autocompleteClasses } from "@mui/material";
 
-function Navbar({ user, setUser }) {
+function Navbar({ setUser }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -36,6 +37,7 @@ function Navbar({ user, setUser }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         style={{ color: "grey" }}
+        // sx={{}
       >
         Menu
       </Button>
@@ -79,11 +81,19 @@ function Navbar({ user, setUser }) {
         </NavLink>
 
         <NavLink
-          to="/review-later-studysets"
+          to="/saved-studysets"
           style={{ color: "grey" }}
           activeStyle={{ color: "black" }}
         >
-          <MenuItem>Review Later</MenuItem>
+          <MenuItem>Saved Studysets</MenuItem>
+        </NavLink>
+
+        <NavLink
+          to="/saved-flashcards"
+          style={{ color: "grey" }}
+          activeStyle={{ color: "black" }}
+        >
+          <MenuItem>Starred Flashcards</MenuItem>
         </NavLink>
 
         <MenuItem onClick={handleLogout} style={{ color: "grey" }}>
