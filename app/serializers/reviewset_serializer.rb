@@ -1,6 +1,13 @@
 class ReviewsetSerializer < ActiveModel::Serializer
-  attributes :id
-
+  attributes :id #,:title, :description
+  
   has_one :studyset
-  has_one :user
+
+  # def title
+  #   self.object.studyset.title
+  # end
+
+  # def description
+  #   self.object.studyset.description
+  # end
 end

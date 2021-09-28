@@ -13,7 +13,7 @@ function SingleSavedStudysets({ reviewset }) {
     <Box
       component="span"
       sx={{ display: "inline-block", mx: "2px", transform: "scale(0.9)" }}
-
+      key={reviewset.id}
     >
       <Card sx={{ minWidth: 200, minHeight: 100 }}>
         <CardContent>
