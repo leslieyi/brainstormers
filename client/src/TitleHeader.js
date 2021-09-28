@@ -5,11 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 function TitleHeader({ user, setUser }) {
-  const [visible, setVisible] = useState(false);
 
-  const handleVisible = () => {
-    setVisible(!visible);
-  };
   return (
     <div>
       <motion.img
@@ -20,9 +16,23 @@ function TitleHeader({ user, setUser }) {
           paddingTop: "20px",
           display: "block",
         }}
-        whileHover={{ scale: 1.2 }}
+        drag
+        dragTransition={{
+          min: 0,
+          max: 0,
+          bounceStiffness: 200
+        }}
+        // initial={{ scale: 0 }}
+        // animate={{ rotate: 360, scale: 1 }}
+        // transition={{
+        //   type: "spring",
+        //   stiffness: 450,
+        //   damping: 60,
+        //   duration: 0.5
+        // }}
+        whileHover={{ scale: 1.1  }}
         whileTap={{ scale: 0.9 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3}}
       />
       {user ? (
         <div style={{ display: "inline", }}>

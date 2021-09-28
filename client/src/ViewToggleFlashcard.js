@@ -58,7 +58,7 @@ function ViewToggleFlashcard({
             <>
               Word: {word}{" "}
               <Popup
-                content="Add to Flashcard to Review Later"
+                content="Add or Remove Flashcard to Review Later"
                 trigger={
                   <Icon
                     name={starred ? "star" : "star outline"}
