@@ -42,29 +42,29 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
             {studyset.title}
           </Typography>
 
-          <Link to={`/my-studysets/${studyset.id}`}>
+          <Link to={(handleEditButton ? "/my-studysets" : "/studysets") + `/${studyset.id}`}>
             <IconButton aria-label="add" size="medium" color="primary">
               <AddIcon fontSize="inherit" />
             </IconButton>
           </Link>
 
-          <IconButton
+          {handleEditButton ? <IconButton
             aria-label="edit"
             size="medium"
             color="primary"
             onClick={() => handleEditButton(studyset)}
           >
             <EditIcon fontSize="inherit" />
-          </IconButton>
+          </IconButton> : null}
 
-          <IconButton
+          {handleDelete ? <IconButton
             aria-label="delete"
             size="medium"
             color="primary"
             onClick={handleClickOpen}
           >
             <DeleteIcon fontSize="inherit" />
-          </IconButton>
+          </IconButton> : null}
 
           <br />
           <Typography>{studyset.description}</Typography>

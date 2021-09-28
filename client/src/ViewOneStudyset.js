@@ -4,14 +4,15 @@ import CreateFlashcards from "./CreateFlashcards";
 import Box from "@mui/material/Box";
 import ViewToggleFlashcard from "./ViewToggleFlashcard";
 
-function ViewOneStudyset({ reviewcards, toggleStar }) {
+function ViewOneStudyset({ reviewcards, toggleStar, mine }) {
   const { id } = useParams();
 
   const [studyset, setStudyset] = useState();
   const [editFlashcard, setEditFlashcard] = useState(null);
 
   useEffect(() => {
-    fetch(`/my_studysets/${id}`)
+    const url = mine ? "/my_studysets" : "/studysets";
+    fetch(`${url}/${id}`)
       .then((r) => r.json())
       .then((data) => setStudyset(data));
   }, [id]);
@@ -66,14 +67,14 @@ function ViewOneStudyset({ reviewcards, toggleStar }) {
         <Link to="/review-later-studysets">Starred Words</Link>
       </div>
 
-      <CreateFlashcards
+      {mine ? <CreateFlashcards
         editFlashcard={editFlashcard}
         setEditFlashcard={setEditFlashcard}
         onEditFlashcard={onEditFlashcard}
         onNewFlashcard={onNewFlashcard}
         studysetId={studyset.id}
         key={studyset.id}
-      />
+      /> : null}
 
       {studyset ? (
         <Box component="span" sx={{ textAlign: "center" }}>
@@ -82,8 +83,8 @@ function ViewOneStudyset({ reviewcards, toggleStar }) {
               flashcard={flashcard}
               reviewcards={reviewcards}
               toggleStar={toggleStar}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
+              handleDelete={mine ? handleDelete : null}
+              handleEdit={mine ? handleEdit : null}
               key={Math.random()}
             />
           ))}

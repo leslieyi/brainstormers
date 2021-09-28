@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Form, Button } from "semantic-ui-react";
 import MySingleStudyset from "./MySingleStudyset";
 
-function MyStudysets() {
+function MyStudysets({onlyMine, user}) {
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
   const [studysetsData, setStudysetsData] = useState([]); //My Studyset data
@@ -16,7 +16,8 @@ function MyStudysets() {
   }); 
 
   useEffect(() => {
-    fetch(`/my_studysets/`).then((r) => {
+    const url = onlyMine ? "/my_studysets" : "/studysets";
+    fetch(url).then((r) => {
       if (r.ok) {
         r.json().then((data) => setStudysetsData(data));
       }
@@ -92,7 +93,7 @@ function MyStudysets() {
       }}
     >
       <div style={{ marginBottom: "50px" }}>
-        <h1 style={{ display: "inline" }}>View My Studysets</h1>{" "}
+        <h1 style={{ display: "inline" }}>{onlyMine ? "View My" : "All"} Studysets</h1>{" "}
         <Link to="/create-studysets">Make a Studyset</Link>
       </div>
 
@@ -101,8 +102,8 @@ function MyStudysets() {
           key={studyset.id}
           studyset={studyset}
           setStudysetsData={setStudysetsData}
-          handleDelete={handleDelete}
-          handleEditButton={handleEditButton}
+          handleDelete={studyset.user.id === user.id ? handleDelete : null}
+          handleEditButton={studyset.user.id === user.id ? handleEditButton : null}
         />
       ))}
 

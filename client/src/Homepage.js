@@ -46,15 +46,19 @@ function Homepage({ user, setUser }) {
     <div>
       <Switch>
         <Route exact path="/">
-          <Main />
+          <MyStudysets onlyMine={false} user={user} key="all" />
         </Route>
 
         <Route exact path="/my-studysets">
-          <MyStudysets />
+          <MyStudysets onlyMine={true} user={user} key="mine" />
         </Route>
 
         <Route path="/my-studysets/:id">
-          <ViewOneStudyset reviewcards={reviewcards} toggleStar={toggleStar} />
+          <ViewOneStudyset mine={true} reviewcards={reviewcards} toggleStar={toggleStar} />
+        </Route>
+
+        <Route path="/studysets/:id">
+          <ViewOneStudyset mine={false} reviewcards={reviewcards} toggleStar={toggleStar} />
         </Route>
 
         <Route path="/create-studysets">
