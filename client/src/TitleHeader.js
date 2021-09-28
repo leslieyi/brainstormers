@@ -20,6 +20,7 @@ function TitleHeader({ user, setUser }) {
           paddingTop: "20px",
           display: "block",
         }}
+<<<<<<< HEAD
         drag
         dragTransition={{
           min: 0,
@@ -35,6 +36,9 @@ function TitleHeader({ user, setUser }) {
         //   duration: 0.5
         // }}
         whileHover={{ scale: 1.1  }}
+=======
+        whileHover={{ scale: 1.2 }}
+>>>>>>> parent of 783fc86 (Drag added for title)
         whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.5 }}
       />
