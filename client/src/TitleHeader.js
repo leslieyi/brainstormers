@@ -5,7 +5,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 function TitleHeader({ user, setUser }) {
+  const [visible, setVisible] = useState(false);
 
+  const handleVisible = () => {
+    setVisible(!visible);
+  };
   return (
     <div>
       <motion.img
@@ -32,7 +36,7 @@ function TitleHeader({ user, setUser }) {
         // }}
         whileHover={{ scale: 1.1  }}
         whileTap={{ scale: 0.9 }}
-        transition={{ duration: 0.3}}
+        transition={{ duration: 0.5 }}
       />
       {user ? (
         <div style={{ display: "inline", }}>

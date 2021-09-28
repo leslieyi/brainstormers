@@ -17,7 +17,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 
-
 function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
   const [open, setOpen] = useState(false);
 
