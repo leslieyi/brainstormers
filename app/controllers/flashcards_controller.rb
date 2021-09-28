@@ -1,7 +1,4 @@
 class FlashcardsController < ApplicationController
-  #before_action :find_flashcard, only: [:show, :update, :destroy]
-  #runs everytime the action runs
-
   skip_before_action :authorize, only: :index
 
   def index

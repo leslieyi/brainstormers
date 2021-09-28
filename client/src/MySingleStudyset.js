@@ -33,7 +33,7 @@ function MySingleStudyset({ studyset, handleDelete, handleEditButton }) {
     <Box
       component="span"
       sx={{ display: "inline-block", mx: "2px", transform: "scale(0.9)" }}
-      key={studyset.id}
+
     >
       <Card sx={{ minWidth: 200, minHeight: 100 }}>
         <CardContent>

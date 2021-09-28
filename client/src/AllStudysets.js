@@ -140,7 +140,7 @@ function AllStudysets({ onlyMine, user }) {
 
       {searchedData.map((studyset) => (
         <MySingleStudyset
-          key={studyset.id}
+          // key={studyset.id}
           studyset={studyset}
           setStudysetsData={setStudysetsData}
           handleDelete={studyset.user.id === user.id ? handleDelete : null}
