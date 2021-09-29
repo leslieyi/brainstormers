@@ -1,11 +1,11 @@
 import Auth from "./Auth";
-import AllStudysets from "./AllStudysets";
-import CreateStudysets from "./CreateStudysets ";
+import StudysetsContainer from "./StudysetsContainer";
+import StudysetForm from "./StudysetForm";
 import { Route, Switch } from "react-router-dom";
-import ViewOneStudyset from "./ViewOneStudyset";
+import FlashcardsContainer from "./FlashcardsContainer";
 import { useEffect, useState } from "react";
 import SavedFlashcards from "./SavedFlashcards";
-import SavedStudysets from "./SavedStudysets";
+import SavedStudysetsContainer from "./SavedStudysetsContainer";
 
 function Homepage({ user, setUser }) {
   const [reviewcards, setReviewcards] = useState([]);
@@ -75,7 +75,7 @@ function Homepage({ user, setUser }) {
     <div>
       <Switch>
         <Route exact path="/">
-          <AllStudysets
+          <StudysetsContainer
             onlyMine={false}
             user={user}
             reviewsets={reviewsets}
@@ -85,7 +85,7 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route exact path="/my-studysets">
-          <AllStudysets
+          <StudysetsContainer
             onlyMine={true}
             user={user}
             reviewsets={reviewsets}
@@ -95,7 +95,7 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route path="/my-studysets/:id">
-          <ViewOneStudyset
+          <FlashcardsContainer
             mine={true}
             reviewcards={reviewcards}
             setReviewcards={setReviewcards}
@@ -106,7 +106,7 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route path="/studysets/:id">
-          <ViewOneStudyset
+          <FlashcardsContainer
             mine={false}
             reviewcards={reviewcards}
             setReviewcards={setReviewcards}
@@ -117,7 +117,7 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route path="/create-studysets">
-          <CreateStudysets />
+          <StudysetForm />
         </Route>
 
         <Route exact path="/saved-flashcards">
@@ -125,7 +125,7 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route exact path="/saved-studysets">
-          <SavedStudysets user={user} reviewsets={reviewsets} />
+          <SavedStudysetsContainer user={user} reviewsets={reviewsets} />
         </Route>
       </Switch>
     </div>

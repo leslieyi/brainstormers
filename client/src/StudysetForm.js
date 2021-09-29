@@ -2,9 +2,9 @@ import { Form, Button } from "semantic-ui-react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-// import CreateFlashcards from "./CreateFlashcards";
 
-function CreateStudysets() {
+
+function StudysetForm() {
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
@@ -87,4 +87,4 @@ function CreateStudysets() {
   );
 }
 
-export default CreateStudysets;
+export default StudysetForm;

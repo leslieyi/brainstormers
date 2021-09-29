@@ -14,7 +14,7 @@ import { Popup } from "semantic-ui-react";
 import { useState } from "react";
 
 
-function ViewToggleFlashcard({
+function FlashcardCard({
   flashcard: { id, word, definition },
   flashcard,
   handleDelete,
@@ -111,4 +111,4 @@ function ViewToggleFlashcard({
     </Card>
   );
 }
-export default ViewToggleFlashcard;
+export default FlashcardCard;

@@ -8,7 +8,7 @@ import { Popup } from "semantic-ui-react";
 
 import IconButton from "@mui/material/IconButton";
 
-function SingleSavedStudysets({ reviewset }) {
+function SavedStudysetCard({ reviewset }) {
   return (
     <Box
       component="span"
@@ -55,4 +55,4 @@ function SingleSavedStudysets({ reviewset }) {
     </Box>
   );
 }
-export default SingleSavedStudysets;
+export default SavedStudysetCard;

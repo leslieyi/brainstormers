@@ -1,11 +1,11 @@
-import ViewToggleFlashcard from "./ViewToggleFlashcard";
+import FlashcardCard from "./FlashcardCard";
 
 function SavedFlashcards({ reviewcards, toggleStar }) {
   return (
     <div>
-      <h1>Review Cards</h1>
+      <h1>Review Flashcards</h1>
       {reviewcards.map((reviewcard) => (
-        <ViewToggleFlashcard
+        <FlashcardCard
           flashcard={reviewcard.flashcard}
           reviewcards={reviewcards}
           toggleStar={toggleStar}

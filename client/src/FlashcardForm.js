@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function CreateFlashcards({
+function FlashcardForm({
   onNewFlashcard,
   editFlashcard,
   setEditFlashcard,
@@ -102,4 +102,4 @@ function CreateFlashcards({
   );
 }
 
-export default CreateFlashcards;
+export default FlashcardForm;

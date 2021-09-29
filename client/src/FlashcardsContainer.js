@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import CreateFlashcards from "./CreateFlashcards";
-import ViewToggleFlashcard from "./ViewToggleFlashcard";
+import FlashcardForm from "./FlashcardForm";
+import FlashcardCard from "./FlashcardCard";
 import { Icon, Popup } from "semantic-ui-react";
 
 import Box from "@mui/material/Box";
 
-function ViewOneStudyset({ reviewcards, setReviewcards, toggleStar, mine, toggleSave, reviewsets }) {
+function FlashcardsContainer({ reviewcards, setReviewcards, toggleStar, mine, toggleSave, reviewsets }) {
   const { id } = useParams();
 
   const [studyset, setStudyset] = useState();
@@ -107,7 +107,7 @@ function ViewOneStudyset({ reviewcards, setReviewcards, toggleStar, mine, toggle
       </div>
 
       {mine ? (
-        <CreateFlashcards
+        <FlashcardForm
           editFlashcard={editFlashcard}
           setEditFlashcard={setEditFlashcard}
           onEditFlashcard={onEditFlashcard}
@@ -120,7 +120,7 @@ function ViewOneStudyset({ reviewcards, setReviewcards, toggleStar, mine, toggle
       {studyset ? (
         <Box component="span" sx={{ textAlign: "center" }}>
           {studyset.flashcards.map((flashcard) => (
-            <ViewToggleFlashcard
+            <FlashcardCard
               flashcard={flashcard}
               reviewcards={reviewcards}
               toggleStar={toggleStar}
@@ -135,4 +135,4 @@ function ViewOneStudyset({ reviewcards, setReviewcards, toggleStar, mine, toggle
   );
 }
 
-export default ViewOneStudyset;
+export default FlashcardsContainer;

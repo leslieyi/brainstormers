@@ -1,6 +1,6 @@
-import SingleSavedStudysets from "./SingleSavedStudysets";
+import SavedStudysetCard from "./SavedStudysetCard";
 
-function SavedStudysets({ reviewsets, toggleSave, user }) {
+function SavedStudysetsContainer({ reviewsets, toggleSave, user }) {
   return (
     <div   style={{
         marginRight: "100px",
@@ -16,7 +16,7 @@ function SavedStudysets({ reviewsets, toggleSave, user }) {
       }}>
       <h1>Saved Studysets</h1>
       {reviewsets.map((reviewset) => (
-        <SingleSavedStudysets
+        <SavedStudysetCard
           reviewset={reviewset}
           toggleSave={toggleSave}
           user={user}
@@ -26,4 +26,4 @@ function SavedStudysets({ reviewsets, toggleSave, user }) {
   );
 }
 
-export default SavedStudysets;
+export default SavedStudysetsContainer;

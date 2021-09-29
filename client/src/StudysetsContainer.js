@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import MySingleStudyset from "./MySingleStudyset";
+import StudysetCard from "./StudysetCard";
 
 import { Popup, Form, Button, Input } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
 
 
 
-function AllStudysets({ onlyMine, user, reviewsets, setReviewsets }) {
+function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
   const [studysetsData, setStudysetsData] = useState([]); //My Studyset data
@@ -146,7 +146,7 @@ function AllStudysets({ onlyMine, user, reviewsets, setReviewsets }) {
       </div>
 
       {searchedData.map((studyset) => (
-        <MySingleStudyset
+        <StudysetCard 
           key={Math.random()}
           studyset={studyset}
           setStudysetsData={setStudysetsData}
@@ -189,4 +189,4 @@ function AllStudysets({ onlyMine, user, reviewsets, setReviewsets }) {
   );
 }
 
-export default AllStudysets;
+export default StudysetsContainer;
