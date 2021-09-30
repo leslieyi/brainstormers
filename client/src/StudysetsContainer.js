@@ -121,35 +121,41 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
         marginTop: "50px",
         border: "2px solid #0353A4",
         opacity: "0.8",
-
       }}
     >
-  
-        <h1 style={{ display: "inline-block" }}>
-          {onlyMine ? "View My" : "All"} Studysets
-        </h1>
-        <Link to="/create-studysets">Make a Studyset</Link>
-        <div>
-          Sort in Alphabetical Order
-          <Popup
-            content="Sort Alphabetically"
-            trigger={<Switch onClick={handleSort} size="small" />}
-          />
-          <Input onChange={handleSearch} placeholder="Start Typing to Search" />
-        </div>
-
-
-      {searchedData.map((studyset) => (
-        <StudysetCard
-          key={Math.random()}
-          studyset={studyset}
-          setStudysetsData={setStudysetsData}
-          handleDelete={studyset.user.id === user.id ? handleDelete : null}
-          handleEditButton={
-            studyset.user.id === user.id ? handleEditButton : null
-          }
+      <h1 style={{ display: "inline-block" }}>
+        {onlyMine ? "View My" : "All"} Studysets
+      </h1>
+      <Link to="/create-studysets">Make a Studyset</Link>
+      <div>
+        Sort in Alphabetical Order
+        <Popup
+          content="Sort Alphabetically"
+          trigger={<Switch onClick={handleSort} size="small" />}
         />
-      ))}
+        <Input onChange={handleSearch} placeholder="Start Typing to Search" />
+      </div>
+
+      <div
+        style={{
+          dispaly: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "10px"
+        }}
+      >
+        {searchedData.map((studyset) => (
+          <StudysetCard
+            key={Math.random()}
+            studyset={studyset}
+            setStudysetsData={setStudysetsData}
+            handleDelete={studyset.user.id === user.id ? handleDelete : null}
+            handleEditButton={
+              studyset.user.id === user.id ? handleEditButton : null
+            }
+          />
+        ))}
+      </div>
 
       {toggleEdit ? (
         <>

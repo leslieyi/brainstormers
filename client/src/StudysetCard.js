@@ -26,8 +26,8 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
   };
 
   return (
-    <Card.Group centered style={{ display: "inline-block" }}>
-      <Card fluid style={{ margin: "20px" }}>
+    <Card.Group>
+      <Card >
         <Card.Content>
           <Card.Header
             style={{

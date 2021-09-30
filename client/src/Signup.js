@@ -55,7 +55,7 @@ function Signup({ onLogin }) {
         <h2>{error}</h2>
       ))}
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} >
         <Form.Group widths="equal">
           <Form.Field
             id="form-input-control-username"
