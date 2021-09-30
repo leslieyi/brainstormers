@@ -1,17 +1,16 @@
 import Navbar from "./Navbar";
 import TitleLogo from "./photos/brainstormers-8-cut.png";
-import { Divider } from 'semantic-ui-react'
+import { Divider } from "semantic-ui-react";
 
 import { motion } from "framer-motion";
 
 function TitleHeader({ user, setUser }) {
-
   return (
     <div>
       <motion.img
         src={TitleLogo}
         style={{
-          maxWidth: "20%",
+          maxWidth: "25%",
           margin: "auto",
           paddingTop: "20px",
           display: "block",
@@ -27,10 +26,25 @@ function TitleHeader({ user, setUser }) {
         transition={{ duration: 0.5 }}
       />
       {user ? (
-        <div >
-      <hr style={{	border: "0",
-	borderTop:"3px solid #003559"}}/>
+        <div>
+          <Divider
+            fitted
+            style={{
+              border: "0",
+              borderTop: "2px solid #0353A4",
+              opacity: "0.8",
+            }}
+          />
+
           <Navbar user={user} setUser={setUser} style={{ float: "right" }} />
+          <Divider
+            fitted
+            style={{
+              border: "0",
+              borderTop: "2px solid #0353A4",
+              opacity: "0.8",
+            }}
+          />
         </div>
       ) : null}
     </div>

@@ -127,7 +127,7 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
         paddingTop: "50px",
         paddingBottom: "100px",
         border: "4px solid black",
-        // backgroundColor: "hsla(209, 49%, 50%, 0.59)"
+      
       }}
     >
       <div style={{ marginBottom: "50px" }}>

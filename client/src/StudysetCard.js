@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import { Popup } from "semantic-ui-react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { Popup, Icon, Card } from "semantic-ui-react";
+
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -29,77 +26,76 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
   };
 
   return (
-    <Box
-      component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.9)" }}
 
-    >
-      <Card sx={{ minWidth: 200, minHeight: 100 }}>
-        <CardContent>
-          <Typography
-            component={"span"}
-            variant="h5"
-            style={{ display: "inline", /*color: handleDelete? "#0353a4" : "#000000"*/ }}
-          >
-            {studyset.title}
-          </Typography>
+    <Card.Group centered style={{ display: "inline-block"}}>
+  
+        <Card fluid padding="20px">
+          <Card.Content>
+            <Card.Header
+            
+              style={{
+                display:
+                  "inline" /*color: handleDelete? "#0353a4" : "#000000"*/,
+              }}
+            >
+              {studyset.title}
+            </Card.Header>
 
-          <Link
-            to={
-              (handleEditButton ? "/my-studysets" : "/studysets") +
-              `/${studyset.id}`
-            }
-          >
-            <Popup
-              content="Go to Studysets"
-              trigger={
-                <IconButton aria-label="add" size="medium" color="primary">
-                  <AddIcon fontSize="inherit" />
-                </IconButton>
+            <Link
+              to={
+                (handleEditButton ? "/my-studysets" : "/studysets") +
+                `/${studyset.id}`
               }
-            />
-          </Link>
-
-          {handleEditButton ? (
-            <IconButton
-              aria-label="edit"
-              size="medium"
-              color="primary"
-              onClick={() => handleEditButton(studyset)}
             >
-              <EditIcon fontSize="inherit" />
-            </IconButton>
-          ) : null}
+              <Popup
+                content="Go to Studysets"
+                trigger={
+                  <IconButton aria-label="add" size="medium" color="primary">
+                    <AddIcon fontSize="inherit" />
+                  </IconButton>
+                }
+              />
+            </Link>
 
-          {handleDelete ? (
-            <IconButton
-              aria-label="delete"
-              size="medium"
-              color="primary"
-              onClick={handleClickOpen}
-            >
-              <DeleteIcon fontSize="inherit" />
-            </IconButton>
-          ) : null}
+            {handleEditButton ? (
+              <IconButton
+                aria-label="edit"
+                size="medium"
+                color="primary"
+                onClick={() => handleEditButton(studyset)}
+              >
+                <EditIcon fontSize="inherit" />
+              </IconButton>
+            ) : null}
 
-          <br />
+            {handleDelete ? (
+              <IconButton
+                aria-label="delete"
+                size="medium"
+                color="primary"
+                onClick={handleClickOpen}
+              >
+                <DeleteIcon fontSize="inherit" />
+              </IconButton>
+            ) : null}
 
-          <div >
-            <Typography style={{ display: "block", }} component={"span"}>
-              <b>Description:</b>
-              {studyset.description}
-            </Typography>
-            <Typography style={{ display: "block",  }} component={"span"}>
-              <b>Total Flashcards:</b> {studyset.total_flashcards}
-            </Typography>
-            <Typography style={{ display: "block",  }} component={"span"}>
-              <b>Creator:</b> {studyset.user.username}
-            </Typography>
-          </div>
-        </CardContent>
-      </Card>
-      {open ? (
-        <div>
+            <div>
+              <Card.Description>
+                <b>Description: </b>
+                {studyset.description}
+              </Card.Description>
+              <Card.Meta>
+                Total Flashcards: {studyset.total_flashcards}
+              </Card.Meta>
+              <Card.Content>
+                <Icon name="user" />
+                <b>Creator:</b> {studyset.user.username}
+              </Card.Content>
+            </div>
+          </Card.Content>
+        </Card>
+
+        {open ? (
           <Dialog
             open={open}
             onClose={handleClose}
@@ -133,10 +129,8 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
               </Button>
             </DialogActions>
           </Dialog>
-        </div>
-      ) : null}
-    </Box>
-
+        ) : null}
+</Card.Group>
   );
 }
 
