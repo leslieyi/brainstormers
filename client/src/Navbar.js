@@ -1,22 +1,7 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
-import { useHistory } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { autocompleteClasses } from "@mui/material";
+import { useHistory, NavLink } from "react-router-dom";
+import { Menu, Icon } from "semantic-ui-react";
 
 function Navbar({ setUser }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const history = useHistory();
 
   const handleLogout = () => {
@@ -30,75 +15,84 @@ function Navbar({ setUser }) {
 
   return (
     <div>
-      <Button
-        id="fade-button"
-        aria-controls="fade-menu"
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        style={{ color: "grey" }}
-        // sx={{}
-      >
-        Menu
-      </Button>
-      <Menu
-        id="fade-menu"
-        MenuListProps={{
-          "aria-labelledby": "fade-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        TransitionComponent={Fade}
-      >
-        <NavLink
-          exact
-          to="/"
-          style={{ color: "grey" }}
-          activeStyle={{ color: "black" }}
-        >
-          <MenuItem>Home</MenuItem>
-        </NavLink>
+      <Menu secondary>
+        <Menu.Item >
+          <NavLink
+            exact
+            to="/"
+            style={{ color: "#98C3EC" }}
+            activeStyle={{
+              color: "#0353A4",
+              fontWeight: "bold",
+            }}
+          >
+            <Icon name="home" />
+            Home
+          </NavLink>
+        </Menu.Item>
 
-        <NavLink
-          to="/my-studysets"
-          style={{ color: "grey" }}
-          activeStyle={{ color: "black" }}
-        >
-          <MenuItem>My Studysets</MenuItem>
-        </NavLink>
+        <Menu.Item>
+          <NavLink
+            to="/my-studysets"
+            style={{ color: "#98C3EC" }}
+            activeStyle={{
+              color: "#0353A4",
+              fontWeight: "bold",
+            }}
+          >
+            <Icon name="book" />
+            My Studysets
+          </NavLink>
+        </Menu.Item>
 
-        <NavLink
-          to="/create-studysets"
-          style={{ color: "grey" }}
-          activeStyle={{ color: "black" }}
-        >
-          <MenuItem>Create Studysets</MenuItem>
-        </NavLink>
+        <Menu.Item>
+          <NavLink
+            to="/create-studysets"
+            style={{ color: "#98C3EC" }}
+            activeStyle={{
+              color: "#0353A4",
+              fontWeight: "bold",
+            }}
+          >
+            <Icon name="compose" />
+            Create Studysets
+          </NavLink>
+        </Menu.Item>
 
-        <NavLink
-          to="/saved-studysets"
-          style={{ color: "grey" }}
-          activeStyle={{ color: "black" }}
-        >
-          <MenuItem>Saved Studysets</MenuItem>
-        </NavLink>
+        <Menu.Item>
+          <NavLink
+            to="/saved-studysets"
+            style={{ color: "#98C3EC" }}
+            activeStyle={{
+              color: "#0353A4",
+              fontWeight: "bold",
+            }}
+          >
+            <Icon name="th list" />
+            Saved Studysets
+          </NavLink>
+        </Menu.Item>
 
-        <NavLink
-          to="/saved-flashcards"
-          style={{ color: "grey" }}
-          activeStyle={{ color: "black" }}
-        >
-          <MenuItem>Starred Flashcards</MenuItem>
-        </NavLink>
+        <Menu.Item>
+          <NavLink
+            to="/saved-flashcards"
+            style={{ color: "#98C3EC" }}
+            activeStyle={{
+              color: "#0353A4",
+              fontWeight: "bold",
+            }}
+          >
+            <Icon name="th" />
+            Starred Flashcards
+          </NavLink>
+        </Menu.Item>
 
-        <MenuItem onClick={handleLogout} style={{ color: "grey" }}>
-          Logout
-        </MenuItem>
+        <Menu.Menu position="right" style={{ marginRight: "20px" }}>
+          <Menu.Item onClick={handleLogout} style={{ color: "#98C3EC" }}>
+            <Icon name="power off" />
+            Logout
+          </Menu.Item>
+        </Menu.Menu>
       </Menu>
     </div>
   );
