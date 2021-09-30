@@ -3,7 +3,6 @@ import { Form, Input, TextArea, Button, Header } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 import { Segment } from "semantic-ui-react";
 
-
 function Signup({ onLogin }) {
   const [errors, setErrors] = useState([]);
   const history = useHistory();
@@ -44,20 +43,13 @@ function Signup({ onLogin }) {
   }
   return (
     <Segment
-    raised
-    style={{
-      marginRight: "100px",
-      marginLeft: "100px",
-      marginTop: "50px",
-      paddingRight: "50px",
-      paddingLeft: "50px",
-      paddingTop: "50px",
-      paddingBottom: "100px",
-      border: "2px solid #0353A4",
-      opacity: "0.8",
-      backgroundColor: "#B9D6F2",
-    }}
-  >
+      raised
+      style={{
+        border: "2px solid #0353A4",
+        opacity: "0.8",
+        backgroundColor: "#B9D6F2",
+      }}
+    >
       <Header as="h2">Sign Up</Header>
       {errors.map((error) => (
         <h2>{error}</h2>

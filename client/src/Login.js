@@ -42,13 +42,6 @@ function Login({ onLogin }) {
     <Segment
       raised
       style={{
-        marginRight: "100px",
-        marginLeft: "100px",
-        marginTop: "50px",
-        paddingRight: "50px",
-        paddingLeft: "50px",
-        paddingTop: "50px",
-        paddingBottom: "100px",
         border: "2px solid #0353A4",
         opacity: "0.8",
         backgroundColor: "#B9D6F2",

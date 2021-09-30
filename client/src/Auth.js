@@ -26,8 +26,8 @@ function Auth({ user, onLogin }) {
           marginLeft: "300px",
           marginTop: "50px",
           marginBottom: "50px",
-          paddingRight: "150px",
-          paddingLeft: "150px",
+          paddingRight: "50px",
+          paddingLeft: "50px",
           paddingTop: "50px",
           paddingBottom: "100px",
           border: "2px solid #0353A4",
@@ -38,7 +38,7 @@ function Auth({ user, onLogin }) {
         <h1 style={{ fontFamily: "'Roboto Mono', monospace" }}>
           Brainstormer:
         </h1>
-        <p style={{ fontSize: "20px" }}>
+        <p style={{ fontSize: "18px" }}>
           A free website providing learning tools for students by creating your
           own studysets with terms and definitions. You can also find
           user-generated studysets that are available on the website. Chances

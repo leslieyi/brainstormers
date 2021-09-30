@@ -26,111 +26,105 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
   };
 
   return (
-
-    <Card.Group centered style={{ display: "inline-block"}}>
-  
-        <Card fluid style={{margin:"20px"}}>
-          <Card.Content>
-            <Card.Header
-            
-              style={{
-                display:
-                  "inline" /*color: handleDelete? "#0353a4" : "#000000"*/,
-              }}
-            >
-              {studyset.title}
-            </Card.Header>
-
-            <Link
-              to={
-                (handleEditButton ? "/my-studysets" : "/studysets") +
-                `/${studyset.id}`
-              }
-            >
-              <Popup
-                content="Go to Studysets"
-                trigger={
-                  <IconButton aria-label="add" size="medium" color="primary">
-                    <AddIcon fontSize="inherit" />
-                  </IconButton>
-                }
-              />
-            </Link>
-
-            {handleEditButton ? (
-              <IconButton
-                aria-label="edit"
-                size="medium"
-                color="primary"
-                onClick={() => handleEditButton(studyset)}
-              >
-                <EditIcon fontSize="inherit" />
-              </IconButton>
-            ) : null}
-
-            {handleDelete ? (
-              <IconButton
-                aria-label="delete"
-                size="medium"
-                color="primary"
-                onClick={handleClickOpen}
-              >
-                <DeleteIcon fontSize="inherit" />
-              </IconButton>
-            ) : null}
-
-            <div>
-              <Card.Description>
-                <b>Description: </b>
-                {studyset.description}
-              </Card.Description>
-              <Card.Meta>
-                Total Flashcards: {studyset.total_flashcards}
-              </Card.Meta>
-              <Card.Content>
-                <Icon name="user" />
-                <b>Creator:</b> {studyset.user.username}
-              </Card.Content>
-            </div>
-          </Card.Content>
-        </Card>
-
-        {open ? (
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
+    <Card.Group centered style={{ display: "inline-block" }}>
+      <Card fluid style={{ margin: "20px" }}>
+        <Card.Content>
+          <Card.Header
+            style={{
+              display: "inline" /*color: handleDelete? "#0353a4" : "#000000"*/,
+            }}
           >
-            <DialogTitle id="alert-dialog-title">Are You Sure?</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Do you really want to delete {studyset.title} studyset? This
-                process cannot be undone.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={() => setOpen(false)}
-                size="small"
-                variant="outlined"
-                color="primary"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={() => handleDelete(studyset.id)}
-                size="small"
-                variant="outlined"
-                color="error"
-                autoFocus
-              >
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
-        ) : null}
-</Card.Group>
+            {studyset.title}
+          </Card.Header>
+
+          <Link
+            to={
+              (handleEditButton ? "/my-studysets" : "/studysets") +
+              `/${studyset.id}`
+            }
+          >
+            <Popup
+              content="Go to Studysets"
+              trigger={
+                <IconButton aria-label="add" size="medium" color="primary">
+                  <AddIcon fontSize="inherit" />
+                </IconButton>
+              }
+            />
+          </Link>
+
+          {handleEditButton ? (
+            <IconButton
+              aria-label="edit"
+              size="medium"
+              color="primary"
+              onClick={() => handleEditButton(studyset)}
+            >
+              <EditIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
+
+          {handleDelete ? (
+            <IconButton
+              aria-label="delete"
+              size="medium"
+              color="primary"
+              onClick={handleClickOpen}
+            >
+              <DeleteIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
+
+          <div>
+            <Card.Description>
+              <b>Description: </b>
+              {studyset.description}
+            </Card.Description>
+            <Card.Meta>Total Flashcards: {studyset.total_flashcards}</Card.Meta>
+            <Card.Content>
+              <Icon name="user" />
+              <b>Creator:</b> {studyset.user.username}
+            </Card.Content>
+          </div>
+        </Card.Content>
+      </Card>
+
+      {open ? (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Are You Sure?</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Do you really want to delete {studyset.title} studyset? This
+              process cannot be undone.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => setOpen(false)}
+              size="small"
+              variant="outlined"
+              color="primary"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => handleDelete(studyset.id)}
+              size="small"
+              variant="outlined"
+              color="error"
+              autoFocus
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      ) : null}
+    </Card.Group>
   );
 }
 
