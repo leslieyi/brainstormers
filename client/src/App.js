@@ -3,15 +3,18 @@ import TitleHeader from "./TitleHeader"
 import Homepage from "./Homepage"
 
   // COMMANDS THAT WE NEED TO RUN
-  // npm install --prefix client
   // npm install semantic-ui-react semantic-ui-css
   // npm install react-router-dom
-  // npm start --prefix client
   // rails db:migrate
   // deploying!
   //brew tap heroku/brew && brew install heroku
   //heroku git:remote -a yi-brainstormers
   //heroku run rails db:migrate db:seed
+
+  // npm install --prefix client
+  // npm start --prefix client
+  // bundle install 
+  // rails s 
 
   // console.log = console.warn = console.error = () => {};
 

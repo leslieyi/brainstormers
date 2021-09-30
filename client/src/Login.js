@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Input, Button, Header } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
+import { Segment } from "semantic-ui-react";
 
 function Login({ onLogin }) {
   const history = useHistory();
@@ -38,12 +39,19 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div
+    <Segment
+      raised
       style={{
-        paddingRight: "300px",
-        paddingLeft: "300px",
-        paddingTop: "100px",
+        marginRight: "100px",
+        marginLeft: "100px",
+        marginTop: "50px",
+        paddingRight: "50px",
+        paddingLeft: "50px",
+        paddingTop: "50px",
         paddingBottom: "100px",
+        border: "2px solid #0353A4",
+        opacity: "0.8",
+        backgroundColor: "#B9D6F2",
       }}
     >
       <Form onSubmit={loginSubmit} float="right">
@@ -74,7 +82,7 @@ function Login({ onLogin }) {
         ))}
         <Button>Login</Button>
       </Form>
-    </div>
+    </Segment>
   );
 }
 

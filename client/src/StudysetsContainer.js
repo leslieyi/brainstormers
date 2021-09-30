@@ -2,10 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StudysetCard from "./StudysetCard";
 
-import { Popup, Form, Button, Input } from "semantic-ui-react";
+import { Popup, Form, Button, Input, Segment } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
-
-
 
 function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
   const [errors, setErrors] = useState([]);
@@ -18,8 +16,6 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
   });
   const [sortedStudyset, setSortedStudyset] = useState(false);
   const [search, setSearch] = useState("");
-
-
 
   const handleSort = () => {
     setSortedStudyset(!sortedStudyset);
@@ -47,7 +43,9 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
       const newData = studysetsData.filter((studyset) => studyset.id !== id); //
       setStudysetsData(newData);
 
-      const newReviewsets = reviewsets.filter(reviewset => reviewset.studyset.id !== id);
+      const newReviewsets = reviewsets.filter(
+        (reviewset) => reviewset.studyset.id !== id
+      );
       setReviewsets(newReviewsets);
     });
   };
@@ -86,10 +84,12 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
         if (editedData.errors) {
           setErrors(editedData.errors);
         } else {
-          const updatedData = studysetsData.map((studyset) => studyset.id !== studysetValue.id ? studyset : studysetValue);
+          const updatedData = studysetsData.map((studyset) =>
+            studyset.id !== studysetValue.id ? studyset : studysetValue
+          );
           setStudysetsData(updatedData);
 
-          const updatedReviewsets = reviewsets.map(reviewset => {
+          const updatedReviewsets = reviewsets.map((reviewset) => {
             if (reviewset.studyset.id !== studysetValue.id) {
               return reviewset;
             }
@@ -100,8 +100,6 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
         }
       });
   };
-
- 
 
   function handleSearch(e) {
     setSearch(e.target.value);
@@ -114,23 +112,23 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
       item.user.username.toLowerCase().includes(search.toLowerCase())
   );
 
-
   return (
-    <div
+    <Segment
+      raised
       style={{
         marginRight: "100px",
         marginLeft: "100px",
-        marginBottom: "200px",
-        marginTop: "100px",
-        paddingRight: "50px",
-        paddingLeft: "50px",
-        paddingTop: "50px",
-        paddingBottom: "100px",
-        border: "4px solid black",
-      
+        marginTop: "50px",
+        // paddingRight: "50px",
+        // paddingLeft: "50px",
+        // paddingTop: "50px",
+        // paddingBottom: "100px",
+        border: "2px solid #0353A4",
+        opacity: "0.8",
+
       }}
     >
-      <div style={{ marginBottom: "50px" }}>
+  
         <h1 style={{ display: "inline-block" }}>
           {onlyMine ? "View My" : "All"} Studysets
         </h1>
@@ -143,10 +141,10 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
           />
           <Input onChange={handleSearch} placeholder="Start Typing to Search" />
         </div>
-      </div>
+
 
       {searchedData.map((studyset) => (
-        <StudysetCard 
+        <StudysetCard
           key={Math.random()}
           studyset={studyset}
           setStudysetsData={setStudysetsData}
@@ -185,7 +183,7 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
           </Form>
         </>
       ) : null}
-    </div>
+    </Segment>
   );
 }
 

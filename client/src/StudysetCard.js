@@ -29,7 +29,7 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
 
     <Card.Group centered style={{ display: "inline-block"}}>
   
-        <Card fluid padding="20px">
+        <Card fluid style={{margin:"20px"}}>
           <Card.Content>
             <Card.Header
             
