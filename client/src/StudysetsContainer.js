@@ -123,6 +123,45 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
         opacity: "0.8",
       }}
     >
+      {toggleEdit ? (
+        <>
+          {errors.map((error) => (
+            <h4>{error}</h4>
+          ))}
+
+          <Form
+            onSubmit={handleUpdate}
+            style={{
+              marginRight: "50px",
+              marginLeft: "50px",
+            }}
+          >
+            <Form.Group widths="equal">
+              <Form.Field
+                control={Input}
+                label="Title"
+                placeholder="Edit term"
+                name="title"
+                onChange={studysetOnChange}
+                autoComplete="off"
+                value={studysetValue.title}
+              />
+
+              <Form.Field
+                control={Input}
+                label="Description"
+                placeholder="Edit Description"
+                name="description"
+                onChange={studysetOnChange}
+                autoComplete="off"
+                value={studysetValue.description}
+              />
+            </Form.Group>
+            <Button type="submit">Update</Button>
+          </Form>
+        </>
+      ) : null}
+
       <h1 style={{ display: "inline-block" }}>
         {onlyMine ? "View My" : "All"} Studysets
       </h1>
@@ -141,7 +180,7 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
           dispaly: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: "10px"
+          gap: "10px",
         }}
       >
         {searchedData.map((studyset) => (
@@ -156,35 +195,6 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
           />
         ))}
       </div>
-
-      {toggleEdit ? (
-        <>
-          {errors.map((error) => (
-            <h4>{error}</h4>
-          ))}
-
-          <Form onSubmit={handleUpdate}>
-            <h1>Title</h1>
-            <Form.Input
-              placeholder="Edit term"
-              name="title"
-              onChange={studysetOnChange}
-              autoComplete="off"
-              value={studysetValue.title}
-            />
-            <h1>Description</h1>
-            <Form.Input
-              placeholder="Edit Description"
-              name="description"
-              onChange={studysetOnChange}
-              autoComplete="off"
-              value={studysetValue.description}
-            />
-
-            <Button type="submit">Update</Button>
-          </Form>
-        </>
-      ) : null}
     </Segment>
   );
 }

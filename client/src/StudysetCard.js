@@ -26,8 +26,8 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
   };
 
   return (
-    <Card.Group>
-      <Card >
+    <Card.Group centered>
+      <Card>
         <Card.Content>
           <Card.Header
             style={{
@@ -54,14 +54,19 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
           </Link>
 
           {handleEditButton ? (
-            <IconButton
-              aria-label="edit"
-              size="medium"
-              color="primary"
-              onClick={() => handleEditButton(studyset)}
-            >
-              <EditIcon fontSize="inherit" />
-            </IconButton>
+            <Popup
+              content="Edit Studyset"
+              trigger={
+                <IconButton
+                  aria-label="edit"
+                  size="medium"
+                  color="primary"
+                  onClick={() => handleEditButton(studyset)}
+                >
+                  <EditIcon fontSize="inherit" />
+                </IconButton>
+              }
+            />
           ) : null}
 
           {handleDelete ? (
