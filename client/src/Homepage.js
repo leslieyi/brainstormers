@@ -130,7 +130,7 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route exact path="/my-profile">
-          <Profile user={user} reviewsets={reviewsets} />
+          <Profile user={user} />
         </Route>
       </Switch>
     </div>

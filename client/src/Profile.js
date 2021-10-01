@@ -1,5 +1,5 @@
 import { Segment } from "semantic-ui-react";
-function Profile() {
+function Profile({user}) {
   return (
     <Segment
       raised
@@ -9,7 +9,10 @@ function Profile() {
         opacity: "0.8",
       }}
     >
-      Hi from Profile
+      <h1>Username: {user.username}</h1>
+      <h1>Bio: {user.bio}</h1>
+      <h1>Email: {user.email}</h1>
+      <h1>You have created {user.studysets.length} studysets!</h1>
     </Segment>
   );
 }
