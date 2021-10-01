@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import TitleHeader from "./TitleHeader";
-import Homepage from "./Homepage";
+import TitleHeader from "./features/TitleHeader";
+import Homepage from "./features/Homepage";
 
 // COMMANDS THAT WE NEED TO RUN
 // npm install semantic-ui-react semantic-ui-css
@@ -22,6 +22,7 @@ import Homepage from "./Homepage";
 // import { createStore, applyMiddleware } from "redux";
 // import thunkMiddleware from "redux-thunk";
 // npm install redux-thunk
+//npm install react-redux
 
 // npm install redux-devtools-extension
 

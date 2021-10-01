@@ -1,5 +1,11 @@
 import { Segment } from "semantic-ui-react";
+import { useSelector } from "react-redux";
+
+
 function Profile({user}) {
+  function handleProfileEdit(){
+    console.log("Edit was clicked!")
+  }
   return (
     <Segment
       raised
@@ -13,6 +19,7 @@ function Profile({user}) {
       <h1>Bio: {user.bio}</h1>
       <h1>Email: {user.email}</h1>
       <h1>You have created {user.studysets.length} studysets!</h1>
+      <button onClick={handleProfileEdit}>Click here to edit profile</button>
     </Segment>
   );
 }

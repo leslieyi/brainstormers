@@ -4,7 +4,7 @@ import FlashcardForm from "./FlashcardForm";
 import FlashcardCard from "./FlashcardCard";
 import { Icon, Popup, Segment } from "semantic-ui-react";
 import { motion } from "framer-motion";
-import SideLogo from "./photos/logo-only.png";
+import SideLogo from "../photos/logo-only.png";
 
 function FlashcardsContainer({
   reviewcards,

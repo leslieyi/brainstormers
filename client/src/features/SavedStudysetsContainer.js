@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SavedStudysetCard from "./SavedStudysetCard";
-import SideLogo from "./photos/logo-only.png";
+import SideLogo from "../photos/logo-only.png";
 
 import { Link } from "react-router-dom";
 import Switch from "@mui/material/Switch";

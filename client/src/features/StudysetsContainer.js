@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StudysetCard from "./StudysetCard";
-import SideLogo from "./photos/logo-only.png";
+import SideLogo from "../photos/logo-only.png";
 
 import { Popup, Form, Button, Input, Segment, Icon } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";

@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import TitleLogo from "./photos/brainstormers-8-cut.png";
+import TitleLogo from "../photos/brainstormers-8-cut.png";
 import { Divider } from "semantic-ui-react";
 
 import { motion } from "framer-motion";
