@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
-import TitleHeader from "./TitleHeader"
-import Homepage from "./Homepage"
+import TitleHeader from "./TitleHeader";
+import Homepage from "./Homepage";
 
-  // COMMANDS THAT WE NEED TO RUN
-  // npm install semantic-ui-react semantic-ui-css
-  // npm install react-router-dom
-  // rails db:migrate
-  // deploying!
-  //brew tap heroku/brew && brew install heroku
-  //heroku git:remote -a yi-brainstormers
-  //heroku run rails db:migrate db:seed
+// COMMANDS THAT WE NEED TO RUN
+// npm install semantic-ui-react semantic-ui-css
+// npm install react-router-dom
+// rails db:migrate
+// deploying!
+//brew tap heroku/brew && brew install heroku
+//heroku git:remote -a yi-brainstormers
+//heroku run rails db:migrate db:seed
 
-  // npm install --prefix client
-  // npm start --prefix client
-  // bundle install 
-  // rails s 
+// npm install --prefix client
+// npm start --prefix client
+// bundle install
+// rails s
 
-  // console.log = console.warn = console.error = () => {};
+// console.log = console.warn = console.error = () => {};
 
+//import { Provider } from "react-redux";
+// import { createStore, applyMiddleware } from "redux";
+// import thunkMiddleware from "redux-thunk";
+// npm install redux-thunk
 
+// npm install redux-devtools-extension
 
 
 function App() {
@@ -33,9 +38,9 @@ function App() {
   }, []);
 
   return (
-    <div >
-      <TitleHeader user={user} setUser={setUser}/>
-      <Homepage user={user} setUser={setUser}/>
+    <div>
+      <TitleHeader user={user} setUser={setUser} />
+      <Homepage user={user} setUser={setUser} />
     </div>
   );
 }

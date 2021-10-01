@@ -40,6 +40,7 @@ function StudysetForm() {
           history.push(`/my-studysets/${data.id}`);
         }
       });
+      e.target.reset(); //added this 10.01
   }
 
   return (
