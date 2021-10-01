@@ -6,6 +6,7 @@ import FlashcardsContainer from "./FlashcardsContainer";
 import { useEffect, useState } from "react";
 import SavedFlashcards from "./SavedFlashcards";
 import SavedStudysetsContainer from "./SavedStudysetsContainer";
+import Profile from "./Profile";
 
 function Homepage({ user, setUser }) {
   const [reviewcards, setReviewcards] = useState([]);
@@ -126,6 +127,10 @@ function Homepage({ user, setUser }) {
 
         <Route exact path="/saved-studysets">
           <SavedStudysetsContainer user={user} reviewsets={reviewsets} />
+        </Route>
+
+        <Route exact path="/my-profile">
+          <Profile user={user} reviewsets={reviewsets} />
         </Route>
       </Switch>
     </div>

@@ -57,14 +57,30 @@ function StudysetForm() {
         <h4>{error}</h4>
       ))}
       <Form onSubmit={handleSubmit}>
-        <h1>Title</h1>
+        <h1
+          style={{
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
+          Title
+        </h1>
         <Form.Input
           placeholder="Enter term"
           name="title"
           onChange={studysetOnChange}
           autoComplete="off"
         />
-        <h1>Description</h1>
+        <h1
+          style={{
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
+          Description
+        </h1>
         <Form.Input
           placeholder="Enter Description"
           name="description"
@@ -72,7 +88,7 @@ function StudysetForm() {
           autoComplete="off"
         />
 
-        <Button type="submit" style={{backgroundColor: "white"}}>
+        <Button type="submit" style={{ backgroundColor: "white" }}>
           <Icon name="paper plane outline" />
           Submit
         </Button>

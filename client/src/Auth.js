@@ -35,18 +35,32 @@ function Auth({ user, onLogin }) {
           textAlign: "center",
         }}
       >
-        <h1 style={{ fontFamily: "'Roboto Mono', monospace" }}>
-          Brainstormer:
+        <h1
+          style={{
+            fontSize: "50px",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+          }}
+        >
+          Brainstormers:
         </h1>
-        <p style={{ fontSize: "18px" }}>
+        <p
+          style={{
+            fontSize: "20px",
+            paddingRight: "40px",
+            paddingLeft: "40px",
+          }}
+        >
           A free website providing learning tools for students by creating your
           own studysets with terms and definitions. You can also find
-          user-generated studysets that are available on the website. Chances
-          are you'll find something to study. Signup or login to start
-          brainstorming!
+          user-generated studysets that are available on the website.
+          <br />
+          Chances are you'll find something to study.
+          <br />
+          Signup or login to start brainstorming!
         </p>
 
-        <h3>
+        <h2 style={{ fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
           <Link to="/login">
             <Icon name="sign in alternate" />
             Login
@@ -57,7 +71,7 @@ function Auth({ user, onLogin }) {
             <Icon name="signup" />
             Signup
           </Link>
-        </h3>
+        </h2>
 
         <Switch>
           <Route exact path="/login">

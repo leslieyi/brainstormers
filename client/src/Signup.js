@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { Form, Input, TextArea, Button, Header } from "semantic-ui-react";
+import {
+  Form,
+  Input,
+  TextArea,
+  Button,
+  Header,
+  Segment,
+  Icon,
+} from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
-import { Segment } from "semantic-ui-react";
+
 
 function Signup({ onLogin }) {
   const [errors, setErrors] = useState([]);
@@ -55,7 +63,7 @@ function Signup({ onLogin }) {
         <h2>{error}</h2>
       ))}
 
-      <Form onSubmit={handleSubmit} >
+      <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
           <Form.Field
             id="form-input-control-username"
@@ -96,7 +104,11 @@ function Signup({ onLogin }) {
           placeholder="Bio"
           onChange={inputOnChange}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {" "}
+          <Icon name="signup" />
+          Submit
+        </Button>
       </Form>
     </Segment>
   );

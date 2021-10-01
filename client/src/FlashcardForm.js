@@ -1,4 +1,4 @@
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Segment, Icon } from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -10,8 +10,6 @@ function FlashcardForm({
   onEditFlashcard,
   studysetId,
 }) {
-
-
   const [errors, setErrors] = useState([]);
   const blankFlashcard = {
     word: "",
@@ -21,7 +19,7 @@ function FlashcardForm({
   const [flashcardValue, setFlashcardValue] = useState({ ...blankFlashcard });
 
   useEffect(() => {
-    setFlashcardValue(editFlashcard || {...blankFlashcard});
+    setFlashcardValue(editFlashcard || { ...blankFlashcard });
   }, [editFlashcard]);
 
   const flashcardOnChange = (e) => {
@@ -47,7 +45,9 @@ function FlashcardForm({
     e.preventDefault();
 
     console.log(flashcardValue);
-    const url = editFlashcard ? `/flashcards/${flashcardValue.id}` : "/flashcards";
+    const url = editFlashcard
+      ? `/flashcards/${flashcardValue.id}`
+      : "/flashcards";
     const method = editFlashcard ? "PATCH" : "POST";
     fetch(url, {
       method,
@@ -63,7 +63,7 @@ function FlashcardForm({
         } else if (editFlashcard) {
           setEditFlashcard(null);
           onEditFlashcard(data);
-        } else {          
+        } else {
           onNewFlashcard(data);
           setFlashcardValue({ ...blankFlashcard });
         }
@@ -72,7 +72,16 @@ function FlashcardForm({
   }
 
   return (
-    <div style={{ marginRight: "250px", marginLeft: "250px" }}>
+    <Segment
+      raised
+      style={{
+        border: "2px solid #0353A4",
+        opacity: "0.8",
+        margin: "30px 300px 30px 300px",
+        padding: "45px 50px 45px 50px",
+        backgroundColor: "#B9D6F2",
+      }}
+    >
       {errors.map((error) => (
         <h4>{error}</h4>
       ))}
@@ -92,13 +101,19 @@ function FlashcardForm({
           value={flashcardValue.definition}
           onChange={quillOnChange}
           placeholder="Enter Defnition"
+          style={{ backgroundColor: "white" }}
         />
         <br />
 
-        <Button type="submit">{editFlashcard ? "Update" : "Create"}</Button>
-        {editFlashcard ? <Button onClick={() => setEditFlashcard(null)}>Cancel</Button> : null}
+        <Button type="submit" style={{ backgroundColor: "white" }}>
+          <Icon name="paper plane outline" />
+          {editFlashcard ? "Update" : "Create"}
+        </Button>
+        {editFlashcard ? (
+          <Button onClick={() => setEditFlashcard(null)}>Cancel</Button>
+        ) : null}
       </Form>
-    </div>
+    </Segment>
   );
 }
 

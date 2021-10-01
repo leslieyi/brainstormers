@@ -1,18 +1,13 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import  Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
+import { Card, Icon, Popup } from "semantic-ui-react";
+
 import parse from "html-react-parser";
 
-import { Icon } from "semantic-ui-react";
-import { Popup } from "semantic-ui-react";
-
 import { useState } from "react";
-
 
 function FlashcardCard({
   flashcard: { id, word, definition },
@@ -23,7 +18,9 @@ function FlashcardCard({
   toggleStar,
 }) {
   const [flip, setFlip] = useState(false);
-  const [starred, setStarred] = useState(!!reviewcards.find(item => item.flashcard.id === flashcard.id));
+  const [starred, setStarred] = useState(
+    !!reviewcards.find((item) => item.flashcard.id === flashcard.id)
+  );
 
   const handleFlip = () => {
     setFlip(!flip);
@@ -35,80 +32,72 @@ function FlashcardCard({
   };
 
   return (
-    
-    <Card
-      sx={{
-        minWidth: 250,
-        minHeight: 200,
-        display: "inline-block",
-        margin: "20px",
-      }}
-    >
-      <CardContent style={{}}>
-        <Typography
-        component={'span'}
-          key={id}
+    <Card.Group>
+      <Card>
+        <Card.Content
           style={{
-            fontSize: "20px",
-            marginBottom: "60px",
-            textAlign: "center",
+            justifyContent: "center",
           }}
         >
           {flip ? (
-            <>Definition: {parse(definition)}</>
+            <Card.Description>
+              <b>Definition: </b> {parse(definition)}
+            </Card.Description>
           ) : (
-            <>
-              Word: {word}{" "}
+            <Card.Description>
+              <b>Term: </b>
+              {word}&nbsp;&nbsp;&nbsp;&nbsp;
               <Popup
                 content="Add to Flashcard to Review Later"
                 trigger={
                   <Icon
                     name={starred ? "star" : "star outline"}
-                    size="small"
                     onClick={handleStar}
                   />
                 }
               />
-            </>
+            </Card.Description>
           )}
-        </Typography>
-        <div style={{ marginBottom: "20px" }}>
+        </Card.Content>
+        <div style={{ marginBottom: "20px", textAlign: "center" }}>
           <Popup
             content="Flip"
             trigger={<Switch onClick={handleFlip} size="small" />}
           />
-          {handleEdit ? 
-          <Popup
-            content="Edit"
-            trigger={
-              <IconButton
-                aria-label="edit"
-                size="small"
-                color="primary"
-                onClick={() => handleEdit(flashcard)}
-              >
-                <EditIcon />
-              </IconButton>
-            }
-          /> : null}
+          {handleEdit ? (
+            <Popup
+              content="Edit"
+              trigger={
+                <IconButton
+                  aria-label="edit"
+                  size="small"
+                  color="primary"
+                  onClick={() => handleEdit(flashcard)}
+                >
+                  <EditIcon />
+                </IconButton>
+              }
+            />
+          ) : null}
 
-          {handleDelete ? 
-          <Popup
-            content="Delete"
-            trigger={
-              <IconButton
-                aria-label="delete"
-                size="small"
-                color="primary"
-                onClick={() => handleDelete(id)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            }
-          /> : null}
+          {handleDelete ? (
+            <Popup
+              content="Delete"
+              trigger={
+                <IconButton
+                  aria-label="delete"
+                  size="small"
+                  color="primary"
+                  onClick={() => handleDelete(id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              }
+            />
+          ) : null}
         </div>
-      </CardContent>
-    </Card>
+      </Card>
+    </Card.Group>
   );
 }
 export default FlashcardCard;

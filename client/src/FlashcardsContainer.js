@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import FlashcardForm from "./FlashcardForm";
 import FlashcardCard from "./FlashcardCard";
-import { Icon, Popup } from "semantic-ui-react";
+import { Icon, Popup, Segment } from "semantic-ui-react";
+import { motion } from "framer-motion";
+import SideLogo from "./photos/logo-only.png";
 
-import Box from "@mui/material/Box";
-
-function FlashcardsContainer({ reviewcards, setReviewcards, toggleStar, mine, toggleSave, reviewsets }) {
+function FlashcardsContainer({
+  reviewcards,
+  setReviewcards,
+  toggleStar,
+  mine,
+  toggleSave,
+  reviewsets,
+}) {
   const { id } = useParams();
 
   const [studyset, setStudyset] = useState();
@@ -24,7 +31,7 @@ function FlashcardsContainer({ reviewcards, setReviewcards, toggleStar, mine, to
     if (!reviewsets || !studyset) {
       return;
     }
-    setSaved(!!reviewsets.find(item => item.studyset.id === studyset.id));
+    setSaved(!!reviewsets.find((item) => item.studyset.id === studyset.id));
   }, [reviewsets, studyset]);
 
   const onNewFlashcard = (flashcard) => {
@@ -39,7 +46,7 @@ function FlashcardsContainer({ reviewcards, setReviewcards, toggleStar, mine, to
     );
     setStudyset({ ...studyset, flashcards });
 
-    const newReviewcards = reviewcards.map(reviewcard => {
+    const newReviewcards = reviewcards.map((reviewcard) => {
       const card = reviewcard.flashcard;
       reviewcard.flashcard = card.id === flashcard.id ? flashcard : card;
       return reviewcard;
@@ -56,7 +63,9 @@ function FlashcardsContainer({ reviewcards, setReviewcards, toggleStar, mine, to
         flashcards: [...studyset.flashcards.filter((item) => item.id !== id)],
       });
 
-      const newReviewcards = reviewcards.filter(reviewcard => reviewcard.flashcard.id !== id);
+      const newReviewcards = reviewcards.filter(
+        (reviewcard) => reviewcard.flashcard.id !== id
+      );
       setReviewcards(newReviewcards);
     });
   };
@@ -76,49 +85,92 @@ function FlashcardsContainer({ reviewcards, setReviewcards, toggleStar, mine, to
   if (!studyset) return null;
 
   return (
-    <div
-      key={studyset.id}
+    <Segment
+      raised
       style={{
-        marginRight: "100px",
-        marginLeft: "100px",
-        marginTop: "100px",
-        border: "4px solid black",
+        margin: "30px 100px 30px 100px",
+        border: "2px solid #0353A4",
+        opacity: "0.8",
       }}
     >
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ display: "inline-block" }}>
+        <h1
+          style={{
+            display: "inline-block",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
           Now showing {studyset.title} studyset
         </h1>
         <Popup
           content="Add or Remove Studyset to my Favorites"
           trigger={
             <Icon
-            
               name={saved ? "folder" : "folder outline"}
               size="large"
               onClick={handleSave}
-              style={{marginLeft: "20px"}}
+              style={{ marginLeft: "20px" }}
             />
           }
         />
-        <h4>Description: {studyset.description}</h4>
-        <h4>Total Flashcards: {studyset.flashcards.length}</h4>
-        <Link to="/saved-flashcards">Starred Words</Link>
+        <motion.img
+          src={SideLogo}
+          style={{ maxWidth: "5%", float: "right" }}
+          drag
+          dragTransition={{
+            min: 0,
+            max: 50,
+            bounceStiffness: 120,
+          }}
+        />
+        <h4
+          style={{
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "20px",
+          }}
+        >
+          Description: {studyset.description}
+        </h4>
+        <h4
+          style={{
+            display: "inline-block",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "20px",
+          }}
+        >
+          Total Flashcards: {studyset.flashcards.length}
+        </h4>
+        <Link to="/saved-flashcards">
+          {" "}
+          &nbsp;&nbsp;&nbsp;&nbsp;Starred Words
+        </Link>
+
+        {mine ? (
+          <FlashcardForm
+            editFlashcard={editFlashcard}
+            setEditFlashcard={setEditFlashcard}
+            onEditFlashcard={onEditFlashcard}
+            onNewFlashcard={onNewFlashcard}
+            studysetId={studyset.id}
+            key={studyset.id}
+          />
+        ) : null}
       </div>
 
-      {mine ? (
-        <FlashcardForm
-          editFlashcard={editFlashcard}
-          setEditFlashcard={setEditFlashcard}
-          onEditFlashcard={onEditFlashcard}
-          onNewFlashcard={onNewFlashcard}
-          studysetId={studyset.id}
-          key={studyset.id}
-        />
-      ) : null}
-
       {studyset ? (
-        <Box component="span" sx={{ textAlign: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "10px",
+            paddingBottom: "20px",
+          }}
+        >
           {studyset.flashcards.map((flashcard) => (
             <FlashcardCard
               flashcard={flashcard}
@@ -129,9 +181,9 @@ function FlashcardsContainer({ reviewcards, setReviewcards, toggleStar, mine, to
               key={Math.random()}
             />
           ))}
-        </Box>
+        </div>
       ) : null}
-    </div>
+    </Segment>
   );
 }
 

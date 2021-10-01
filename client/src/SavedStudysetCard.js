@@ -27,20 +27,19 @@ function SavedStudysetCard({ reviewset }) {
             />
           </Link>
 
-
-        <div>
-          <Card.Description>
-            <b>Description:</b>
-            {reviewset.studyset.description}
-          </Card.Description>
-          <Card.Meta>
-            <b>Total Flashcards:</b> {reviewset.studyset.total_flashcards}
-          </Card.Meta>
-          <Card.Content>
-            <Icon name="user" /> <b>Creator:</b>{" "}
-            {reviewset.studyset.user.username}
-          </Card.Content>
-        </div>
+          <div>
+            <Card.Description>
+              <b>Description:</b>
+              {reviewset.studyset.description}
+            </Card.Description>
+            <Card.Meta>
+              <b>Total Flashcards:</b> {reviewset.studyset.total_flashcards}
+            </Card.Meta>
+            <Card.Content>
+              <Icon name="user" /> <b>Creator:</b>{" "}
+              {reviewset.studyset.user.username}
+            </Card.Content>
+          </div>
         </Card.Content>
       </Card>
     </Card.Group>

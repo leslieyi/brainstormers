@@ -28,7 +28,11 @@ function SavedStudysetsContainer({ reviewsets, toggleSave, user }) {
       item.studyset.user.username.toLowerCase().includes(search.toLowerCase())
   );
 
-  const sortedData = sortedReviewsets ? [...searchedData].sort((a, b) => a.studyset.title < b.studyset.title ? -1 : 1) : searchedData
+  const sortedData = sortedReviewsets
+    ? [...searchedData].sort((a, b) =>
+        a.studyset.title < b.studyset.title ? -1 : 1
+      )
+    : searchedData;
 
   return (
     <Segment
@@ -40,7 +44,16 @@ function SavedStudysetsContainer({ reviewsets, toggleSave, user }) {
       }}
     >
       <div style={{ margin: "20px" }}>
-        <h1 style={{ display: "inline-block" }}>Saved Studysets</h1>
+        <h1
+          style={{
+            display: "inline-block",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
+          Saved Studysets
+        </h1>
         <Link to="/create-studysets">
           &nbsp;&nbsp;&nbsp;&nbsp;Make a Studyset
         </Link>
@@ -56,7 +69,16 @@ function SavedStudysetsContainer({ reviewsets, toggleSave, user }) {
           }}
         />
         <br />
-        <h1 style={{ display: "inline-block" }}>Sort in Alphabetical Order</h1>
+        <h1
+          style={{
+            display: "inline-block",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
+          Sort in Alphabetical Order
+        </h1>
         <Popup
           content="Sort Alphabetically"
           trigger={<Switch onClick={handleSort} size="small" />}

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Form, Input, Button, Header } from "semantic-ui-react";
+import { Form, Input, Button, Header, Segment, Icon } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
-import { Segment } from "semantic-ui-react";
+
 
 function Login({ onLogin }) {
   const history = useHistory();
@@ -73,7 +73,7 @@ function Login({ onLogin }) {
         {errors.map((error) => (
           <div>{error}</div>
         ))}
-        <Button>Login</Button>
+        <Button><Icon name="sign in alternate" />Login</Button>
       </Form>
     </Segment>
   );

@@ -7,7 +7,6 @@ import { Popup, Form, Button, Input, Segment, Icon } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
 import { motion } from "framer-motion";
 
-
 function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
@@ -125,11 +124,25 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
       }}
     >
       <div style={{ margin: "20px" }}>
-        <h1 style={{ display: "inline-block" }}>
+        <h1
+          style={{
+            display: "inline-block",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
           {onlyMine ? "View My" : "All"} Studysets
         </h1>
         <Link to="/create-studysets">
-          &nbsp;&nbsp;&nbsp;&nbsp;Make a Studyset
+          <p
+            style={{
+              fontFamily: "'Rajdhani', sans-serif",
+              display: "inline-block",
+            }}
+          >
+            &nbsp;&nbsp;&nbsp;&nbsp;Make a Studyset
+          </p>
         </Link>
         <motion.img
           src={SideLogo}
@@ -142,7 +155,16 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
           }}
         />
         <br />
-        <h1 style={{ display: "inline-block" }}>Sort in Alphabetical Order</h1>
+        <h1
+          style={{
+            display: "inline-block",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
+          Sort in Alphabetical Order
+        </h1>
         <Popup
           content="Sort Alphabetically"
           trigger={<Switch onClick={handleSort} size="small" />}

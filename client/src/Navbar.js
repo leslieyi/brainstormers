@@ -16,7 +16,7 @@ function Navbar({ setUser }) {
   return (
     <div>
       <Menu secondary>
-        <Menu.Item >
+        <Menu.Item>
           <NavLink
             exact
             to="/"
@@ -88,6 +88,20 @@ function Navbar({ setUser }) {
         </Menu.Item>
 
         <Menu.Menu position="right" style={{ marginRight: "20px" }}>
+          <Menu.Item>
+            <NavLink
+              to="/my-profile"
+              style={{ color: "#98C3EC" }}
+              activeStyle={{
+                color: "#0353A4",
+                fontWeight: "bold",
+              }}
+            >
+              <Icon name="user circle" />
+              Profile
+            </NavLink>
+          </Menu.Item>
+
           <Menu.Item onClick={handleLogout} style={{ color: "#98C3EC" }}>
             <Icon name="power off" />
             Logout
