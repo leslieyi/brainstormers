@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StudysetCard from "./StudysetCard";
+import SideLogo from "./photos/logo-only.png";
 
-import { Popup, Form, Button, Input, Segment } from "semantic-ui-react";
+import { Popup, Form, Button, Input, Segment, Icon } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
+import { motion } from "framer-motion";
+
 
 function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
   const [errors, setErrors] = useState([]);
@@ -116,71 +119,86 @@ function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
     <Segment
       raised
       style={{
-        marginRight: "100px",
-        marginLeft: "100px",
-        marginTop: "50px",
+        margin: "30px 100px 30px 100px",
         border: "2px solid #0353A4",
         opacity: "0.8",
       }}
     >
-      {toggleEdit ? (
-        <>
-          {errors.map((error) => (
-            <h4>{error}</h4>
-          ))}
-
-          <Form
-            onSubmit={handleUpdate}
-            style={{
-              marginRight: "50px",
-              marginLeft: "50px",
-            }}
-          >
-            <Form.Group widths="equal">
-              <Form.Field
-                control={Input}
-                label="Title"
-                placeholder="Edit term"
-                name="title"
-                onChange={studysetOnChange}
-                autoComplete="off"
-                value={studysetValue.title}
-              />
-
-              <Form.Field
-                control={Input}
-                label="Description"
-                placeholder="Edit Description"
-                name="description"
-                onChange={studysetOnChange}
-                autoComplete="off"
-                value={studysetValue.description}
-              />
-            </Form.Group>
-            <Button type="submit">Update</Button>
-          </Form>
-        </>
-      ) : null}
-
-      <h1 style={{ display: "inline-block" }}>
-        {onlyMine ? "View My" : "All"} Studysets
-      </h1>
-      <Link to="/create-studysets">Make a Studyset</Link>
-      <div>
-        Sort in Alphabetical Order
+      <div style={{ margin: "20px" }}>
+        <h1 style={{ display: "inline-block" }}>
+          {onlyMine ? "View My" : "All"} Studysets
+        </h1>
+        <Link to="/create-studysets">
+          &nbsp;&nbsp;&nbsp;&nbsp;Make a Studyset
+        </Link>
+        <motion.img
+          src={SideLogo}
+          style={{ maxWidth: "5%", float: "right" }}
+          drag
+          dragTransition={{
+            min: 0,
+            max: 50,
+            bounceStiffness: 120,
+          }}
+        />
+        <br />
+        <h1 style={{ display: "inline-block" }}>Sort in Alphabetical Order</h1>
         <Popup
           content="Sort Alphabetically"
           trigger={<Switch onClick={handleSort} size="small" />}
         />
         <Input onChange={handleSearch} placeholder="Start Typing to Search" />
       </div>
+      {toggleEdit ? (
+        <Segment
+          raised
+          style={{
+            textAlign: "center",
+            margin: "10px 300px 20px 300px",
+            padding: "45px 150px 45px 150px",
+            border: "2px solid #0353A4",
+            opacity: "0.8",
+            backgroundColor: "#B9D6F2",
+          }}
+        >
+          {errors.map((error) => (
+            <h4>{error}</h4>
+          ))}
+
+          <Form onSubmit={handleUpdate}>
+            <Form.Input
+              label="Title"
+              placeholder="Edit term"
+              name="title"
+              autoComplete="off"
+              onChange={studysetOnChange}
+              value={studysetValue.title}
+            />
+
+            <Form.Input
+              label="Description"
+              placeholder="Edit Description"
+              name="description"
+              autoComplete="off"
+              onChange={studysetOnChange}
+              value={studysetValue.description}
+            />
+
+            <Button type="submit">
+              <Icon name="refresh" />
+              Update
+            </Button>
+          </Form>
+        </Segment>
+      ) : null}
 
       <div
         style={{
-          dispaly: "flex",
+          display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
           gap: "10px",
+          paddingBottom: "20px",
         }}
       >
         {searchedData.map((studyset) => (

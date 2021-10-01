@@ -10,11 +10,6 @@ class FlashcardsController < ApplicationController
     flashcard = find_flashcard
     render json: flashcard, status: :ok
   end
-  
-  def ordered_flashcards
-    flashcards = Flashcard.reorder(:word)
-    render json: flashcards, status: :ok
-  end
 
   def create
     flashcard = Flashcard.create!(flashcard_params)

@@ -1,8 +1,6 @@
-import { Form, Button } from "semantic-ui-react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-
+import { Form, Button, Segment, Icon } from "semantic-ui-react";
 
 function StudysetForm() {
   const [errors, setErrors] = useState([]);
@@ -13,18 +11,15 @@ function StudysetForm() {
     description: "",
   });
 
-
   const studysetOnChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
     setStudysetValue({
-      ...studysetValue, 
-      [name]: value, 
+      ...studysetValue,
+      [name]: value,
     });
-
   };
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -48,17 +43,14 @@ function StudysetForm() {
   }
 
   return (
-    <div
+    <Segment
+      raised
       style={{
-        marginRight: "100px",
-        marginLeft: "100px",
-        marginBottom: "200px",
-        marginTop:"100px",
-        paddingRight: "250px",
-        paddingLeft: "250px",
-        paddingTop: "50px",
-        paddingBottom: "100px",
-        border: "4px solid black",
+        border: "2px solid #0353A4",
+        opacity: "0.8",
+        margin: "30px 300px 30px 300px",
+        padding: "45px 150px 45px 150px",
+        backgroundColor: "#B9D6F2",
       }}
     >
       {errors.map((error) => (
@@ -80,10 +72,12 @@ function StudysetForm() {
           autoComplete="off"
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" style={{backgroundColor: "white"}}>
+          <Icon name="paper plane outline" />
+          Submit
+        </Button>
       </Form>
-
-    </div>
+    </Segment>
   );
 }
 

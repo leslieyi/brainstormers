@@ -26,12 +26,12 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
   };
 
   return (
-    <Card.Group centered>
-      <Card>
+    <Card.Group >
+      <Card >
         <Card.Content>
           <Card.Header
             style={{
-              display: "inline" /*color: handleDelete? "#0353a4" : "#000000"*/,
+              display: "inline",
             }}
           >
             {studyset.title}
