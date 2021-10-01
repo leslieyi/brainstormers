@@ -1,31 +1,20 @@
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
-import { Popup } from "semantic-ui-react";
-
+import { Popup, Icon, Card } from "semantic-ui-react";
+import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
 
 function SavedStudysetCard({ reviewset }) {
   return (
-    <Box
-      component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.9)" }}
-
-    >
-      <Card sx={{ minWidth: 200, minHeight: 100 }}>
-        <CardContent>
-          <Typography
-            component={"span"}
-            variant="h5"
+    <Card.Group>
+      <Card>
+        <Card.Content>
+          <Card.Header
             style={{
-              display: "inline" /*color: handleDelete? "#0353a4" : "#000000"*/,
+              display: "inline",
             }}
           >
             {reviewset.studyset.title}
-          </Typography>
+          </Card.Header>
 
           <Link to={`/studysets/${reviewset.studyset.id}`}>
             <Popup
@@ -38,21 +27,23 @@ function SavedStudysetCard({ reviewset }) {
             />
           </Link>
 
-          <div>
-            <Typography style={{ display: "block" }} component={"span"}>
-              <b>Description:</b>
-              {reviewset.studyset.description}
-            </Typography>
-            <Typography style={{ display: "block" }} component={"span"}>
-              <b>Total Flashcards:</b> {reviewset.studyset.total_flashcards}
-            </Typography>
-            <Typography style={{ display: "block" }} component={"span"}>
-              <b>Creator:</b> {reviewset.studyset.user.username}
-            </Typography>
-          </div>
-        </CardContent>
+
+        <div>
+          <Card.Description>
+            <b>Description:</b>
+            {reviewset.studyset.description}
+          </Card.Description>
+          <Card.Meta>
+            <b>Total Flashcards:</b> {reviewset.studyset.total_flashcards}
+          </Card.Meta>
+          <Card.Content>
+            <Icon name="user" /> <b>Creator:</b>{" "}
+            {reviewset.studyset.user.username}
+          </Card.Content>
+        </div>
+        </Card.Content>
       </Card>
-    </Box>
+    </Card.Group>
   );
 }
 export default SavedStudysetCard;
