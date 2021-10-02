@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { Popup, Icon, Card } from "semantic-ui-react";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
+// import { useSelector } from "react-redux";
+// import { selectUser } from "./user/userSlice";
 
 function SavedStudysetCard({ reviewset }) {
+  // const user = useSelector(selectUser);
   return (
     <Card.Group>
       <Card>

@@ -1,19 +1,13 @@
 import { useHistory, NavLink } from "react-router-dom";
 import { Menu, Icon } from "semantic-ui-react";
-import {logout} from "./userSlice";
-import {useDispatch} from "react-redux";
+import { logout } from "./userSlice";
+import { useDispatch } from "react-redux";
 
-function Navbar({ setUser }) {
+function Navbar() {
   const history = useHistory();
   const dispatch = useDispatch();
-  
+
   const handleLogout = () => {
-    // fetch("/logout", {
-    //   method: "DELETE",
-    // }).then((r) => {
-    //   setUser(null);
-    //   history.push("/");
-    // });
     dispatch(logout());
     history.push("/");
   };

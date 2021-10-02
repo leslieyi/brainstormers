@@ -1,8 +1,6 @@
 import { Segment } from "semantic-ui-react";
-import { useEffect } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
-import { fetchUser, selectUser } from "./userSlice";
+import { useSelector } from "react-redux";
+import { selectUser } from "./userSlice";
 
 function Profile() {
   const user = useSelector(selectUser);

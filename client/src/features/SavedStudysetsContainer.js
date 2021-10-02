@@ -8,7 +8,10 @@ import Switch from "@mui/material/Switch";
 import { Segment, Input, Popup } from "semantic-ui-react";
 import { motion } from "framer-motion";
 
-function SavedStudysetsContainer({ reviewsets, toggleSave, user }) {
+
+
+function SavedStudysetsContainer({ reviewsets, toggleSave  }) {
+
   const [search, setSearch] = useState("");
   const [sortedReviewsets, setSortedReviewsets] = useState(false);
 
@@ -99,7 +102,6 @@ function SavedStudysetsContainer({ reviewsets, toggleSave, user }) {
           <SavedStudysetCard
             reviewset={reviewset}
             toggleSave={toggleSave}
-            user={user}
           />
         ))}
       </div>

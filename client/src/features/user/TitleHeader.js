@@ -1,10 +1,13 @@
-import Navbar from "./user/Navbar";
-import TitleLogo from "../photos/brainstormers-8-cut.png";
+import Navbar from "./Navbar";
+import TitleLogo from "../../photos/brainstormers-8-cut.png";
 import { Divider } from "semantic-ui-react";
-
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selectUser } from "./userSlice";
 
-function TitleHeader({ user, setUser }) {
+function TitleHeader() {
+  const user = useSelector(selectUser);
+
   return (
     <div>
       <motion.img
@@ -36,7 +39,7 @@ function TitleHeader({ user, setUser }) {
             }}
           />
 
-          <Navbar user={user} setUser={setUser} style={{ float: "right" }} />
+          <Navbar style={{ float: "right" }} />
           <Divider
             fitted
             style={{

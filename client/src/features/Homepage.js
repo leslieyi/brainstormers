@@ -1,4 +1,4 @@
-import Auth from "./Auth";
+import Auth from "./user/Auth";
 import StudysetsContainer from "./StudysetsContainer";
 import StudysetForm from "./StudysetForm";
 import { Route, Switch } from "react-router-dom";
@@ -7,11 +7,15 @@ import { useEffect, useState } from "react";
 import SavedFlashcards from "./SavedFlashcards";
 import SavedStudysetsContainer from "./SavedStudysetsContainer";
 import Profile from "./user/Profile";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "./user/userSlice";
 
-function Homepage({ user, setUser }) {
+function Homepage() {
   const [reviewcards, setReviewcards] = useState([]);
   const [reviewsets, setReviewsets] = useState([]);
+
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     if (!user) setReviewsets([]);
@@ -71,7 +75,7 @@ function Homepage({ user, setUser }) {
     }
   };
 
-  if (!user) return <Auth user={user} onLogin={setUser} />;
+  if (!user) return <Auth />;
 
   return (
     <div>
@@ -80,10 +84,13 @@ function Homepage({ user, setUser }) {
           <Redirect to="/" />
         </Route>
 
+        <Route exact path="/signup">
+          <Redirect to="/" />
+        </Route>
+
         <Route exact path="/">
           <StudysetsContainer
             onlyMine={false}
-            user={user}
             reviewsets={reviewsets}
             setReviewsets={setReviewsets}
             key="all"
@@ -93,7 +100,6 @@ function Homepage({ user, setUser }) {
         <Route exact path="/my-studysets">
           <StudysetsContainer
             onlyMine={true}
-            user={user}
             reviewsets={reviewsets}
             setReviewsets={setReviewsets}
             key="mine"
@@ -131,11 +137,11 @@ function Homepage({ user, setUser }) {
         </Route>
 
         <Route exact path="/saved-studysets">
-          <SavedStudysetsContainer user={user} reviewsets={reviewsets} />
+          <SavedStudysetsContainer reviewsets={reviewsets} />
         </Route>
 
         <Route exact path="/my-profile">
-          <Profile user={user} />
+          <Profile />
         </Route>
       </Switch>
     </div>

@@ -8,12 +8,12 @@ import {
   Segment,
   Icon,
 } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signup, selectErrors } from "./userSlice";
 
-
-function Signup({ onLogin }) {
-  const [errors, setErrors] = useState([]);
-  const history = useHistory();
+function Signup() {
+  const dispatch = useDispatch();
+  const errors = useSelector(selectErrors);
 
   const [userInput, setUserInput] = useState({
     username: "",
@@ -34,20 +34,8 @@ function Signup({ onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userInput),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((user) => onLogin(user));
-        history.push("/");
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+    dispatch(signup(userInput));
+
   }
   return (
     <Segment

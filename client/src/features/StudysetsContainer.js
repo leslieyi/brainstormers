@@ -2,12 +2,18 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StudysetCard from "./StudysetCard";
 import SideLogo from "../photos/logo-only.png";
+import { useSelector } from "react-redux";
+import { selectUser } from "./user/userSlice";
 
 import { Popup, Form, Button, Input, Segment, Icon } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
 import { motion } from "framer-motion";
 
-function StudysetsContainer({ onlyMine, user, reviewsets, setReviewsets }) {
+
+
+function StudysetsContainer({ onlyMine, reviewsets, setReviewsets }) {
+  const user = useSelector(selectUser);
+
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
   const [studysetsData, setStudysetsData] = useState([]); //My Studyset data

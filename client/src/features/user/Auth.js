@@ -4,7 +4,7 @@ import { Segment, Icon } from "semantic-ui-react";
 import { motion } from "framer-motion";
 
 import Signup from "./Signup";
-import Login from "./user/Login";
+import Login from "./Login";
 
 function Auth({ user, onLogin }) {
   return (
