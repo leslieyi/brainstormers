@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Input, Button, Header, Segment, Icon } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
+import { login, selectErrors, selectIsLoggedIn, selectUser } from "./userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
+function Login() {
+  const dispatch = useDispatch();
 
-function Login({ onLogin }) {
-  const history = useHistory();
-  const [errors, setErrors] = useState([]);
+  const errors = useSelector(selectErrors);
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -15,27 +19,13 @@ function Login({ onLogin }) {
     const name = e.target.name;
     const value = e.target.value;
     setUser({
-      ...user, //spreading the userInput
+      ...user,
       [name]: value,
     });
   }
   const loginSubmit = (e) => {
     e.preventDefault();
-
-    fetch("/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.errors) {
-          setErrors(data.errors);
-        } else {
-          onLogin(data);
-          history.push("/");
-        }
-      });
+    dispatch(login(user))
   };
 
   return (
@@ -73,7 +63,10 @@ function Login({ onLogin }) {
         {errors.map((error) => (
           <div>{error}</div>
         ))}
-        <Button><Icon name="sign in alternate" />Login</Button>
+        <Button>
+          <Icon name="sign in alternate" />
+          Login
+        </Button>
       </Form>
     </Segment>
   );

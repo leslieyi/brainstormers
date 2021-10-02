@@ -1,11 +1,17 @@
 import { Segment } from "semantic-ui-react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUser, selectUser } from "./userSlice";
 
-function Profile({user}) {
-  function handleProfileEdit(){
-    console.log("Edit was clicked!")
+function Profile() {
+  const user = useSelector(selectUser);
+
+  function handleProfileEdit() {
+    console.log("Edit was clicked!");
   }
+
+  console.log(user);
   return (
     <Segment
       raised

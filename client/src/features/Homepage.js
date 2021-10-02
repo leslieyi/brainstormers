@@ -6,7 +6,8 @@ import FlashcardsContainer from "./FlashcardsContainer";
 import { useEffect, useState } from "react";
 import SavedFlashcards from "./SavedFlashcards";
 import SavedStudysetsContainer from "./SavedStudysetsContainer";
-import Profile from "./Profile";
+import Profile from "./user/Profile";
+import {Redirect} from "react-router-dom";
 
 function Homepage({ user, setUser }) {
   const [reviewcards, setReviewcards] = useState([]);
@@ -75,6 +76,10 @@ function Homepage({ user, setUser }) {
   return (
     <div>
       <Switch>
+        <Route exact path="/login">
+          <Redirect to="/" />
+        </Route>
+
         <Route exact path="/">
           <StudysetsContainer
             onlyMine={false}

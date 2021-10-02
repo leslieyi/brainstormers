@@ -4,7 +4,7 @@ import { Segment, Icon } from "semantic-ui-react";
 import { motion } from "framer-motion";
 
 import Signup from "./Signup";
-import Login from "./Login";
+import Login from "./user/Login";
 
 function Auth({ user, onLogin }) {
   return (
@@ -15,9 +15,9 @@ function Auth({ user, onLogin }) {
         max: 200,
         bounceStiffness: 120,
       }}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ duration: 0.2 }}
+      // whileHover={{ scale: 1.04 }}
+      // whileTap={{ scale: 0.9 }}
+      // transition={{ duration: 0.2 }}
     >
       <Segment.Group
         raised

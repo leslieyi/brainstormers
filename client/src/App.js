@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TitleHeader from "./features/TitleHeader";
 import Homepage from "./features/Homepage";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser, selectUser } from "./features/user/userSlice";
 
 // COMMANDS THAT WE NEED TO RUN
 // npm install semantic-ui-react semantic-ui-css
@@ -25,17 +27,19 @@ import Homepage from "./features/Homepage";
 //npm install react-redux
 
 // npm install redux-devtools-extension
+//npm install @reduxjs/toolkit
 
 
 function App() {
-  const [user, setUser] = useState(null);
+  const setUser = () => {
+    throw new Error("Stop using setUser!");
+  };
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
+  // Intialize redux store here.
   useEffect(() => {
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
+    dispatch(fetchUser());
   }, []);
 
   return (
