@@ -60,7 +60,12 @@ function Auth({ user, onLogin }) {
           Signup or login to start brainstorming!
         </p>
 
-        <h2 style={{ fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
+        <h2
+          style={{
+            fontFamily: "'Rajdhani', sans-serif",
+            textTransform: "uppercase",
+          }}
+        >
           <Link to="/login">
             <Icon name="sign in alternate" />
             Login
@@ -75,10 +80,10 @@ function Auth({ user, onLogin }) {
 
         <Switch>
           <Route exact path="/login">
-            <Login onLogin={onLogin} />
+            <Login />
           </Route>
           <Route exact path="/signup">
-            <Signup onLogin={onLogin} user={user} />
+            <Signup />
           </Route>
         </Switch>
       </Segment.Group>

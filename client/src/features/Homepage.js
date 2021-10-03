@@ -1,6 +1,6 @@
 import Auth from "./user/Auth";
-import StudysetsContainer from "./StudysetsContainer";
-import StudysetForm from "./StudysetForm";
+import StudysetsContainer from "./studyset/StudysetsContainer";
+import StudysetForm from "./studyset/StudysetForm";
 import { Route, Switch } from "react-router-dom";
 import FlashcardsContainer from "./FlashcardsContainer";
 import { useEffect, useState } from "react";
@@ -90,7 +90,7 @@ function Homepage() {
 
         <Route exact path="/">
           <StudysetsContainer
-            onlyMine={false}
+            mine={false}
             reviewsets={reviewsets}
             setReviewsets={setReviewsets}
             key="all"
@@ -99,7 +99,7 @@ function Homepage() {
 
         <Route exact path="/my-studysets">
           <StudysetsContainer
-            onlyMine={true}
+            mine={true}
             reviewsets={reviewsets}
             setReviewsets={setReviewsets}
             key="mine"

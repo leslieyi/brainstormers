@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form, Input, Button, Header, Segment, Icon } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
-import { login, selectErrors, selectIsLoggedIn, selectUser } from "./userSlice";
+
+import { login, selectErrors } from "./userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
@@ -25,7 +24,7 @@ function Login() {
   }
   const loginSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(user))
+    dispatch(login(user));
   };
 
   return (

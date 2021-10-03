@@ -1,48 +1,43 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import StudysetCard from "./StudysetCard";
-import SideLogo from "../photos/logo-only.png";
-import { useSelector } from "react-redux";
-import { selectUser } from "./user/userSlice";
-
+import StudysetCard from "../StudysetCard";
+import SideLogo from "../../photos/logo-only.png";
 import { Popup, Form, Button, Input, Segment, Icon } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
 import { motion } from "framer-motion";
 
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser } from "../user/userSlice";
+import { fetchStudysets, selectStudysets } from "./studysetsSlice";
 
-
-function StudysetsContainer({ onlyMine, reviewsets, setReviewsets }) {
+function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
   const user = useSelector(selectUser);
+  const studysetsData = useSelector(selectStudysets);
+  const setStudysetsData = () => {
+    throw new Error("Don't use me!");
+  };
+
+  const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
   const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
-  const [studysetsData, setStudysetsData] = useState([]); //My Studyset data
+
   const [studysetValue, setStudysetValue] = useState({
     title: "",
     description: "",
     id: "",
   });
-  const [sortedStudyset, setSortedStudyset] = useState(false);
-  const [search, setSearch] = useState("");
 
+  const [search, setSearch] = useState("");
+  const [sorted, setSorted] = useState(false);
   const handleSort = () => {
-    setSortedStudyset(!sortedStudyset);
+    setSorted(!sorted);
   };
 
   useEffect(() => {
-    let url;
-    if (onlyMine) {
-      url = sortedStudyset ? "/my-ordered-studysets" : "/my_studysets";
-    } else {
-      url = sortedStudyset ? "/ordered-studysets" : "/studysets";
-    }
-
-    fetch(url).then((r) => {
-      if (r.ok) {
-        r.json().then((data) => setStudysetsData(data));
-      }
-    });
-  }, [sortedStudyset]);
+    console.log("DISPATCH", { mine, sorted })
+    dispatch(fetchStudysets({ mine, sorted }));
+  }, [sorted]);
 
   const handleDelete = (id) => {
     fetch(`/my_studysets/${id}`, {
@@ -138,7 +133,7 @@ function StudysetsContainer({ onlyMine, reviewsets, setReviewsets }) {
             fontSize: "30px",
           }}
         >
-          {onlyMine ? "View My" : "All"} Studysets
+          {mine ? "View My" : "All"} Studysets
         </h1>
         <Link to="/create-studysets">
           <p

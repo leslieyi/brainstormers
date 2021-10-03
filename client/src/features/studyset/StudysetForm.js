@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Segment, Icon } from "semantic-ui-react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { createStudyset } from "./studysetsSlice";
+
 function StudysetForm() {
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
-  const [studysetValue, setStudysetValue] = useState({
+  const dispatch = useDispatch();
+
+  const [studysetInputValue, setStudysetInputValue] = useState({
     title: "",
     description: "",
   });
@@ -15,32 +20,24 @@ function StudysetForm() {
     const name = e.target.name;
     const value = e.target.value;
 
-    setStudysetValue({
-      ...studysetValue,
+    setStudysetInputValue({
+      ...studysetInputValue,
       [name]: value,
     });
   };
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    fetch(`/studysets`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(studysetValue),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.errors) {
-          setErrors(data.errors);
-        } else {
-          setStudysetValue(data);
-          history.push(`/my-studysets/${data.id}`);
-        }
-      });
-      e.target.reset(); //added this 10.01
+    dispatch(createStudyset(studysetInputValue))
+    .then(action => {
+      const data = action.payload;
+      if (!data.errors) {
+        history.push(`/my-studysets/${data.id}`);
+      } else {
+        setErrors(data.errors);
+      }
+    });
+    e.target.reset(); //added this 10.01
   }
 
   return (
