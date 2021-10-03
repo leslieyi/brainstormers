@@ -38,10 +38,7 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
           </Card.Header>
 
           <Link
-            to={
-              (handleEditButton ? "/my-studysets" : "/studysets") +
-              `/${studyset.id}`
-            }
+            to={(handleEditButton ? "/my-studysets" : "/studysets") + `/${studyset.id}`}
           >
             <Popup
               content="Go to Studysets"

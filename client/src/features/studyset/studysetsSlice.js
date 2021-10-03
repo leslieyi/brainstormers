@@ -16,19 +16,6 @@ export const fetchStudysets = createAsyncThunk(
   }
 );
 
-//Creating a studyset
-export const createStudyset = createAsyncThunk(
-  "studysets/createStudyset",
-  (studysetInputValue) =>
-    fetch(`/studysets`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(studysetInputValue),
-    }).then((res) => res.json())
-);
-
 const studysetsSlice = createSlice({
   name: "studysets",
   initialState: {
@@ -48,6 +35,7 @@ const studysetsSlice = createSlice({
 });
 
 export const selectStudysets = (state) => state.studysets.value;
+
 
 export default studysetsSlice.reducer;
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import StudysetCard from "../StudysetCard";
+import StudysetCard from "./StudysetCard";
 import SideLogo from "../../photos/logo-only.png";
 import { Popup, Form, Button, Input, Segment, Icon } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
@@ -34,23 +34,16 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
     setSorted(!sorted);
   };
 
-  useEffect(() => {
-    console.log("DISPATCH", { mine, sorted })
+  const refresh = () => {
     dispatch(fetchStudysets({ mine, sorted }));
-  }, [sorted]);
+  }
+
+  useEffect(refresh, [sorted]);
 
   const handleDelete = (id) => {
     fetch(`/my_studysets/${id}`, {
       method: "DELETE",
-    }).then((r) => {
-      const newData = studysetsData.filter((studyset) => studyset.id !== id); //
-      setStudysetsData(newData);
-
-      const newReviewsets = reviewsets.filter(
-        (reviewset) => reviewset.studyset.id !== id
-      );
-      setReviewsets(newReviewsets);
-    });
+    }).then((r) => refresh());
   };
 
   const studysetOnChange = (e) => {
@@ -87,19 +80,8 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
         if (editedData.errors) {
           setErrors(editedData.errors);
         } else {
-          const updatedData = studysetsData.map((studyset) =>
-            studyset.id !== studysetValue.id ? studyset : studysetValue
-          );
-          setStudysetsData(updatedData);
-
-          const updatedReviewsets = reviewsets.map((reviewset) => {
-            if (reviewset.studyset.id !== studysetValue.id) {
-              return reviewset;
-            }
-            reviewset.studyset = studysetValue;
-            return reviewset;
-          });
-          setReviewsets(updatedReviewsets);
+          refresh();
+          setToggleEdit(!toggleEdit);
         }
       });
   };
@@ -108,7 +90,7 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
     setSearch(e.target.value);
   }
 
-  let searchedData = studysetsData.filter(
+  const searchedData = studysetsData.filter(
     (item) =>
       item.title.toLowerCase().includes(search.toLowerCase()) ||
       item.description.toLowerCase().includes(search.toLowerCase()) ||
@@ -227,6 +209,7 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
         {searchedData.map((studyset) => (
           <StudysetCard
             key={Math.random()}
+            mine={mine}
             studyset={studyset}
             setStudysetsData={setStudysetsData}
             handleDelete={studyset.user.id === user.id ? handleDelete : null}

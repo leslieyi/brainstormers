@@ -1,20 +1,21 @@
-import { Form, Button, Segment, Icon } from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Form, Icon, Segment } from "semantic-ui-react";
+import { cancelEdit, fetchOneStudyset, selectEditing, selectOneStudyset } from "../studyset/oneStudysetSlice";
 
-function FlashcardForm({
-  onNewFlashcard,
-  editFlashcard,
-  setEditFlashcard,
-  onEditFlashcard,
-  studysetId,
-}) {
+function FlashcardForm() {
+  const dispatch = useDispatch();
+  const studyset = useSelector(selectOneStudyset);
+  const editFlashcard = useSelector(selectEditing);
+
   const [errors, setErrors] = useState([]);
   const blankFlashcard = {
+    id: null,
     word: "",
     definition: "<p><br></p>",
-    studyset_id: studysetId,
+    studyset_id: studyset.id,
   };
   const [flashcardValue, setFlashcardValue] = useState({ ...blankFlashcard });
 
@@ -25,26 +26,22 @@ function FlashcardForm({
   const flashcardOnChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(`${e.target.name}: ${e.target.value}`);
 
     setFlashcardValue((flashcardValue) => {
       return {
-        ...flashcardValue, //spreading the user's input
-        [name]: value, //inserting the key/value pair of the user just typed in
+        ...flashcardValue,
+        [name]: value,
       };
     });
   };
 
-  const quillOnChange = (content, editor) => {
-    console.log(editor);
+  const quillOnChange = (content) => {
     flashcardOnChange({ target: { name: "definition", value: content } });
-    //making my own e.target.value and e.target.name bc I don't know how else to attach the event
   };
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(flashcardValue);
     const url = editFlashcard
       ? `/flashcards/${flashcardValue.id}`
       : "/flashcards";
@@ -60,15 +57,11 @@ function FlashcardForm({
       .then((data) => {
         if (data.errors) {
           setErrors(data.errors);
-        } else if (editFlashcard) {
-          setEditFlashcard(null);
-          onEditFlashcard(data);
         } else {
-          onNewFlashcard(data);
-          setFlashcardValue({ ...blankFlashcard });
+          dispatch(fetchOneStudyset(studyset.id));
+          setFlashcardValue({...blankFlashcard});
         }
       });
-    e.target.reset();
   }
 
   return (
@@ -110,7 +103,7 @@ function FlashcardForm({
           {editFlashcard ? "Update" : "Create"}
         </Button>
         {editFlashcard ? (
-          <Button onClick={() => setEditFlashcard(null)}>Cancel</Button>
+          <Button onClick={() => dispatch(cancelEdit())}>Cancel</Button>
         ) : null}
       </Form>
     </Segment>

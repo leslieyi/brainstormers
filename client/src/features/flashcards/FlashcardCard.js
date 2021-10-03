@@ -8,19 +8,22 @@ import { Card, Icon, Popup } from "semantic-ui-react";
 import parse from "html-react-parser";
 
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  edit,
+  selectMine,
+  selectOneStudyset,
+  fetchOneStudyset,
+} from "../studyset/oneStudysetSlice";
 
-function FlashcardCard({
-  flashcard: { id, word, definition },
-  flashcard,
-  handleDelete,
-  handleEdit,
-  reviewcards,
-  toggleStar,
-}) {
+function FlashcardCard({ flashcard }) {
+  const dispatch = useDispatch();
+  const mine = useSelector(selectMine);
+
+  const studyset = useSelector(selectOneStudyset);
+
   const [flip, setFlip] = useState(false);
-  const [starred, setStarred] = useState(
-    !!reviewcards.find((item) => item.flashcard.id === flashcard.id)
-  );
+  const [starred, setStarred] = useState(false);
 
   const handleFlip = () => {
     setFlip(!flip);
@@ -28,8 +31,20 @@ function FlashcardCard({
 
   const handleStar = () => {
     setStarred(!starred);
-    toggleStar(flashcard.id);
   };
+
+  const handleDelete = () => {
+    fetch(`/flashcards/${flashcard.id}`, {
+      method: "DELETE",
+    }).then(() => dispatch(fetchOneStudyset(studyset.id)));
+  };
+
+  const handleEdit = () => {
+    const id = flashcard.id;
+    dispatch(edit(id));
+  };
+
+  if (!flashcard) return null;
 
   return (
     <Card.Group>
@@ -41,12 +56,12 @@ function FlashcardCard({
         >
           {flip ? (
             <Card.Description>
-              <b>Definition: </b> {parse(definition)}
+              <b>Definition: </b> {parse(flashcard.definition)}
             </Card.Description>
           ) : (
             <Card.Description>
               <b>Term: </b>
-              {word}&nbsp;&nbsp;&nbsp;&nbsp;
+              {flashcard.word}&nbsp;&nbsp;&nbsp;&nbsp;
               <Popup
                 content="Add to Flashcard to Review Later"
                 trigger={
@@ -64,7 +79,7 @@ function FlashcardCard({
             content="Flip"
             trigger={<Switch onClick={handleFlip} size="small" />}
           />
-          {handleEdit ? (
+          {mine ? (
             <Popup
               content="Edit"
               trigger={
@@ -72,7 +87,7 @@ function FlashcardCard({
                   aria-label="edit"
                   size="small"
                   color="primary"
-                  onClick={() => handleEdit(flashcard)}
+                  onClick={handleEdit}
                 >
                   <EditIcon />
                 </IconButton>
@@ -80,7 +95,7 @@ function FlashcardCard({
             />
           ) : null}
 
-          {handleDelete ? (
+          {mine ? (
             <Popup
               content="Delete"
               trigger={
@@ -88,7 +103,7 @@ function FlashcardCard({
                   aria-label="delete"
                   size="small"
                   color="primary"
-                  onClick={() => handleDelete(id)}
+                  onClick={handleDelete}
                 >
                   <DeleteIcon />
                 </IconButton>
