@@ -33,6 +33,17 @@ function FlashcardCard({ flashcard }) {
     setStarred(!starred);
   };
 
+  // const handleSave = () => {
+  //   const query = reviewset
+  //     ? fetch(`/reviewsets/${reviewset.id}`, { method: "DELETE" })
+  //     : fetch("/reviewsets", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ studyset_id: studyset.id, user_id: user.id }),
+  //       });
+  //   query.then(() => dispatch(fetchSavedStudysets()));
+  // };
+
   const handleDelete = () => {
     fetch(`/flashcards/${flashcard.id}`, {
       method: "DELETE",

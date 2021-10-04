@@ -1,28 +1,18 @@
 import Auth from "./user/Auth";
+import Profile from "./user/Profile";
 import StudysetsContainer from "./studyset/StudysetsContainer";
 import StudysetForm from "./studyset/StudysetForm";
-import { Route, Switch } from "react-router-dom";
 import FlashcardsContainer from "./flashcards/FlashcardsContainer";
-import { useEffect, useState } from "react";
 import SavedFlashcards from "./flashcards/SavedFlashcards";
-import SavedStudysetsContainer from "./SavedStudysetsContainer";
-import Profile from "./user/Profile";
-import { Redirect } from "react-router-dom";
+import SavedStudysetsContainer from "./savedStudysets/SavedStudysetsContainer";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "./user/userSlice";
 
 function Homepage() {
   const [reviewcards, setReviewcards] = useState([]);
-  const [reviewsets, setReviewsets] = useState([]);
-
   const user = useSelector(selectUser);
-
-  useEffect(() => {
-    if (!user) setReviewsets([]);
-    fetch("/reviewsets")
-      .then((r) => r.json())
-      .then((data) => setReviewsets(data));
-  }, [user]);
 
   useEffect(() => {
     if (!user) setReviewcards([]);
@@ -30,27 +20,6 @@ function Homepage() {
       .then((r) => r.json())
       .then((data) => setReviewcards(data));
   }, [user]);
-
-  const toggleSave = (studysetId) => {
-    const deleting = reviewsets.find((card) => card.studyset.id === studysetId);
-    if (deleting) {
-      fetch(`/reviewsets/${deleting.id}`, {
-        method: "DELETE",
-      }).then(() => {
-        setReviewsets(reviewsets.filter((item) => item.id !== deleting.id));
-      });
-    } else {
-      fetch("/reviewsets", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ studyset_id: studysetId, user_id: user.id }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          setReviewsets([...reviewsets, data]);
-        });
-    }
-  };
 
   const toggleStar = (flashcardId) => {
     const deleting = reviewcards.find(
@@ -89,43 +58,19 @@ function Homepage() {
         </Route>
 
         <Route exact path="/">
-          <StudysetsContainer
-            mine={false}
-            reviewsets={reviewsets}
-            setReviewsets={setReviewsets}
-            key="all"
-          />
+          <StudysetsContainer mine={false} key="all" />
         </Route>
 
         <Route exact path="/my-studysets">
-          <StudysetsContainer
-            mine={true}
-            reviewsets={reviewsets}
-            setReviewsets={setReviewsets}
-            key="mine"
-          />
+          <StudysetsContainer mine={true} key="mine" />
         </Route>
 
         <Route path="/my-studysets/:id">
-          <FlashcardsContainer
-            mine={true}
-            reviewcards={reviewcards}
-            setReviewcards={setReviewcards}
-            toggleStar={toggleStar}
-            toggleSave={toggleSave}
-            reviewsets={reviewsets}
-          />
+          <FlashcardsContainer mine={true} />
         </Route>
 
         <Route path="/studysets/:id">
-          <FlashcardsContainer
-            mine={false}
-            reviewcards={reviewcards}
-            setReviewcards={setReviewcards}
-            toggleStar={toggleStar}
-            toggleSave={toggleSave}
-            reviewsets={reviewsets}
-          />
+          <FlashcardsContainer mine={false} />
         </Route>
 
         <Route path="/create-studysets">
@@ -137,7 +82,7 @@ function Homepage() {
         </Route>
 
         <Route exact path="/saved-studysets">
-          <SavedStudysetsContainer reviewsets={reviewsets} />
+          <SavedStudysetsContainer />
         </Route>
 
         <Route exact path="/my-profile">

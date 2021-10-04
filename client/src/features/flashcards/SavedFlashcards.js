@@ -1,7 +1,11 @@
-import FlashcardCard from "./FlashcardCard";
+import { useSelector } from "react-redux";
 import { Segment } from "semantic-ui-react";
+import FlashcardCard from "./FlashcardCard";
+import { selectSavedFlashcards } from "./savedFlashcardsSlice";
 
 function SavedFlashcards({ reviewcards, toggleStar }) {
+
+  const savedFlashcards = useSelector(selectSavedFlashcards)
   return (
     <Segment
       raised
@@ -11,7 +15,19 @@ function SavedFlashcards({ reviewcards, toggleStar }) {
         opacity: "0.8",
       }}
     >
-      <h1>Review Flashcards</h1>
+      <div style={{ margin: "20px" }}>
+        <h1
+          style={{
+            display: "inline-block",
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
+          Review Flashcards
+        </h1>
+      </div>
+
       <div
         style={{
           display: "flex",
@@ -21,12 +37,11 @@ function SavedFlashcards({ reviewcards, toggleStar }) {
           paddingBottom: "20px",
         }}
       >
-        {reviewcards.map((reviewcard) => (
+        {savedFlashcards.map((savedFlashcard) => (
           <FlashcardCard
-            flashcard={reviewcard.flashcard}
-            reviewcards={reviewcards}
-            toggleStar={toggleStar}
-            key={reviewcard.id}
+            flashcard={savedFlashcard.flashcard}
+            savedFlashcards={savedFlashcards}
+            key={savedFlashcard.id}
           />
         ))}
       </div>

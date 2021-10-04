@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import TitleHeader from "./features/user/TitleHeader";
 import Homepage from "./features/Homepage";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
+import { fetchSavedStudysets } from "./features/savedStudysets/savedStudysetsSlice";
 
 // COMMANDS THAT WE NEED TO RUN
 // npm install semantic-ui-react semantic-ui-css
@@ -35,7 +36,8 @@ function App() {
   // Intialize redux store here.
   useEffect(() => {
     dispatch(fetchUser());
-  }, []);
+    dispatch(fetchSavedStudysets());
+  });
 
   return (
     <div>

@@ -2,24 +2,31 @@ import { Link } from "react-router-dom";
 import { Popup, Icon, Card } from "semantic-ui-react";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
-// import { useSelector } from "react-redux";
-// import { selectUser } from "./user/userSlice";
+import { useSelector } from "react-redux";
+import { selectUser } from "../user/userSlice";
 
-function SavedStudysetCard({ reviewset }) {
-  // const user = useSelector(selectUser);
+function SavedStudysetCard({ savedStudyset }) {
+  const user = useSelector(selectUser);
+  const isMine = savedStudyset.studyset.user.id === user.id;
   return (
     <Card.Group>
-      <Card>
+      <Card  >
         <Card.Content>
           <Card.Header
             style={{
               display: "inline",
+    
             }}
           >
-            {reviewset.studyset.title}
+            {savedStudyset.studyset.title}
           </Card.Header>
 
-          <Link to={`/studysets/${reviewset.studyset.id}`}>
+          <Link
+            to={
+              (isMine ? "/my-studysets" : "/studysets") +
+              `/${savedStudyset.studyset.id}`
+            }
+          >
             <Popup
               content="Go to Studysets"
               trigger={
@@ -30,17 +37,18 @@ function SavedStudysetCard({ reviewset }) {
             />
           </Link>
 
-          <div>
+          <div >
             <Card.Description>
               <b>Description:</b>
-              {reviewset.studyset.description}
+              {savedStudyset.studyset.description}
             </Card.Description>
             <Card.Meta>
-              <b>Total Flashcards:</b> {reviewset.studyset.total_flashcards}
+              <b>Total Flashcards:</b> {savedStudyset.studyset.total_flashcards}
             </Card.Meta>
             <Card.Content>
-              <Icon name="user" /> <b>Creator:</b>{" "}
-              {reviewset.studyset.user.username}
+              <Icon name= {isMine? "smile outline":"user"} style={{ color: isMine ? " #0353A4" : null }} />
+              <b style={{ color: isMine ? " #0353A4" : null }}>Creator:</b>{" "}
+              {savedStudyset.studyset.user.username}
             </Card.Content>
           </div>
         </Card.Content>

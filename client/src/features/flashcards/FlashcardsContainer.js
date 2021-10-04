@@ -2,39 +2,41 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import FlashcardForm from "./FlashcardForm";
 import FlashcardCard from "./FlashcardCard";
-import { Icon, Popup, Segment } from "semantic-ui-react";
-import { motion } from "framer-motion";
-import SideLogo from "../../photos/logo-only.png";
-
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchOneStudyset,
   selectMine,
   selectOneStudyset,
 } from "../studyset/oneStudysetSlice";
+import {
+  selectReviewsetWithStudysetId,
+  fetchSavedStudysets,
+} from "../savedStudysets/savedStudysetsSlice";
+import { selectUser } from "../user/userSlice";
 
-function FlashcardsContainer({
-  toggleSave,
-  reviewsets,
-}) {
+import { Icon, Popup, Segment } from "semantic-ui-react";
+import { motion } from "framer-motion";
+import SideLogo from "../../photos/logo-only.png";
+
+function FlashcardsContainer() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const studyset = useSelector(selectOneStudyset);
   const mine = useSelector(selectMine);
-
+  const user = useSelector(selectUser);
+  const reviewset = useSelector(selectReviewsetWithStudysetId(id));
   const refresh = () => dispatch(fetchOneStudyset(id));
   useEffect(refresh, [id]);
 
-  useEffect(() => {
-    if (!reviewsets || !studyset) {
-      return;
-    }
-    setSaved(!!reviewsets.find((item) => item.studyset.id === studyset.id));
-  }, [reviewsets, studyset]);
-
-  const [saved, setSaved] = useState(false);
   const handleSave = () => {
-    toggleSave(studyset.id);
+    const query = reviewset
+      ? fetch(`/reviewsets/${reviewset.id}`, { method: "DELETE" })
+      : fetch("/reviewsets", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ studyset_id: studyset.id, user_id: user.id }),
+        });
+    query.then(() => dispatch(fetchSavedStudysets()));
   };
 
   if (!studyset) return null;
@@ -63,7 +65,7 @@ function FlashcardsContainer({
           content="Add or Remove Studyset to my Favorites"
           trigger={
             <Icon
-              name={saved ? "folder" : "folder outline"}
+              name={reviewset ? "folder" : "folder outline"}
               size="large"
               onClick={handleSave}
               style={{ marginLeft: "20px" }}
@@ -100,7 +102,6 @@ function FlashcardsContainer({
           Total Flashcards: {studyset.flashcards.length}
         </h4>
         <Link to="/saved-flashcards">
-          {" "}
           &nbsp;&nbsp;&nbsp;&nbsp;Starred Words
         </Link>
 
@@ -118,10 +119,7 @@ function FlashcardsContainer({
           }}
         >
           {studyset.flashcards.map((flashcard) => (
-            <FlashcardCard
-              flashcard={flashcard}
-              key={Math.random()}
-            />
+            <FlashcardCard flashcard={flashcard} key={Math.random()} />
           ))}
         </div>
       ) : null}

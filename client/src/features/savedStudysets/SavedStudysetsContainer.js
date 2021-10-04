@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SavedStudysetCard from "./SavedStudysetCard";
-import SideLogo from "../photos/logo-only.png";
+import SideLogo from "../../photos/logo-only.png";
 
 import { Link } from "react-router-dom";
 import Switch from "@mui/material/Switch";
@@ -8,30 +8,41 @@ import Switch from "@mui/material/Switch";
 import { Segment, Input, Popup } from "semantic-ui-react";
 import { motion } from "framer-motion";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectSavedStudysets,
+  fetchSavedStudysets,
+} from "./savedStudysetsSlice";
 
-
-function SavedStudysetsContainer({ reviewsets, toggleSave  }) {
+function SavedStudysetsContainer() {
+  const dispatch = useDispatch();
+  const savedStudysets = useSelector(selectSavedStudysets);
 
   const [search, setSearch] = useState("");
-  const [sortedReviewsets, setSortedReviewsets] = useState(false);
+  const [sorted, setSorted] = useState(false);
+
+  const refresh = () => {
+    dispatch(fetchSavedStudysets({ sorted }));
+  };
+
+  useEffect(refresh, [sorted]);
 
   function handleSearch(e) {
     setSearch(e.target.value);
   }
 
   const handleSort = () => {
-    setSortedReviewsets(!sortedReviewsets);
-    console.log("hi");
+    setSorted(!sorted);
   };
 
-  const searchedData = reviewsets.filter(
+  const searchedData = savedStudysets.filter(
     (item) =>
       item.studyset.title.toLowerCase().includes(search.toLowerCase()) ||
       item.studyset.description.toLowerCase().includes(search.toLowerCase()) ||
       item.studyset.user.username.toLowerCase().includes(search.toLowerCase())
   );
 
-  const sortedData = sortedReviewsets
+  const sortedData = sorted
     ? [...searchedData].sort((a, b) =>
         a.studyset.title < b.studyset.title ? -1 : 1
       )
@@ -58,7 +69,18 @@ function SavedStudysetsContainer({ reviewsets, toggleSave  }) {
           Saved Studysets
         </h1>
         <Link to="/create-studysets">
-          &nbsp;&nbsp;&nbsp;&nbsp;Make a Studyset
+          <motion.p
+            style={{
+              fontFamily: "'Rajdhani', sans-serif",
+              display: "inline-block",
+              fontSize: "20px",
+            }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+          >
+            &nbsp;&nbsp;&nbsp;&nbsp;Make a Studyset
+          </motion.p>
         </Link>
 
         <motion.img
@@ -77,7 +99,7 @@ function SavedStudysetsContainer({ reviewsets, toggleSave  }) {
             display: "inline-block",
             fontFamily: "'Rajdhani', sans-serif",
             fontWeight: "bold",
-            fontSize: "30px",
+            fontSize: "25px",
           }}
         >
           Sort in Alphabetical Order
@@ -98,10 +120,10 @@ function SavedStudysetsContainer({ reviewsets, toggleSave  }) {
           paddingBottom: "20px",
         }}
       >
-        {sortedData.map((reviewset) => (
+        {sortedData.map((savedStudyset) => (
           <SavedStudysetCard
-            reviewset={reviewset}
-            toggleSave={toggleSave}
+            key={savedStudyset.id}
+            savedStudyset={savedStudyset}
           />
         ))}
       </div>

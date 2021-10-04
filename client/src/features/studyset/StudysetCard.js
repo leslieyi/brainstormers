@@ -13,9 +13,13 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import { useSelector } from "react-redux";
+import { selectUser } from "../user/userSlice";
 
 function StudysetCard({ studyset, handleDelete, handleEditButton }) {
   const [open, setOpen] = useState(false);
+  const user = useSelector(selectUser);
+  const isMine = studyset.user.id === user.id;
 
   const handleClickOpen = () => {
     setOpen(!open);
@@ -26,56 +30,66 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
   };
 
   return (
-    <Card.Group >
-      <Card >
+    <Card.Group style={{ alignItems: "stretch" }}>
+      <Card>
         <Card.Content>
           <Card.Header
             style={{
-              display: "inline",
+              display: "inline-block",
             }}
           >
             {studyset.title}
           </Card.Header>
-
-          <Link
-            to={(handleEditButton ? "/my-studysets" : "/studysets") + `/${studyset.id}`}
+          <Card.Header
+            style={{
+              display: "inline-block",
+            }}
           >
-            <Popup
-              content="Go to Studysets"
-              trigger={
-                <IconButton aria-label="add" size="medium" color="primary">
-                  <AddIcon fontSize="inherit" />
-                </IconButton>
-              }
-            />
-          </Link>
-
-          {handleEditButton ? (
-            <Popup
-              content="Edit Studyset"
-              trigger={
-                <IconButton
-                  aria-label="edit"
-                  size="medium"
-                  color="primary"
-                  onClick={() => handleEditButton(studyset)}
-                >
-                  <EditIcon fontSize="inherit" />
-                </IconButton>
-              }
-            />
-          ) : null}
-
-          {handleDelete ? (
-            <IconButton
-              aria-label="delete"
-              size="medium"
-              color="primary"
-              onClick={handleClickOpen}
+            <Link
+              to={(isMine ? "/my-studysets" : "/studysets") + `/${studyset.id}`}
             >
-              <DeleteIcon fontSize="inherit" />
-            </IconButton>
-          ) : null}
+              <Popup
+                content="Go to Studysets"
+                trigger={
+                  <IconButton aria-label="add" size="medium" color="primary">
+                    <AddIcon fontSize="inherit" />
+                  </IconButton>
+                }
+              />
+            </Link>
+
+            {isMine ? (
+              <Popup
+                content="Edit Studyset"
+                trigger={
+                  <IconButton
+                    aria-label="edit"
+                    size="medium"
+                    color="primary"
+                    onClick={() => handleEditButton(studyset)}
+                  >
+                    <EditIcon fontSize="inherit" />
+                  </IconButton>
+                }
+              />
+            ) : null}
+
+            {isMine ? (
+              <Popup
+                content="Delete Studyset"
+                trigger={
+                  <IconButton
+                    aria-label="delete"
+                    size="medium"
+                    color="primary"
+                    onClick={handleClickOpen}
+                  >
+                    <DeleteIcon fontSize="inherit" />
+                  </IconButton>
+                }
+              />
+            ) : null}
+          </Card.Header>
 
           <div>
             <Card.Description>
@@ -84,8 +98,9 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
             </Card.Description>
             <Card.Meta>Total Flashcards: {studyset.total_flashcards}</Card.Meta>
             <Card.Content>
-              <Icon name="user" />
-              <b>Creator:</b> {studyset.user.username}
+            <Icon name= {isMine? "smile outline":"user"} style={{ color: isMine ? " #0353A4" : null }} />
+              <b style={{ color: isMine ? " #0353A4" : null }}>Creator:</b>{" "}
+              {studyset.user.username}
             </Card.Content>
           </div>
         </Card.Content>

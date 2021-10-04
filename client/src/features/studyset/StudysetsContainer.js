@@ -10,18 +10,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../user/userSlice";
 import { fetchStudysets, selectStudysets } from "./studysetsSlice";
 
-function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
+function StudysetsContainer({ mine }) {
   const user = useSelector(selectUser);
   const studysetsData = useSelector(selectStudysets);
-  const setStudysetsData = () => {
-    throw new Error("Don't use me!");
-  };
-
   const dispatch = useDispatch();
-
   const [errors, setErrors] = useState([]);
-  const [toggleEdit, setToggleEdit] = useState(false); //Edit Button click
-
+  const [toggleEdit, setToggleEdit] = useState(false);
   const [studysetValue, setStudysetValue] = useState({
     title: "",
     description: "",
@@ -36,7 +30,7 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
 
   const refresh = () => {
     dispatch(fetchStudysets({ mine, sorted }));
-  }
+  };
 
   useEffect(refresh, [sorted]);
 
@@ -118,14 +112,18 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
           {mine ? "View My" : "All"} Studysets
         </h1>
         <Link to="/create-studysets">
-          <p
+          <motion.p
             style={{
               fontFamily: "'Rajdhani', sans-serif",
               display: "inline-block",
+              fontSize: "20px"
             }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
           >
             &nbsp;&nbsp;&nbsp;&nbsp;Make a Studyset
-          </p>
+          </motion.p>
         </Link>
         <motion.img
           src={SideLogo}
@@ -143,7 +141,7 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
             display: "inline-block",
             fontFamily: "'Rajdhani', sans-serif",
             fontWeight: "bold",
-            fontSize: "30px",
+            fontSize: "25px",
           }}
         >
           Sort in Alphabetical Order
@@ -209,13 +207,9 @@ function StudysetsContainer({ mine, reviewsets, setReviewsets }) {
         {searchedData.map((studyset) => (
           <StudysetCard
             key={Math.random()}
-            mine={mine}
             studyset={studyset}
-            setStudysetsData={setStudysetsData}
-            handleDelete={studyset.user.id === user.id ? handleDelete : null}
-            handleEditButton={
-              studyset.user.id === user.id ? handleEditButton : null
-            }
+            handleDelete={handleDelete}
+            handleEditButton={handleEditButton}
           />
         ))}
       </div>

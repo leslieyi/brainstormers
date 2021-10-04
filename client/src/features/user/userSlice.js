@@ -15,14 +15,12 @@ export const login = createAsyncThunk("user/login", (user) =>
   }).then((res) => res.json())
 );
 
-export const signup = createAsyncThunk(
-  "user/signup",
-  (userInput) =>
-    fetch("/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userInput),
-    }).then((res) => res.json())
+export const signup = createAsyncThunk("user/signup", (userInput) =>
+  fetch("/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userInput),
+  }).then((res) => res.json())
 );
 
 const userSlice = createSlice({
