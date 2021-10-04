@@ -34,7 +34,7 @@ export const selectEditing = (state) => {
   );
 };
 export const selectMine = (state) => {
-  const studyset = state.oneStudyset.value;
+  const studyset = state.oneStudyset.value
   return studyset && studyset.user.id === state.user.value.id;
 }
 

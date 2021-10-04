@@ -4,6 +4,7 @@ import Homepage from "./features/Homepage";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
 import { fetchSavedStudysets } from "./features/savedStudysets/savedStudysetsSlice";
+import { fetchSavedFlashcards } from "./features/flashcards/savedFlashcardsSlice";
 
 // COMMANDS THAT WE NEED TO RUN
 // npm install semantic-ui-react semantic-ui-css
@@ -37,6 +38,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(fetchSavedStudysets());
+    dispatch(fetchSavedFlashcards());
   });
 
   return (

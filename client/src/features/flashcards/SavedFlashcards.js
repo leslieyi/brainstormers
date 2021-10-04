@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { Segment } from "semantic-ui-react";
-import FlashcardCard from "./FlashcardCard";
+import SavedFlashcardCard from "./SavedFlashcardCard";
 import { selectSavedFlashcards } from "./savedFlashcardsSlice";
 
-function SavedFlashcards({ reviewcards, toggleStar }) {
+function SavedFlashcards() {
+  const savedFlashcards = useSelector(selectSavedFlashcards);
 
-  const savedFlashcards = useSelector(selectSavedFlashcards)
   return (
     <Segment
       raised
@@ -38,10 +38,9 @@ function SavedFlashcards({ reviewcards, toggleStar }) {
         }}
       >
         {savedFlashcards.map((savedFlashcard) => (
-          <FlashcardCard
-            flashcard={savedFlashcard.flashcard}
-            savedFlashcards={savedFlashcards}
-            key={savedFlashcard.id}
+          <SavedFlashcardCard
+            savedFlashcard={savedFlashcard}
+            key={savedFlashcard.flashcard.id}
           />
         ))}
       </div>

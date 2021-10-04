@@ -14,10 +14,14 @@ const savedFlashcardsSlice = createSlice({
   extraReducers: {
     [fetchSavedFlashcards.fulfilled](state, action) {
       state.value = action.payload;
+
     },
   },
 });
 
 export const selectSavedFlashcards = (state) => state.savedFlashcards.value;
+export const selectReviewcardWithFlashcardId = (flashcardId) => (state) => state.savedFlashcards.value.find(
+    (reviewcard) => reviewcard.flashcard.id == flashcardId
+  );
 
 export default savedFlashcardsSlice.reducer;

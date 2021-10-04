@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   edit,
-  selectMine,
   selectOneStudyset,
   fetchOneStudyset,
 } from "../studyset/oneStudysetSlice";
@@ -21,17 +20,17 @@ import {
 } from "./savedFlashcardsSlice";
 import { selectUser } from "../user/userSlice";
 
-function FlashcardCard({ flashcard }) {
+function SavedFlashcardCard({ savedFlashcard }) {
   const dispatch = useDispatch();
 
   const refresh = () => dispatch(fetchSavedFlashcards());
   useEffect(refresh, [dispatch]);
-  const reviewcard = useSelector(selectReviewcardWithFlashcardId(flashcard.id));
-  const mine = useSelector(selectMine);
-
+  const reviewcard = useSelector(selectReviewcardWithFlashcardId(savedFlashcard.flashcard.id));
   const user = useSelector(selectUser);
   const studyset = useSelector(selectOneStudyset);
   const [flip, setFlip] = useState(false);
+  const mine = savedFlashcard.user.id == user.id
+  console.log("hello?", savedFlashcard)
   const handleFlip = () => {
     setFlip(!flip);
   };
@@ -43,25 +42,15 @@ function FlashcardCard({ flashcard }) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            flashcard_id: flashcard.id,
+            flashcard_id: savedFlashcard.flashcard.id,
             user_id: user.id,
           }),
         });
     query.then(() => dispatch(fetchSavedFlashcards()));
   };
 
-  const handleDelete = () => {
-    fetch(`/flashcards/${flashcard.id}`, {
-      method: "DELETE",
-    }).then(() => dispatch(fetchOneStudyset(studyset.id)));
-  };
 
-  const handleEdit = () => {
-    const id = flashcard.id;
-    dispatch(edit(id));
-  };
-
-  if (!flashcard) return null;
+  if (!savedFlashcard.flashcard) return null;
 
   return (
     <Card.Group>
@@ -73,12 +62,12 @@ function FlashcardCard({ flashcard }) {
         >
           {flip ? (
             <Card.Description>
-              <b>Definition: </b> {parse(flashcard.definition)}
+              <b>Definition: </b> {parse(savedFlashcard.flashcard.definition)}
             </Card.Description>
           ) : (
             <Card.Description>
               <b>Term: </b>
-              {flashcard.word}&nbsp;&nbsp;&nbsp;&nbsp;
+              {savedFlashcard.flashcard.word}&nbsp;&nbsp;&nbsp;&nbsp;
               <Popup
                 content="Add to Flashcard to Review Later"
                 trigger={
@@ -96,40 +85,10 @@ function FlashcardCard({ flashcard }) {
             content="Flip"
             trigger={<Switch onClick={handleFlip} size="small" />}
           />
-          {mine ? (
-            <Popup
-              content="Edit"
-              trigger={
-                <IconButton
-                  aria-label="edit"
-                  size="small"
-                  color="primary"
-                  onClick={handleEdit}
-                >
-                  <EditIcon />
-                </IconButton>
-              }
-            />
-          ) : null}
 
-          {mine ? (
-            <Popup
-              content="Delete"
-              trigger={
-                <IconButton
-                  aria-label="delete"
-                  size="small"
-                  color="primary"
-                  onClick={handleDelete}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              }
-            />
-          ) : null}
         </div>
       </Card>
     </Card.Group>
   );
 }
-export default FlashcardCard;
+export default SavedFlashcardCard;

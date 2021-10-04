@@ -23,7 +23,6 @@ function Profile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit ");
     fetch("/edit-profile", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
