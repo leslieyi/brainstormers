@@ -14,12 +14,14 @@ import {
 } from "../savedStudysets/savedStudysetsSlice";
 import { selectUser } from "../user/userSlice";
 
-import { Icon, Popup, Segment } from "semantic-ui-react";
+import { Icon, Popup, Segment, Table, Button } from "semantic-ui-react";
 import { motion } from "framer-motion";
 import SideLogo from "../../photos/logo-only.png";
+import parse from "html-react-parser";
 
 function FlashcardsContainer() {
   const { id } = useParams();
+  const [viewList, setViewList] = useState(false);
   const dispatch = useDispatch();
   const studyset = useSelector(selectOneStudyset);
   const mine = useSelector(selectMine);
@@ -106,6 +108,42 @@ function FlashcardsContainer() {
         </Link>
 
         {mine ? <FlashcardForm /> : null}
+        <Button
+          onClick={() => setViewList(!viewList)}
+          style={{ backgroundColor: "white" }}
+        >
+          <Icon name="angle down" />
+          View List
+        </Button>
+        {viewList ? (
+          <div
+            style={{
+              justifyContent: "center",
+              textAlign: "center",
+              padding: "20px 100px 20px 100px",
+            }}
+          >
+            <Table
+              definition
+              celled
+              striped
+              style={{
+                border: "2px solid #0353A4",
+                opacity: "0.8",
+                backgroundColor: "#DDEBF9",
+              }}
+            >
+              {studyset.flashcards.map((flashcard) => (
+                <Table.Row>
+                  <Table.Cell width={2} style={{ color: "#0353A4" }}>
+                    {flashcard.word}
+                  </Table.Cell>
+                  <Table.Cell>{parse(flashcard.definition)} </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table>
+          </div>
+        ) : null}
       </div>
 
       {studyset ? (

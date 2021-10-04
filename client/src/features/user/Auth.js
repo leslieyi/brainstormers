@@ -8,16 +8,8 @@ import Login from "./Login";
 
 function Auth({ user, onLogin }) {
   return (
-    <motion.div
-      drag
-      dragTransition={{
-        min: 0,
-        max: 200,
-        bounceStiffness: 120,
-      }}
-      // whileHover={{ scale: 1.04 }}
-      // whileTap={{ scale: 0.9 }}
-      // transition={{ duration: 0.2 }}
+    <div
+
     >
       <Segment.Group
         raised
@@ -87,7 +79,7 @@ function Auth({ user, onLogin }) {
           </Route>
         </Switch>
       </Segment.Group>
-    </motion.div>
+    </div>
   );
 }
 
