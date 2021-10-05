@@ -1,24 +1,23 @@
+import { motion } from "framer-motion";
+import parse from "html-react-parser";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import FlashcardForm from "./FlashcardForm";
-import FlashcardCard from "./FlashcardCard";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { Button, Icon, Popup, Segment, Table } from "semantic-ui-react";
+import ColorLogo from "../../photos/cut-out-logo.png";
+import SideLogo from "../../photos/logo-only.png";
+import {
+  fetchSavedStudysets, selectReviewsetWithStudysetId
+} from "../savedStudysets/savedStudysetsSlice";
 import {
   fetchOneStudyset,
   selectMine,
-  selectOneStudyset,
+  selectOneStudyset
 } from "../studyset/oneStudysetSlice";
-import {
-  selectReviewsetWithStudysetId,
-  fetchSavedStudysets,
-} from "../savedStudysets/savedStudysetsSlice";
 import { selectUser } from "../user/userSlice";
+import FlashcardCard from "./FlashcardCard";
+import FlashcardForm from "./FlashcardForm";
 
-import { Icon, Popup, Segment, Table, Button } from "semantic-ui-react";
-import { motion } from "framer-motion";
-import SideLogo from "../../photos/logo-only.png";
-import ColorLogo from "../../photos/cut-out-logo.png";
-import parse from "html-react-parser";
 
 function FlashcardsContainer() {
   const { id } = useParams();
@@ -44,7 +43,6 @@ function FlashcardsContainer() {
     query.then(() => dispatch(fetchSavedStudysets()));
   };
   const toggleStudyMode = () => {
-  
     setStudyMode(!studyMode);
   };
   if (!studyset) return null;
@@ -81,11 +79,11 @@ function FlashcardsContainer() {
           }
         />
         <Popup
-          content="Turn on/off StudyMode"
+          content="Turn on/off Study Mode"
           trigger={
             <motion.img
-              src={studyMode? ColorLogo: SideLogo}
-              style={{ maxWidth: "10%", float: "right", margin: "20px" }}
+              src={studyMode ? ColorLogo : SideLogo}
+              style={{ maxWidth: "5%",verticalAlign: "middle", margin: "20px" }}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}

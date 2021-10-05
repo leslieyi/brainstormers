@@ -6,14 +6,15 @@ import { Card, Icon, Popup } from "semantic-ui-react";
 import { selectUser } from "../user/userSlice";
 import {
   fetchSavedFlashcards,
-  selectReviewcardWithFlashcardId
+  selectReviewcardWithFlashcardId,
 } from "./savedFlashcardsSlice";
-
 
 function SavedFlashcardCard({ savedFlashcard }) {
   const dispatch = useDispatch();
 
-  const reviewcard = useSelector(selectReviewcardWithFlashcardId(savedFlashcard.flashcard.id));
+  const reviewcard = useSelector(
+    selectReviewcardWithFlashcardId(savedFlashcard.flashcard.id)
+  );
   const user = useSelector(selectUser);
   const [flip, setFlip] = useState(false);
   const handleFlip = () => {
@@ -33,7 +34,6 @@ function SavedFlashcardCard({ savedFlashcard }) {
         });
     query.then(() => dispatch(fetchSavedFlashcards()));
   };
-
 
   if (!savedFlashcard.flashcard) return null;
 
@@ -70,7 +70,6 @@ function SavedFlashcardCard({ savedFlashcard }) {
             content="Flip"
             trigger={<Switch onClick={handleFlip} size="small" />}
           />
-
         </div>
       </Card>
     </Card.Group>
