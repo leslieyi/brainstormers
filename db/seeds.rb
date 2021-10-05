@@ -28,8 +28,19 @@ Studyset.create(title: "Phase 2", description: "Flatiron SE phase 2, React", use
 Studyset.create(title: "Phase 3", description: "Flatiron SE phase 3, Ruby", user_id: 5) #studysetid 6
 Studyset.create(title: "Phase 4", description: "Flatiron SE phase 4, Ruby on Rails", user_id: 6) #studysetid 7
 Studyset.create(title: "Phase 5", description: "Putting it all together!", user_id: 7) #studysetid 8
-Studyset.create(title: "Career Coaching", description: "Resume", user_id: 8) #studysetid 8
-Studyset.create(title: "Korean", description: "Learn Simple Expressions!", user_id: 2) #studysetid 9
+Studyset.create(title: "Career Coaching", description: "Resume", user_id: 8) #studysetid 9
+Studyset.create(title: "Korean", description: "Learn Simple Expressions!", user_id: 2) #studysetid 10
+
+Studyset.create(title: "Coffee I", description: "Let's learn about Coffee!!!!", user_id: 1) #studysetid 11
+Studyset.create(title: "Coffee II", description: "Let's learn MORE about Coffee!!!!", user_id: 1) #studysetid 12
+Studyset.create(title: "Basketball", description: "Dunk it", user_id: 6) #studysetid 13
+Studyset.create(title: "Quotes", description: "Dunk it", user_id: 4) #studysetid 14
+Studyset.create(title: "Most Interesting Man in the World", description: "WOW ", user_id: 9) #studysetid 15
+Studyset.create(title: "Geography", description: "USPS", user_id: 10) #studysetid 16
+Studyset.create(title: "Companies Part 1", description: "Get to know the industry", user_id: 5) #studysetid 17
+Studyset.create(title: "Companies Part 2", description: "Get to know the industry", user_id: 5) #studysetid 18
+
+
 
 
 Flashcard.create(word: "Op. 2, No. 1", definition: "F minor (1795) - Vienna", studyset_id: 1)
@@ -81,6 +92,105 @@ Flashcard.create(word: "I am jet lagged", definition: "Je suis décalé",studyse
 Flashcard.create(word: "You're kidding!", definition: "Tu rigoles.",studyset_id: 3)
 Flashcard.create(word: "You're kidding me!", definition: "Tu te moque de moi?",studyset_id: 3)
 Flashcard.create(word: "Remember his/her name", definition: "Souviens-toi de son nom",studyset_id: 3)
+
+Flashcard.create(word: "공부해요", definition: "study",studyset_id: 10)
+Flashcard.create(word: "배워요", definition: "learn",studyset_id: 10)
+Flashcard.create(word: "읽어요", definition: "read",studyset_id: 10)
+Flashcard.create(word: "먹어요", definition: "eat",studyset_id: 10)
+Flashcard.create(word: "마시다", definition: "to drink",studyset_id: 10)
+Flashcard.create(word: "요리해요", definition: "cook",studyset_id: 10)
+Flashcard.create(word: "아파요", definition: "sick",studyset_id: 10)
+Flashcard.create(word: "없어요", definition: "don't have",studyset_id: 10)
+Flashcard.create(word: "봐요", definition: "watch/see",studyset_id: 10)
+Flashcard.create(word: "놀아요", definition: "play",studyset_id: 10)
+Flashcard.create(word: "노래해요", definition: "sing",studyset_id: 10)
+Flashcard.create(word: "듣다", definition: "to listen",studyset_id: 10)
+
+
+20.times do 
+    Flashcard.create(word:Faker::TvShows::Community.characters, definition:Faker::TvShows::Community.quotes, studyset_id:4)
+  end
+
+20.times do 
+    Flashcard.create(word:Faker::TvShows::ParksAndRec.character, definition:Faker::TvShows::ParksAndRec.city, studyset_id:5)
+  end
+
+
+20.times do 
+    Flashcard.create(word:Faker::TvShows::RickAndMorty.character, definition:Faker::TvShows::RickAndMorty.quote, studyset_id:6)
+  end
+
+20.times do 
+    Flashcard.create(word:Faker::Movies::HarryPotter.spell, definition:Faker::Movies::HarryPotter.character, studyset_id:7)
+  end
+
+  20.times do 
+    Flashcard.create(word:Faker::Movies::LordOfTheRings.character, definition:Faker::Movies::LordOfTheRings.location, studyset_id:8)
+  end
+
+  20.times do 
+    Flashcard.create(word:Faker::Book.title, definition:Faker::Book.publisher, studyset_id:9)
+  end
+
+
+  20.times do 
+    Flashcard.create(word:Faker::Coffee.origin, definition:Faker::Coffee.variety, studyset_id:10)
+  end
+
+  20.times do 
+    Flashcard.create(word:Faker::Coffee.blend_name, definition:Faker::Coffee.notes, studyset_id:10)
+  end
+
+  20.times do 
+    Flashcard.create(word:Faker::Sports::Basketball.team, definition:Faker::Sports::Basketball.position , studyset_id:11)
+  end
+
+  30.times do 
+    Flashcard.create(word:Faker::Sports::Basketball.player, definition:Faker::Quote.famous_last_words , studyset_id:12)
+  end
+
+  30.times do 
+    Flashcard.create(word:Faker::Name.unique.name, definition:Faker::Quote.most_interesting_man_in_the_world, studyset_id:13)
+  end
+
+
+  20.times do 
+    Flashcard.create(word:Faker::Artist.name, definition:Faker::TvShows::RickAndMorty.location, studyset_id:14)
+  end
+
+  30.times do 
+    Flashcard.create(word:Faker::TvShows::DumbAndDumber.actor, definition:Faker::Quote.most_interesting_man_in_the_world, studyset_id:15)
+  end
+
+  30.times do 
+    Flashcard.create(word:Faker::TvShows::DumbAndDumber.character, definition:Faker::Quote.most_interesting_man_in_the_world, studyset_id:16)
+  end
+
+
+
+  25.times do 
+    Flashcard.create(word:Faker::Name.unique.name, definition:Faker::Quote.yoda, studyset_id:17)
+  end
+
+  25.times do 
+    Flashcard.create(word:Faker::Music.instrument, definition:Faker::Quote.matz, studyset_id:18)
+  end
+
+
+Reviewset.create(studyset_id:1, user_id:1)
+Reviewset.create(studyset_id:2, user_id:1)
+Reviewset.create(studyset_id:3, user_id:1)
+Reviewset.create(studyset_id:7, user_id:1)
+Reviewset.create(studyset_id:10, user_id:1)
+
+
+Reviewcard.create(flashcard_id:11, user_id:1 )
+Reviewcard.create(flashcard_id:17, user_id:1 )
+Reviewcard.create(flashcard_id:40, user_id:1 )
+Reviewcard.create(flashcard_id:41, user_id:1 )
+
+
+
 
 
 puts "Done Seeding!"

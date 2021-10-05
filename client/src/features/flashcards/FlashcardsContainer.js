@@ -17,6 +17,7 @@ import { selectUser } from "../user/userSlice";
 import { Icon, Popup, Segment, Table, Button } from "semantic-ui-react";
 import { motion } from "framer-motion";
 import SideLogo from "../../photos/logo-only.png";
+import ColorLogo from "../../photos/cut-out-logo.png";
 import parse from "html-react-parser";
 
 function FlashcardsContainer() {
@@ -30,6 +31,8 @@ function FlashcardsContainer() {
   const refresh = () => dispatch(fetchOneStudyset(id));
   useEffect(refresh, [id, dispatch]);
 
+  const [studyMode, setStudyMode] = useState(false);
+
   const handleSave = () => {
     const query = reviewset
       ? fetch(`/reviewsets/${reviewset.id}`, { method: "DELETE" })
@@ -40,7 +43,10 @@ function FlashcardsContainer() {
         });
     query.then(() => dispatch(fetchSavedStudysets()));
   };
-
+  const toggleStudyMode = () => {
+  
+    setStudyMode(!studyMode);
+  };
   if (!studyset) return null;
 
   return (
@@ -74,15 +80,18 @@ function FlashcardsContainer() {
             />
           }
         />
-        <motion.img
-          src={SideLogo}
-          style={{ maxWidth: "5%", float: "right" }}
-          drag
-          dragTransition={{
-            min: 0,
-            max: 50,
-            bounceStiffness: 120,
-          }}
+        <Popup
+          content="Turn on/off StudyMode"
+          trigger={
+            <motion.img
+              src={studyMode? ColorLogo: SideLogo}
+              style={{ maxWidth: "10%", float: "right", margin: "20px" }}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              onClick={toggleStudyMode}
+            />
+          }
         />
         <h4
           style={{
@@ -110,10 +119,10 @@ function FlashcardsContainer() {
         {mine ? <FlashcardForm /> : null}
         <Button
           onClick={() => setViewList(!viewList)}
-          style={{ backgroundColor: "white" }}
+          style={{ backgroundColor: "white", fontSize: "16px" }}
         >
-          <Icon name="angle down" />
-          View List
+          <Icon name={viewList ? "angle up" : "angle down"} />
+          {viewList ? "Collapse List" : "View List"}
         </Button>
         {viewList ? (
           <div
@@ -134,14 +143,14 @@ function FlashcardsContainer() {
               }}
             >
               <Table.Body>
-              {studyset.flashcards.map((flashcard) => (
-                <Table.Row key={flashcard.id}>
-                  <Table.Cell width={2} style={{ color: "#0353A4" }}>
-                    {flashcard.word}
-                  </Table.Cell>
-                  <Table.Cell>{parse(flashcard.definition)} </Table.Cell>
-                </Table.Row>
-              ))}
+                {studyset.flashcards.map((flashcard) => (
+                  <Table.Row key={flashcard.id}>
+                    <Table.Cell width={2} style={{ color: "#0353A4" }}>
+                      {flashcard.word}
+                    </Table.Cell>
+                    <Table.Cell>{parse(flashcard.definition)} </Table.Cell>
+                  </Table.Row>
+                ))}
               </Table.Body>
             </Table>
           </div>
@@ -159,7 +168,11 @@ function FlashcardsContainer() {
           }}
         >
           {studyset.flashcards.map((flashcard) => (
-            <FlashcardCard flashcard={flashcard} key={Math.random()} />
+            <FlashcardCard
+              flashcard={flashcard}
+              key={Math.random()}
+              studyMode={studyMode}
+            />
           ))}
         </div>
       ) : null}
