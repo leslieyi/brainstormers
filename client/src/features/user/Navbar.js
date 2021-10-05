@@ -4,12 +4,10 @@ import { logout } from "./userSlice";
 import { useDispatch } from "react-redux";
 
 function Navbar() {
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
-    history.push("/");
   };
 
   return (
