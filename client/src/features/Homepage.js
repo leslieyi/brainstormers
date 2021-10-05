@@ -1,48 +1,16 @@
 import Auth from "./user/Auth";
-import Profile from "./user/Profile";
+import MyProfile from "./user/MyProfile";
 import StudysetsContainer from "./studyset/StudysetsContainer";
 import StudysetForm from "./studyset/StudysetForm";
 import FlashcardsContainer from "./flashcards/FlashcardsContainer";
 import SavedFlashcards from "./flashcards/SavedFlashcards";
 import SavedStudysetsContainer from "./savedStudysets/SavedStudysetsContainer";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "./user/userSlice";
 
 function Homepage() {
-  const [reviewcards, setReviewcards] = useState([]);
   const user = useSelector(selectUser);
-
-  useEffect(() => {
-    if (!user) setReviewcards([]);
-    fetch("/reviewcards")
-      .then((r) => r.json())
-      .then((data) => setReviewcards(data));
-  }, [user]);
-
-  const toggleStar = (flashcardId) => {
-    const deleting = reviewcards.find(
-      (card) => card.flashcard.id === flashcardId
-    );
-    if (deleting) {
-      fetch(`/reviewcards/${deleting.id}`, {
-        method: "DELETE",
-      }).then(() => {
-        setReviewcards(reviewcards.filter((item) => item.id !== deleting.id));
-      });
-    } else {
-      fetch("/reviewcards", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ flashcard_id: flashcardId, user_id: user.id }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          setReviewcards([...reviewcards, data]);
-        });
-    }
-  };
 
   if (!user) return <Auth />;
 
@@ -78,7 +46,7 @@ function Homepage() {
         </Route>
 
         <Route exact path="/saved-flashcards">
-          <SavedFlashcards reviewcards={reviewcards} toggleStar={toggleStar} />
+          <SavedFlashcards />
         </Route>
 
         <Route exact path="/saved-studysets">
@@ -86,8 +54,10 @@ function Homepage() {
         </Route>
 
         <Route exact path="/my-profile">
-          <Profile />
+          <MyProfile />
         </Route>
+
+
       </Switch>
     </div>
   );

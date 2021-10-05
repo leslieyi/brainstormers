@@ -28,7 +28,7 @@ function FlashcardsContainer() {
   const user = useSelector(selectUser);
   const reviewset = useSelector(selectReviewsetWithStudysetId(id));
   const refresh = () => dispatch(fetchOneStudyset(id));
-  useEffect(refresh, [id]);
+  useEffect(refresh, [id, dispatch]);
 
   const handleSave = () => {
     const query = reviewset
@@ -133,14 +133,16 @@ function FlashcardsContainer() {
                 backgroundColor: "#DDEBF9",
               }}
             >
+              <Table.Body>
               {studyset.flashcards.map((flashcard) => (
-                <Table.Row>
+                <Table.Row key={flashcard.id}>
                   <Table.Cell width={2} style={{ color: "#0353A4" }}>
                     {flashcard.word}
                   </Table.Cell>
                   <Table.Cell>{parse(flashcard.definition)} </Table.Cell>
                 </Table.Row>
               ))}
+              </Table.Body>
             </Table>
           </div>
         ) : null}

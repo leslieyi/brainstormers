@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser, fetchUser } from "./userSlice";
 
-function Profile() {
+function MyProfile() {
   const user = useSelector(selectUser);
   const [errors, setErrors] = useState([]);
   const [editButton, setEditButton] = useState(false);
@@ -166,4 +166,4 @@ function Profile() {
     </Segment>
   );
 }
-export default Profile;
+export default MyProfile;

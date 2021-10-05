@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,17 +11,17 @@ function FlashcardForm() {
   const editFlashcard = useSelector(selectEditing);
 
   const [errors, setErrors] = useState([]);
-  const blankFlashcard = {
+  const blankFlashcard = useMemo(() => ({
     id: null,
     word: "",
     definition: "<p><br></p>",
     studyset_id: studyset.id,
-  };
+  }), [studyset]);
   const [flashcardValue, setFlashcardValue] = useState({ ...blankFlashcard });
 
   useEffect(() => {
     setFlashcardValue(editFlashcard || { ...blankFlashcard });
-  }, [editFlashcard]);
+  }, [editFlashcard, blankFlashcard]);
 
   const flashcardOnChange = (e) => {
     const name = e.target.name;

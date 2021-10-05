@@ -16,6 +16,9 @@ User.create(username: "eli", password: "123123", email: "eli@gmail.com", bio: Fa
 User.create(username: "mari", password: "123123", email: "mari@gmail.com", bio: Faker::Quote.famous_last_words) #6
 User.create(username: "tara", password: "123123", email: "tara@gmail.com", bio: Faker::Quote.famous_last_words) #7
 User.create(username: "zach", password: "123123", email: "zach@gmail.com", bio: Faker::Quote.famous_last_words) #8
+User.create(username: "eric", password: "123123", email: "eric@gmail.com", bio: Faker::Quote.famous_last_words) #9
+User.create(username: "leonna", password: "123123", email: "leonna@gmail.com", bio: Faker::Quote.famous_last_words) #10
+User.create(username: "troy", password: "123123", email: "troy@gmail.com", bio: Faker::Quote.famous_last_words) #11
 
 Studyset.create(title: "Beethoven Sonatas-I", description: "Listening Exam Part 1", user_id: 1) #studysetId 1
 Studyset.create(title: "Beethoven Sonatas-II", description: "Listening Exam Part 2", user_id: 1) #studysetId 2

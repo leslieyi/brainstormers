@@ -1,31 +1,25 @@
-import Switch from "@mui/material/Switch";
-import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-
-import { Card, Icon, Popup } from "semantic-ui-react";
-
+import IconButton from "@mui/material/IconButton";
+import Switch from "@mui/material/Switch";
 import parse from "html-react-parser";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Card, Icon, Popup } from "semantic-ui-react";
 import {
-  edit,
-  selectMine,
-  selectOneStudyset,
-  fetchOneStudyset,
+  edit, fetchOneStudyset, selectMine,
+  selectOneStudyset
 } from "../studyset/oneStudysetSlice";
+import { selectUser } from "../user/userSlice";
 import {
   fetchSavedFlashcards,
-  selectReviewcardWithFlashcardId,
+  selectReviewcardWithFlashcardId
 } from "./savedFlashcardsSlice";
-import { selectUser } from "../user/userSlice";
+
 
 function FlashcardCard({ flashcard }) {
   const dispatch = useDispatch();
 
-  const refresh = () => dispatch(fetchSavedFlashcards());
-  useEffect(refresh, [dispatch]);
   const reviewcard = useSelector(selectReviewcardWithFlashcardId(flashcard.id));
   const mine = useSelector(selectMine);
 

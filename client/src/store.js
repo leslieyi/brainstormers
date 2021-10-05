@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     studysets: studysetsReducer,
-    oneStudyset: oneStudysetReducer,    
+    oneStudyset: oneStudysetReducer,
     savedStudysets: savedStudysetsReducer,
     savedFlashcards: savedFlashcardsReducer,
   },

@@ -21,7 +21,7 @@ const savedFlashcardsSlice = createSlice({
 
 export const selectSavedFlashcards = (state) => state.savedFlashcards.value;
 export const selectReviewcardWithFlashcardId = (flashcardId) => (state) => state.savedFlashcards.value.find(
-    (reviewcard) => reviewcard.flashcard.id == flashcardId
+    (reviewcard) => reviewcard.flashcard.id === parseInt(flashcardId)
   );
 
 export default savedFlashcardsSlice.reducer;

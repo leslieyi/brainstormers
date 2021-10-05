@@ -97,8 +97,12 @@ function StudysetCard({ studyset, handleDelete, handleEditButton }) {
               {studyset.description}
             </Card.Description>
             <Card.Meta>Total Flashcards: {studyset.total_flashcards}</Card.Meta>
+
             <Card.Content>
-            <Icon name= {isMine? "smile outline":"user"} style={{ color: isMine ? " #0353A4" : null }} />
+              <Icon
+                name={isMine ? "smile outline" : "user"}
+                style={{ color: isMine ? " #0353A4" : null }}
+              />
               <b style={{ color: isMine ? " #0353A4" : null }}>Creator:</b>{" "}
               {studyset.user.username}
             </Card.Content>

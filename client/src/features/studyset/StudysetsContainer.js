@@ -1,17 +1,15 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import StudysetCard from "./StudysetCard";
-import SideLogo from "../../photos/logo-only.png";
-import { Popup, Form, Button, Input, Segment, Icon } from "semantic-ui-react";
 import Switch from "@mui/material/Switch";
 import { motion } from "framer-motion";
-
-import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../user/userSlice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, Form, Icon, Input, Popup, Segment } from "semantic-ui-react";
+import SideLogo from "../../photos/logo-only.png";
+import StudysetCard from "./StudysetCard";
 import { fetchStudysets, selectStudysets } from "./studysetsSlice";
 
+
 function StudysetsContainer({ mine }) {
-  const user = useSelector(selectUser);
   const studysetsData = useSelector(selectStudysets);
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
@@ -32,7 +30,7 @@ function StudysetsContainer({ mine }) {
     dispatch(fetchStudysets({ mine, sorted }));
   };
 
-  useEffect(refresh, [sorted]);
+  useEffect(refresh, [dispatch, mine, sorted]);
 
   const handleDelete = (id) => {
     fetch(`/my_studysets/${id}`, {

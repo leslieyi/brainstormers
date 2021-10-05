@@ -1,12 +1,10 @@
-import { Link, Switch, Route } from "react-router-dom";
-import { Segment, Icon } from "semantic-ui-react";
-
-import { motion } from "framer-motion";
-
-import Signup from "./Signup";
+import { Link, Route, Switch } from "react-router-dom";
+import { Icon, Segment } from "semantic-ui-react";
 import Login from "./Login";
+import Signup from "./Signup";
 
-function Auth({ user, onLogin }) {
+
+function Auth() {
   return (
     <div
 

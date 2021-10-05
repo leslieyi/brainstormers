@@ -1,36 +1,21 @@
 import Switch from "@mui/material/Switch";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-
-import { Card, Icon, Popup } from "semantic-ui-react";
-
 import parse from "html-react-parser";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  edit,
-  selectOneStudyset,
-  fetchOneStudyset,
-} from "../studyset/oneStudysetSlice";
+import { Card, Icon, Popup } from "semantic-ui-react";
+import { selectUser } from "../user/userSlice";
 import {
   fetchSavedFlashcards,
-  selectReviewcardWithFlashcardId,
+  selectReviewcardWithFlashcardId
 } from "./savedFlashcardsSlice";
-import { selectUser } from "../user/userSlice";
+
 
 function SavedFlashcardCard({ savedFlashcard }) {
   const dispatch = useDispatch();
 
-  const refresh = () => dispatch(fetchSavedFlashcards());
-  useEffect(refresh, [dispatch]);
   const reviewcard = useSelector(selectReviewcardWithFlashcardId(savedFlashcard.flashcard.id));
   const user = useSelector(selectUser);
-  const studyset = useSelector(selectOneStudyset);
   const [flip, setFlip] = useState(false);
-  const mine = savedFlashcard.user.id == user.id
-  console.log("hello?", savedFlashcard)
   const handleFlip = () => {
     setFlip(!flip);
   };

@@ -20,7 +20,7 @@ const savedStudysetsSlice = createSlice({
 
 export const selectSavedStudysets = (state) => state.savedStudysets.value;
 export const selectReviewsetWithStudysetId = (studysetId) => (state) => state.savedStudysets.value.find(
-  (reviewset) => reviewset.studyset.id == studysetId
+  (reviewset) => reviewset.studyset.id === parseInt(studysetId)
 );
 
 export default savedStudysetsSlice.reducer;

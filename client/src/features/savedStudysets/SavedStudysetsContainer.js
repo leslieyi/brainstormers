@@ -25,7 +25,7 @@ function SavedStudysetsContainer() {
     dispatch(fetchSavedStudysets({ sorted }));
   };
 
-  useEffect(refresh, [sorted]);
+  useEffect(refresh, [sorted, dispatch]);
 
   function handleSearch(e) {
     setSearch(e.target.value);
