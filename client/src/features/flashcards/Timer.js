@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
-import { Button, Input, Divider } from "semantic-ui-react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import {
+  Button, Divider, Header, Icon,
+  Input, Modal
+} from "semantic-ui-react";
 
 function Timer() {
   const timer = {
@@ -13,6 +17,8 @@ function Timer() {
   const isTicking = () => timerState === timer.ticking;
   const pause = () => setTimerState(timer.paused);
 
+  const [instructions, setInstructions] = useState(false);
+  const [open, setOpen] = useState(false);
   function handleStart() {
     if (isTicking()) {
       return;
@@ -26,7 +32,7 @@ function Timer() {
   const handlePause = () => pause();
   const handleReset = () => {
     pause();
-    setCurrent(0);
+    setCurrent("");
   };
 
   useEffect(() => {
@@ -37,7 +43,8 @@ function Timer() {
     function tick() {
       setCurrent((current) => {
         if (current === 0) {
-          handleReset();
+          pause();
+          setCurrent(0);
         }
         return current - 1;
       });
@@ -56,6 +63,10 @@ function Timer() {
     return pauseTimer;
   }, [timerState]);
 
+  const toggleInstructions = () => {
+    setInstructions(!instructions);
+  };
+
   return (
     <Divider
       horiztontal
@@ -70,14 +81,65 @@ function Timer() {
             fontFamily: "'Rajdhani', sans-serif",
             fontWeight: "bold",
             fontSize: "40px",
-            display: "inline-block",
+            display: "inline",
           }}
         >
-          Put the Learned Cards Below &nbsp;&nbsp;&nbsp;&nbsp;
+          Drag and Drop below the line! &nbsp;
         </h4>
 
+        <Modal
+          basic
+          onClose={() => setOpen(false)}
+          onOpen={() => setOpen(true)}
+          open={open}
+          size="small"
+          trigger={<Icon name="question circle outline" size="big" />}
+        >
+          <Header icon>
+            <Icon name="tasks" />
+            Instructions
+          </Header>
+          <Modal.Content>
+            <p
+              style={{
+                fontFamily: "'Rajdhani', sans-serif",
+                fontSize: "30px",
+              }}
+            >
+              1.Start the Timer
+              <br />
+              2.If you're familiar with the flascard,
+              <br />
+              Drag & Place the flashcards below the line
+              <br />
+              3.If you are NOT, "Star" them to review later
+              <br />
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button basic inverted onClick={() => setOpen(false)}>
+              <Icon name="window close outline" /> close
+            </Button>
+          </Modal.Actions>
+        </Modal>
+
         <div>
-          <h3>{current === 0 ? "Time is Up!!!" : `${current} seconds left`}</h3>
+          {current === 0 ? (
+            <motion.h1
+              style={{ color: "#f9b4ab" }}
+              initial={{ scale: 0 }}
+              animate={{ rotate: 360, scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+              }}
+            >
+              "Time is Up!!!"
+            </motion.h1>
+          ) : (
+            <h3>{current} seconds left</h3>
+          )}
           <br />
           <Input
             placeholder="Time in seconds"

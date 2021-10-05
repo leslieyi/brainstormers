@@ -88,7 +88,7 @@ function FlashcardsContainer() {
             }
           />
           <Popup
-            content="Turn on/off Study Mode"
+            content="Turn on/off Testing Mode"
             trigger={
               <motion.img
                 src={testingMode ? ColorLogo : SideLogo}
