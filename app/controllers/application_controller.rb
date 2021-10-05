@@ -4,14 +4,15 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
-
   before_action :authorize
 
   private
-  def current_user
-    if cookies[:remember_token].present?
-    @current_user ||= User.find_by_remember_token(cookies[:remember_token])
-end
+
+  # def current_user
+  #   if cookies[:remember_token].present?
+  #     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+  #   end
+  # end
 
   def authorize
     @current_user = User.find_by(id: session[:user_id])

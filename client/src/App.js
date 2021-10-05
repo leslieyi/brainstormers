@@ -26,6 +26,7 @@ import { fetchSavedFlashcards } from "./features/flashcards/savedFlashcardsSlice
 //npm install @reduxjs/toolkit
 //heroku run rails db:migrate db:seed
 //heroku pg:reset DATABASE_URL 
+//heroku run rake db:setup
 //git push heroku main
 
 function App() {
