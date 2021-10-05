@@ -20,7 +20,7 @@ import {
 
 import { motion } from "framer-motion";
 
-function FlashcardCard({ flashcard, studyMode }) {
+function FlashcardCard({ flashcard, testingMode }) {
   const dispatch = useDispatch();
 
   const reviewcard = useSelector(selectReviewcardWithFlashcardId(flashcard.id));
@@ -59,9 +59,9 @@ function FlashcardCard({ flashcard, studyMode }) {
   };
 
   if (!flashcard) return null;
-  console.log(studyMode);
+  console.log(testingMode);
 
-  const render = studyMode ? (
+  const render = testingMode ? (
     <motion.div
       drag
       dragConstraints={{
@@ -211,82 +211,6 @@ function FlashcardCard({ flashcard, studyMode }) {
   );
 
   return render;
-  // <motion.div
-  //   drag
-  //   dragConstraints={{
-  //     top: 0,
-  //     right: 0,
-  //     bottom: 750,
-  //     left: 0,
-  //   }}
-  //   dragElastic={0.5}
-  // >
-  //   <Card.Group>
-  //     <Card>
-  //       <Card.Content
-  //         style={{
-  //           justifyContent: "center",
-  //         }}
-  //       >
-  //         {flip ? (
-  //           <Card.Description>
-  //             <b>Definition: </b> {parse(flashcard.definition)}
-  //           </Card.Description>
-  //         ) : (
-  //           <Card.Description>
-  //             <b>Term: </b>
-  //             {flashcard.word}&nbsp;&nbsp;&nbsp;&nbsp;
-  //             <Popup
-  //               content="Add to Flashcard to Review Later"
-  //               trigger={
-  //                 <Icon
-  //                   name={reviewcard ? "star" : "star outline"}
-  //                   onClick={handleStar}
-  //                 />
-  //               }
-  //             />
-  //           </Card.Description>
-  //         )}
-  //       </Card.Content>
-  //       <div style={{ marginBottom: "20px", textAlign: "center" }}>
-  //         <Popup
-  //           content="Flip"
-  //           trigger={<Switch onClick={handleFlip} size="small" />}
-  //         />
-  //         {mine ? (
-  //           <Popup
-  //             content="Edit"
-  //             trigger={
-  //               <IconButton
-  //                 aria-label="edit"
-  //                 size="small"
-  //                 color="primary"
-  //                 onClick={handleEdit}
-  //               >
-  //                 <EditIcon />
-  //               </IconButton>
-  //             }
-  //           />
-  //         ) : null}
 
-  //         {mine ? (
-  //           <Popup
-  //             content="Delete"
-  //             trigger={
-  //               <IconButton
-  //                 aria-label="delete"
-  //                 size="small"
-  //                 color="primary"
-  //                 onClick={handleDelete}
-  //               >
-  //                 <DeleteIcon />
-  //               </IconButton>
-  //             }
-  //           />
-  //         ) : null}
-  //       </div>
-  //     </Card>
-  //   </Card.Group>
-  // </motion.div>
 }
 export default FlashcardCard;
