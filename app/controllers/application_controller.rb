@@ -8,6 +8,10 @@ class ApplicationController < ActionController::API
   before_action :authorize
 
   private
+  def current_user
+    if cookies[:remember_token].present?
+    @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+end
 
   def authorize
     @current_user = User.find_by(id: session[:user_id])
