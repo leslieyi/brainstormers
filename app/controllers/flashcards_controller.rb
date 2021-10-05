@@ -1,10 +1,13 @@
 class FlashcardsController < ApplicationController
   skip_before_action :authorize, only: :index
-  full_sanitizer = Rails::Html::FullSanitizer.new
-  
+
   def index
     flashcards = Flashcard.all
     render json: flashcards, status: :ok
+  end
+
+  def sanitizer
+    Rails::Html::SafeListSanitizer.new
   end
 
   def show
@@ -36,6 +39,11 @@ class FlashcardsController < ApplicationController
   end
 
   def flashcard_params
-    params.permit(:word, :definition, :studyset_id)
+    permitted = params.permit(:word, :definition, :studyset_id)
+    sanitized = permitted.to_h
+    if sanitized.key?(:definition)
+      sanitized[:definition] = sanitizer.sanitize(sanitized[:definition])
+    end
+    sanitized
   end
 end
