@@ -22,14 +22,9 @@ import { fetchSavedFlashcards } from "./features/flashcards/savedFlashcardsSlice
 
 // console.log = console.warn = console.error = () => {};
 
-//import { Provider } from "react-redux";
-// import { createStore, applyMiddleware } from "redux";
-// import thunkMiddleware from "redux-thunk";
-// npm install redux-thunk
-//npm install react-redux
-
 // npm install redux-devtools-extension
 //npm install @reduxjs/toolkit
+//heroku run rails db:migrate db:seed
 
 function App() {
   const dispatch = useDispatch();

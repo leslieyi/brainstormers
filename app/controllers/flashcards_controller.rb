@@ -1,6 +1,7 @@
 class FlashcardsController < ApplicationController
   skip_before_action :authorize, only: :index
-
+  full_sanitizer = Rails::Html::FullSanitizer.new
+  
   def index
     flashcards = Flashcard.all
     render json: flashcards, status: :ok

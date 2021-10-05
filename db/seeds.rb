@@ -43,10 +43,10 @@ Studyset.create(title: "Companies Part 2", description: "Get to know the industr
 
 
 
-Flashcard.create(word: "Op. 2, No. 1", definition: "F minor (1795) - Vienna", studyset_id: 1)
+Flashcard.create(word: "Op. 2, No. 1", definition: "<b>F minor (1795)</b> - Vienna", studyset_id: 1)
 Flashcard.create(word: "Op. 2, No. 2", definition: "A Major (1795) - Vienna", studyset_id: 1)
 Flashcard.create(word: "Op. 2, No. 3", definition: "C Major (1795) - Vienna", studyset_id: 1)
-Flashcard.create(word: "Op. 7", definition: "E-flat Major Grand Sonata (1798) - Vienna", studyset_id: 1)
+Flashcard.create(word: "Op. 7", definition: "E-flat Major <b>Grand Sonata</b> (1798) - Vienna", studyset_id: 1)
 
 Flashcard.create(word: "Op. 10, No. 1", definition: "C minor (1797) - Vienna", studyset_id: 1)
 Flashcard.create(word: "Op. 10, No. 2", definition: "F Major (1797) - Vienna", studyset_id: 1)
