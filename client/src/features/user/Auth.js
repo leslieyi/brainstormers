@@ -2,13 +2,22 @@ import { Link, Route, Switch } from "react-router-dom";
 import { Icon, Segment } from "semantic-ui-react";
 import Login from "./Login";
 import Signup from "./Signup";
-
+import { motion } from "framer-motion";
 
 function Auth() {
   return (
-    <div
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{  scale: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 100,
+        mass: 5,
 
+      }}
     >
+
       <Segment.Group
         raised
         style={{
@@ -41,11 +50,11 @@ function Auth() {
             paddingLeft: "40px",
           }}
         >
-          A free website providing learning tools for students by creating your
-          own studysets with terms and definitions. You can also find
-          user-generated studysets that are available on the website.
-          <br />
-          Chances are you'll find something to study.
+          A free, multi-national Korean-American website providing tools used
+          for studying and learning. Brainstormers' primary products include
+          creating your own studysets, flashcards with terms and definitions and
+          practice games. You can also find user-generated studysets that are
+          available on the website. Chances are you'll find something to study.
           <br />
           Signup or login to start brainstorming!
         </p>
@@ -77,7 +86,7 @@ function Auth() {
           </Route>
         </Switch>
       </Segment.Group>
-    </div>
+    </motion.div>
   );
 }
 

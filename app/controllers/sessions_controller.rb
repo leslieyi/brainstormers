@@ -13,8 +13,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :user_id
-    puts "After delete"
-    puts session.to_h
     head :no_content
   end
 end

@@ -9,8 +9,6 @@ class ApplicationController < ActionController::API
   private
 
   def authorize
-    puts "Before authorize"
-    puts session.to_h
     @current_user = User.find_by(id: session[:user_id])
     render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_user
     #Check that my user_id is saved to sessions and render the error “Not authorized” if the current user is missing
