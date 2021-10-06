@@ -28,6 +28,17 @@ rails s
 - Semantic Ui, Material Ui
 - Quill js
 
+## Screenshots
+### Homepage
+![Homepage](./previews/HomeScreen.png)
+### Studysets
+![Studysets](./previews/studyset.gif)
+### Testing Mode
+![TestingMode](./previews/testing-mode-gif.gif)
+
+
+
+
 
 ## Author
 **Leslie Yi**
