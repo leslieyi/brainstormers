@@ -1,4 +1,5 @@
-# Brainstormers
+# Brainstormers 
+<img src="./client/src/photos/brainstormers-8-cut.png" width="70%">
 
 ## Description
 
@@ -28,11 +29,17 @@ rails s
 - Semantic Ui, Material Ui
 - Quill js
 
+## Links
+- [Heroku Brainstormers](https://yi-brainstormers.herokuapp.com/)
+- [Repo](https://github.com/leslieyi/brainstormers)
+
 ## Screenshots
 ### Homepage
-![Homepage](./previews/HomeScreen.png)
+<img src="./previews/HomeScreen.png" width="70%">
+
 ### Studysets
 ![Studysets](./previews/studyset.gif)
+
 ### Testing Mode
 ![TestingMode](./previews/testing-mode-gif.gif)
 
@@ -44,7 +51,7 @@ rails s
 **Leslie Yi**
 - [Profile](https://github.com/leslieyi "Leslie Yi")
 - [Email](mailto:leslieyi411@gmail.com)
-- [Website](https://leslieyi.medium.com/)
+- [Blog](https://leslieyi.medium.com/)
 
 ## Support 
 Contributions, issues, and feature requests are welcome!
