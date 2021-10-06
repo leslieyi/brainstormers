@@ -69,7 +69,7 @@ function FlashcardForm() {
       raised
       style={{
         border: "2px solid #0353A4",
-        opacity: "0.8",
+        opacity: "0.85",
         margin: "30px 300px 30px 300px",
         padding: "45px 50px 45px 50px",
         backgroundColor: "#B9D6F2",

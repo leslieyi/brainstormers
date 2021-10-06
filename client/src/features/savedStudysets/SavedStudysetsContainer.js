@@ -54,7 +54,8 @@ function SavedStudysetsContainer() {
       style={{
         margin: "30px 100px 30px 100px",
         border: "2px solid #0353A4",
-        opacity: "0.8",
+        opacity: "0.85",
+        backgroundColor: "#B9D6F2",
       }}
     >
       <div style={{ margin: "20px" }}>
@@ -74,6 +75,8 @@ function SavedStudysetsContainer() {
               fontFamily: "'Rajdhani', sans-serif",
               display: "inline-block",
               fontSize: "20px",
+              color: "#0353A4",
+              fontWeight: "bold",
             }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}

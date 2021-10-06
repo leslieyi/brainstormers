@@ -2,6 +2,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import Switch from "@mui/material/Switch";
+import { motion } from "framer-motion";
 import parse from "html-react-parser";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,8 +18,6 @@ import {
   fetchSavedFlashcards,
   selectReviewcardWithFlashcardId,
 } from "./savedFlashcardsSlice";
-
-import { motion } from "framer-motion";
 
 function FlashcardCard({ flashcard, testingMode }) {
   const dispatch = useDispatch();
@@ -59,7 +58,6 @@ function FlashcardCard({ flashcard, testingMode }) {
   };
 
   if (!flashcard) return null;
-  console.log(testingMode);
 
   const render = testingMode ? (
     <motion.div
@@ -211,6 +209,5 @@ function FlashcardCard({ flashcard, testingMode }) {
   );
 
   return render;
-
 }
 export default FlashcardCard;

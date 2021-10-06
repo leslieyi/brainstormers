@@ -1,7 +1,7 @@
-import { useHistory, NavLink } from "react-router-dom";
-import { Menu, Icon } from "semantic-ui-react";
-import { logout } from "./userSlice";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { Icon, Menu } from "semantic-ui-react";
+import { logout } from "./userSlice";
 
 function Navbar() {
   const dispatch = useDispatch();

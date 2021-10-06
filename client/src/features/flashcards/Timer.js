@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import {
   Button, Divider, Header, Icon,
   Input, Modal
@@ -15,9 +15,11 @@ function Timer() {
   const [current, setCurrent] = useState("");
   const [timerState, setTimerState] = useState(timer.paused);
   const isTicking = () => timerState === timer.ticking;
-  const pause = () => setTimerState(timer.paused);
+  // const pause = () => setTimerState(timer.paused);
+  const pause = useCallback(()=> {
+    setTimerState(timer.paused)
+  },[timer.paused])
 
-  const [instructions, setInstructions] = useState(false);
   const [open, setOpen] = useState(false);
   function handleStart() {
     if (isTicking()) {
@@ -61,18 +63,14 @@ function Timer() {
     }
 
     return pauseTimer;
-  }, [timerState]);
-
-  const toggleInstructions = () => {
-    setInstructions(!instructions);
-  };
+  }, [timerState, timer.paused, timer.ticking, pause]);
 
   return (
     <Divider
-      horiztontal
+      horiztontal="true"
       style={{
         backgroundColor: "#0353A4",
-        opacity: "0.8",
+        opacity: "0.85",
       }}
     >
       <div style={{ textAlign: "center", padding: "0 0 100px 0" }}>

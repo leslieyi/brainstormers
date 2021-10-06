@@ -42,7 +42,7 @@ function Signup() {
       raised
       style={{
         border: "2px solid #0353A4",
-        opacity: "0.8",
+        opacity: "0.85",
         backgroundColor: "#B9D6F2",
       }}
     >

@@ -4,23 +4,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
-  Button,
-  Icon,
+  Button, Icon,
   Popup,
   Segment,
-  Table,
-  Divider,
+  Table
 } from "semantic-ui-react";
 import ColorLogo from "../../photos/cut-out-logo.png";
 import SideLogo from "../../photos/logo-only.png";
+import Notebook from "../../photos/notebook.jpeg";
 import {
   fetchSavedStudysets,
-  selectReviewsetWithStudysetId,
+  selectReviewsetWithStudysetId
 } from "../savedStudysets/savedStudysetsSlice";
 import {
   fetchOneStudyset,
   selectMine,
-  selectOneStudyset,
+  selectOneStudyset
 } from "../studyset/oneStudysetSlice";
 import { selectUser } from "../user/userSlice";
 import FlashcardCard from "./FlashcardCard";
@@ -62,7 +61,7 @@ function FlashcardsContainer() {
         style={{
           margin: "30px 100px 30px 100px",
           border: "2px solid #0353A4",
-          opacity: "0.8",
+          backgroundImage: `url(${Notebook})`,
         }}
       >
         <div style={{ textAlign: "center" }}>
@@ -74,7 +73,7 @@ function FlashcardsContainer() {
               fontSize: "30px",
             }}
           >
-            Now showing {studyset.title} studyset
+            Now showing {studyset.title} Studyset
           </h1>
           <Popup
             content="Add or Remove Studyset to my Favorites"
@@ -149,7 +148,7 @@ function FlashcardsContainer() {
                 striped
                 style={{
                   border: "2px solid #0353A4",
-                  opacity: "0.8",
+                  opacity: "0.85",
                   backgroundColor: "#DDEBF9",
                 }}
               >
@@ -188,8 +187,11 @@ function FlashcardsContainer() {
           </div>
         ) : null}
       </Segment>
-      {testingMode ?  <Divider horizontal ><Timer/></Divider>: null}
-     
+      {testingMode ? (
+      
+          <Timer />
+
+      ) : null}
     </div>
   );
 }

@@ -35,7 +35,7 @@ function TitleHeader() {
             style={{
               border: "0",
               borderTop: "2px solid #0353A4",
-              opacity: "0.8",
+              opacity: "0.85",
             }}
           />
 
@@ -45,7 +45,7 @@ function TitleHeader() {
             style={{
               border: "0",
               borderTop: "2px solid #0353A4",
-              opacity: "0.8",
+              opacity: "0.85",
             }}
           />
         </div>

@@ -46,7 +46,7 @@ function StudysetForm() {
       raised
       style={{
         border: "2px solid #0353A4",
-        opacity: "0.8",
+        opacity: "0.85",
         margin: "30px 300px 30px 300px",
         padding: "45px 150px 45px 150px",
         backgroundColor: "#B9D6F2",

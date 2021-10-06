@@ -11,7 +11,7 @@ function Auth() {
       animate={{  scale: 1 }}
       transition={{
         type: "spring",
-        stiffness: 200,
+        stiffness: 350,
         damping: 100,
         mass: 5,
 
@@ -30,8 +30,9 @@ function Auth() {
           paddingTop: "50px",
           paddingBottom: "100px",
           border: "2px solid #0353A4",
-          opacity: "0.8",
           textAlign: "center",
+          opacity: "0.8",
+          backgroundColor: "white"
         }}
       >
         <h1

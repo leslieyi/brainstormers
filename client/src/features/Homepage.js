@@ -1,12 +1,12 @@
-import Auth from "./user/Auth";
-import MyProfile from "./user/MyProfile";
-import StudysetsContainer from "./studyset/StudysetsContainer";
-import StudysetForm from "./studyset/StudysetForm";
+import { useSelector } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
 import FlashcardsContainer from "./flashcards/FlashcardsContainer";
 import SavedFlashcards from "./flashcards/SavedFlashcards";
 import SavedStudysetsContainer from "./savedStudysets/SavedStudysetsContainer";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import StudysetForm from "./studyset/StudysetForm";
+import StudysetsContainer from "./studyset/StudysetsContainer";
+import Auth from "./user/Auth";
+import MyProfile from "./user/MyProfile";
 import { selectUser } from "./user/userSlice";
 
 function Homepage() {
@@ -56,8 +56,6 @@ function Homepage() {
         <Route exact path="/my-profile">
           <MyProfile />
         </Route>
-
-
       </Switch>
     </div>
   );

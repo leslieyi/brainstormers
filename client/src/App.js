@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import TitleHeader from "./features/user/TitleHeader";
-import Homepage from "./features/Homepage";
 import { useDispatch } from "react-redux";
-import { fetchUser } from "./features/user/userSlice";
-import { fetchSavedStudysets } from "./features/savedStudysets/savedStudysetsSlice";
 import { fetchSavedFlashcards } from "./features/flashcards/savedFlashcardsSlice";
+import Homepage from "./features/Homepage";
+import { fetchSavedStudysets } from "./features/savedStudysets/savedStudysetsSlice";
+import TitleHeader from "./features/user/TitleHeader";
+import { fetchUser } from "./features/user/userSlice";
 
 // COMMANDS THAT WE NEED TO RUN
 // npm install semantic-ui-react semantic-ui-css
@@ -32,7 +32,6 @@ import { fetchSavedFlashcards } from "./features/flashcards/savedFlashcardsSlice
 function App() {
   const dispatch = useDispatch();
 
-  // Intialize redux store here.
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(fetchSavedStudysets());
@@ -40,7 +39,7 @@ function App() {
   });
 
   return (
-    <div>
+    <div >
       <TitleHeader />
       <Homepage />
     </div>

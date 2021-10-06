@@ -12,7 +12,8 @@ function SavedFlashcards() {
       style={{
         margin: "30px 100px 30px 100px",
         border: "2px solid #0353A4",
-        opacity: "0.8",
+        opacity: "0.9",
+        backgroundColor: "#B9D6F2",
       }}
     >
       <div style={{ margin: "20px" }}>
