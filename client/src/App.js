@@ -22,12 +22,10 @@ import { fetchUser } from "./features/user/userSlice";
 
 // console.log = console.warn = console.error = () => {};
 
-// npm install redux-devtools-extension
-//npm install @reduxjs/toolkit
-//heroku run rails db:migrate db:seed
 //heroku pg:reset DATABASE_URL 
-//heroku run rake db:setup
-//git push heroku main
+//heroku pg:reset 
+//heroku run rails db:migrate db:seed
+// git push heroku main
 
 function App() {
   const dispatch = useDispatch();
